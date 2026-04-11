@@ -1,41 +1,57 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Psychological Understand Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body{font-family:sans-serif;background:#f5f0e8;margin:0;padding:40px;color:#1a1614}
-.container{max-width:800px;margin:auto;line-height:1.8}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --cream: #f5f0e8; --ink: #1a1614; --ink-light: #5a4e47; --ink-faint: #9a8f88; --accent: #8b4513; --accent-light: #d4956a; --white: #ffffff; --card-border: rgba(139,69,19,0.15); }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+  .topbar { padding: 20px 40px; border-bottom: 1px solid var(--card-border); display: flex; align-items: center; gap: 12px; }
+  .topbar a { font-size: 0.82rem; color: var(--ink-faint); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .topbar a:hover { color: var(--accent); }
+  .topbar-sep { color: var(--ink-faint); font-size: 0.8rem; }
+  .page { max-width: 720px; margin: 0 auto; padding: 64px 40px 100px; }
+  .page-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; }
+  .page h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.4; margin-bottom: 8px; }
+  .tagline { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: var(--accent); font-weight: 400; margin-bottom: 36px; padding-bottom: 32px; border-bottom: 1px solid var(--card-border); }
+  .body-text { font-size: 1rem; line-height: 1.9; color: var(--ink-light); font-weight: 300; margin-bottom: 40px; }
+  .body-text p + p { margin-top: 16px; }
+  .learn-block { background: var(--white); border: 1px solid var(--card-border); border-radius: 14px; padding: 28px 32px; margin-bottom: 40px; }
+  .learn-block h3 { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 18px; }
+  .learn-block ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .learn-block ul li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; }
+  .learn-block ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); flex-shrink: 0; margin-top: 8px; }
+  .cta { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--ink); line-height: 1.8; }
+  @media (max-width: 560px) { .page { padding: 48px 24px 80px; } .topbar { padding: 16px 24px; } }
 </style>
 </head>
 <body>
-<div class="container">
-
-<h1>🧠 Psychological Understand Club</h1>
-
-<p><strong>病理之前，先有心理。</strong></p>
-
-<p>
-你知道該運動，但為什麼做不到？<br>
-你知道要健康，但為什麼會拖延？
-</p>
-
-<p>
-這不是意志力問題，而是心理機制。
-</p>
-
-<h3>你會學到：</h3>
-<ul>
-<li>習慣形成的原理</li>
-<li>拖延與焦慮的關係</li>
-<li>自我欺騙與認知偏誤</li>
-</ul>
-
-<p>👉 行為的背後，永遠有心理</p>
-
-<a href="index.html">← 回首頁</a>
-
-</div>
+<nav class="topbar">
+  <a href="index.html">← 首頁</a>
+  <span class="topbar-sep">/</span>
+  <span style="font-size:0.82rem; color: var(--ink);">Psychological Understand Club</span>
+</nav>
+<main class="page">
+  <p class="page-eyebrow">🧠 理解行為</p>
+  <h1>Psychological Understand Club</h1>
+  <p class="tagline">病理之前，先有心理。</p>
+  <div class="body-text">
+    <p>你知道該運動，但為什麼做不到？</p>
+    <p>你知道要健康，但為什麼會拖延？</p>
+    <p>這不是意志力問題，而是心理機制。</p>
+  </div>
+  <div class="learn-block">
+    <h3>你會學到</h3>
+    <ul>
+      <li>習慣形成的原理</li>
+      <li>拖延與焦慮的關係</li>
+      <li>自我欺騙與認知偏誤</li>
+    </ul>
+  </div>
+  <p class="cta">👉 行為的背後，永遠有心理</p>
+</main>
 </body>
 </html>
