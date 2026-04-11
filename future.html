@@ -2,42 +2,130 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>To See the Future Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body{font-family:sans-serif;background:#f5f0e8;margin:0;padding:40px;color:#1a1614}
-.container{max-width:800px;margin:auto;line-height:1.8}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #f5f0e8;
+    --ink: #1a1614;
+    --ink-light: #5a4e47;
+    --ink-faint: #9a8f88;
+    --accent: #8b4513;
+    --accent-light: #d4956a;
+    --white: #ffffff;
+    --card-border: rgba(139,69,19,0.15);
+    --shadow: rgba(26,22,20,0.08);
+  }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
+  .topbar { padding: 20px 40px; border-bottom: 1px solid var(--card-border); display: flex; align-items: center; gap: 12px; }
+  .topbar a { font-size: 0.82rem; color: var(--ink-faint); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .topbar a:hover { color: var(--accent); }
+  .topbar-sep { color: var(--ink-faint); font-size: 0.8rem; }
+  .page { max-width: 720px; margin: 0 auto; padding: 64px 40px 100px; }
+  .page-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; }
+  .page h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.4; margin-bottom: 8px; }
+  .tagline { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: var(--accent); font-weight: 400; margin-bottom: 36px; padding-bottom: 32px; border-bottom: 1px solid var(--card-border); }
+  .body-text { font-size: 1rem; line-height: 1.9; color: var(--ink-light); font-weight: 300; margin-bottom: 40px; }
+  .body-text p + p { margin-top: 16px; }
+
+  /* Sub-cards */
+  .sub-section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--ink-faint); text-transform: uppercase; margin-bottom: 16px;
+  }
+  .sub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .sub-card {
+    background: var(--white);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 22px 20px 18px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .sub-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent-light);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .sub-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px var(--shadow); border-color: var(--accent-light); }
+  .sub-card:hover::after { transform: scaleX(1); }
+  .sub-card-icon { font-size: 18px; }
+  .sub-card-title { font-family: 'Noto Serif TC', serif; font-size: 0.9rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+  .sub-card-sub { font-size: 0.76rem; color: var(--ink-faint); font-weight: 300; line-height: 1.5; }
+  .sub-card-arrow { margin-top: 4px; font-size: 0.73rem; color: var(--accent-light); font-weight: 500; }
+
+  .learn-block { background: var(--white); border: 1px solid var(--card-border); border-radius: 14px; padding: 28px 32px; margin-bottom: 40px; }
+  .learn-block h3 { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 18px; }
+  .learn-block ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .learn-block ul li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; }
+  .learn-block ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); flex-shrink: 0; margin-top: 8px; }
+  .cta { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--ink); line-height: 1.8; }
+  @media (max-width: 560px) { .page { padding: 48px 24px 80px; } .topbar { padding: 16px 24px; } }
 </style>
 </head>
 <body>
-<div class="container">
+<nav class="topbar">
+  <a href="index.html">← 首頁</a>
+  <span class="topbar-sep">/</span>
+  <span style="font-size:0.82rem; color: var(--ink);">To See the Future Club</span>
+</nav>
 
-<h1>🔮 To See the Future Club</h1>
+<main class="page">
+  <p class="page-eyebrow">🔮 預測你的未來</p>
+  <h1>To See the Future Club</h1>
+  <p class="tagline">未來不是預測，是累積的結果。</p>
 
-<p><strong>未來不是預測，是累積的結果。</strong></p>
+  <div class="body-text">
+    <p>當你把醫學、心理、社會全部拼在一起，你會開始看到一件事：</p>
+    <p><strong style="color: var(--ink); font-weight: 500;">未來，其實早就正在發生。</strong></p>
+  </div>
 
-<p>
-當你把醫學、心理、社會全部拼在一起，<br>
-你會開始看到一件事：
-</p>
+  <p class="sub-section-label">進入模組</p>
+  <div class="sub-grid">
+    <a class="sub-card" href="/future/questionaire1.html">
+      <div class="sub-card-icon">📋</div>
+      <div class="sub-card-title">健康風險評估</div>
+      <div class="sub-card-sub">你需要為未來擔心嗎？</div>
+      <div class="sub-card-arrow">開始評估 →</div>
+    </a>
+    <a class="sub-card" href="journal.html">
+      <div class="sub-card-icon">⚠️</div>
+      <div class="sub-card-title">Worry Future</div>
+      <div class="sub-card-sub">為未來擔心，從閱讀開始</div>
+      <div class="sub-card-arrow">了解更多 →</div>
+    </a>
+  </div>
 
-<p><strong>未來，其實早就正在發生。</strong></p>
-<div class="grid">
-<div class="card" onclick="location.href='/future/questionaire1.html'"><br><small>你需要為未來擔心</small></div>
-  <div class="card" onclick="location.href='journal.html'">📚 Worry Future<br><small>為未來擔心</small></div>
+  <div class="learn-block">
+    <h3>你會學到</h3>
+    <ul>
+      <li>如何預測健康風險</li>
+      <li>如何評估生活決策</li>
+      <li>如何設計你想要的人生</li>
+    </ul>
+  </div>
 
-</div>
-  
-<h3>你會學到：</h3>
-<ul>
-<li>如何預測健康風險</li>
-<li>如何評估生活決策</li>
-<li>如何設計你想要的人生</li>
-</ul>
+  <p class="cta">👉 你不是在猜未來，而是在創造它</p>
+</main>
 
-<p>👉 你不是在猜未來，而是在創造它</p>
-
-<a href="index.html">← 回首頁</a>
-
-</div>
 </body>
 </html>
