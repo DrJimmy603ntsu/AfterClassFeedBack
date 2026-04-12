@@ -1,1 +1,443 @@
 
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文獻閱讀反思問卷｜Ruiz-Leon et al. (2025)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #3d3d5c;
+    --paper: #f8f6f0;
+    --paper-warm: #efeae0;
+    --accent: #185fa5;
+    --accent-light: #378add;
+    --accent-muted: #e6f1fb;
+    --gold: #ba7517;
+    --line: #ccc8bc;
+    --checked-bg: #185fa5;
+    --radio-checked: #ba7517;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 2.6rem 2rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px);
+  }
+  header::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%);
+  }
+  .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
+  .eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #85b7eb; margin-bottom: 0.6rem; }
+  header h1 { font-family: 'DM Serif Display','Noto Serif TC',serif; font-size: clamp(1.35rem,3.5vw,1.9rem); font-weight: 400; line-height: 1.35; }
+  .header-meta { margin-top: 0.8rem; font-size: 0.78rem; color: rgba(255,255,255,0.5); display: flex; flex-wrap: wrap; gap: 1rem; }
+  .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.67rem; letter-spacing: 0.1em; padding: 0.18em 0.7em; border-radius: 2px; margin-top: 0.9rem; }
+  main { max-width: 760px; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
+  .citation { background: var(--paper-warm); border-left: 3px solid var(--gold); padding: 0.9rem 1.1rem; font-size: 0.78rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 2rem; }
+  .citation a { color: var(--accent); }
+  .basic-info { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 1.2rem 1.4rem; margin-bottom: 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:520px){ .basic-info { grid-template-columns: 1fr; } }
+  .field label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.35rem; }
+  .field input { width: 100%; border: none; border-bottom: 1.5px solid var(--line); background: transparent; font-family: 'Noto Sans TC',sans-serif; font-size: 0.88rem; color: var(--ink); padding: 0.25rem 0; outline: none; transition: border-color 0.2s; }
+  .field input:focus { border-color: var(--accent); }
+  .field.full { grid-column: 1/-1; }
+  .progress-bar-wrap { position: sticky; top: 0; z-index: 10; background: rgba(248,246,240,0.93); backdrop-filter: blur(4px); padding: 0.5rem 0 0.4rem; margin-bottom: 1.6rem; }
+  .progress-label { font-size: 0.72rem; color: var(--ink-light); margin-bottom: 0.25rem; text-align: right; }
+  .progress-track { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 2px; transition: width 0.35s ease; width: 0%; }
+  section { margin-bottom: 2.6rem; }
+  .sec-header { display: flex; align-items: baseline; gap: 0.75rem; border-bottom: 2px solid var(--ink); padding-bottom: 0.5rem; margin-bottom: 0.45rem; }
+  .sec-num { font-family: 'DM Serif Display',serif; font-size: 1.55rem; color: var(--accent); line-height: 1; }
+  .sec-title { font-family: 'Noto Serif TC',serif; font-size: 1rem; font-weight: 600; }
+  .sec-desc { font-size: 0.82rem; color: var(--ink-light); margin-bottom: 1rem; line-height: 1.7; }
+  .q-block { margin-bottom: 1.45rem; }
+  .q-text { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.55rem; }
+  .q-note { font-size: 0.71rem; color: var(--ink-light); font-weight: 300; margin-left: 0.35rem; }
+  .radio-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .radio-item { position: relative; }
+  .radio-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .radio-label { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; background: #fff; border: 1.5px solid var(--line); border-radius: 3px; padding: 0.55rem 0.85rem; font-size: 0.85rem; color: var(--ink); transition: all 0.15s; user-select: none; }
+  .radio-label:hover { border-color: var(--accent); background: var(--accent-muted); }
+  .radio-item input:checked + .radio-label { background: var(--radio-checked); border-color: var(--radio-checked); color: #fff; font-weight: 500; }
+  .r-dot { width: 15px; height: 15px; border: 1.5px solid var(--line); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; }
+  .radio-item input:checked + .radio-label .r-dot { background: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.5); }
+  .r-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: transparent; transition: background 0.15s; }
+  .radio-item input:checked + .radio-label .r-dot::after { background: #fff; }
+  .check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 0.4rem; }
+  .check-item { position: relative; }
+  .check-item input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check-label { display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer; background: #fff; border: 1.5px solid var(--line); border-radius: 3px; padding: 0.55rem 0.85rem; font-size: 0.85rem; color: var(--ink); transition: all 0.15s; min-height: 48px; user-select: none; }
+  .check-label:hover { border-color: var(--accent); background: var(--accent-muted); }
+  .check-item input:checked + .check-label { background: var(--checked-bg); border-color: var(--checked-bg); color: #fff; }
+  .c-box { width: 15px; height: 15px; border: 1.5px solid var(--line); border-radius: 2px; flex-shrink: 0; margin-top: 3px; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; font-size: 0.65rem; color: transparent; }
+  .check-item input:checked + .check-label .c-box { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); color: #fff; }
+  hr.div { border: none; border-top: 1px dashed var(--line); margin: 1.8rem 0; }
+  .action-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; justify-content: space-between; margin-top: 1.8rem; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; font-family: 'Noto Sans TC',sans-serif; font-size: 0.88rem; letter-spacing: 0.04em; padding: 0.72rem 1.8rem; border-radius: 3px; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--accent-light); }
+  .btn-secondary { background: transparent; color: var(--ink-light); border: 1px solid var(--line); font-family: 'Noto Sans TC',sans-serif; font-size: 0.82rem; padding: 0.68rem 1.3rem; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+  #summary-output { display: none; margin-top: 2.2rem; background: var(--ink); color: #fff; border-radius: 4px; padding: 1.8rem; position: relative; }
+  #summary-output::before { content: '個人反思摘要'; display: block; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #85b7eb; margin-bottom: 0.9rem; }
+  #summary-text { font-size: 0.85rem; line-height: 2; color: rgba(255,255,255,0.85); white-space: pre-wrap; }
+  .copy-btn { position: absolute; top: 1.1rem; right: 1.1rem; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.55); font-size: 0.72rem; padding: 0.25em 0.75em; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .copy-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">體育大學碩士班｜文獻閱讀反思問卷</div>
+    <h1>mHealth 行為介入於第二型糖尿病<br>自我管理之成效反思問卷</h1>
+    <div class="header-meta">
+      <span>📄 Ruiz-Leon et al. (2025)</span>
+      <span>🏫 J Med Internet Res</span>
+      <span>🔬 平行隨機對照試驗</span>
+    </div>
+    <div class="badge">mHealth · 行為改變 · 糖尿病自我管理 · 心血管風險</div>
+  </div>
+</header>
+<main>
+  <div class="citation">
+    <strong>文獻：</strong>Ruiz-Leon AM, Casas R, Castro-Barquero S, et al. (2025). Efficacy of a mobile health–based behavioral treatment for lifestyle modification in type 2 diabetes self-management: Greenhabit randomized controlled trial. <em>J Med Internet Res, 27</em>, e58319.
+    <a href="https://doi.org/10.2196/58319" target="_blank">https://doi.org/10.2196/58319</a>
+  </div>
+  <div class="basic-info">
+    <div class="field"><label>姓名（隱藏中間字）</label><input type="text" id="f-name" placeholder="例：王○明"></div>
+    <div class="field"><label>填寫日期</label><input type="date" id="f-date"></div>
+    <div class="field full"><label>所屬課程／教授</label><input type="text" id="f-course" value="成人病理學／陳進明"></div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-label" id="prog-label">答題進度：0 / 18</div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
+
+  <!-- 一 -->
+  <section>
+    <div class="sec-header"><span class="sec-num">一</span><span class="sec-title">閱讀後的第一感受</span></div>
+    <p class="sec-desc">根據你閱讀完整篇文獻的整體印象回答。</p>
+    <div class="q-block">
+      <div class="q-text">Q1. 讀完這篇研究，你最直接的感想是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q1" id="q1a"><label class="radio-label" for="q1a"><span class="r-dot"></span>「用手機 App 管理糖尿病，原來行為改變才是關鍵！」</label></div>
+        <div class="radio-item"><input type="radio" name="q1" id="q1b"><label class="radio-label" for="q1b"><span class="r-dot"></span>「12 週竟然能改善血壓、三酸甘油酯和腰圍，效果超乎預期」</label></div>
+        <div class="radio-item"><input type="radio" name="q1" id="q1c"><label class="radio-label" for="q1c"><span class="r-dot"></span>「把認知行為教育做成遊戲化 App，這個設計很有創意」</label></div>
+        <div class="radio-item"><input type="radio" name="q1" id="q1d"><label class="radio-label" for="q1d"><span class="r-dot"></span>「RCT 設計嚴謹，但兩組 HbA1c 都改善、組間無顯著差異讓我很意外」</label></div>
+        <div class="radio-item"><input type="radio" name="q1" id="q1e"><label class="radio-label" for="q1e"><span class="r-dot"></span>「科技能輔助自我管理，但動機與依從性才是真正的挑戰」</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q2. 這篇研究最讓你印象深刻的發現是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q2" id="q2a"><label class="radio-label" for="q2a"><span class="r-dot"></span>介入組在 12 週後收縮壓、舒張壓均顯著下降</label></div>
+        <div class="radio-item"><input type="radio" name="q2" id="q2b"><label class="radio-label" for="q2b"><span class="r-dot"></span>兩組 HbA1c 都改善，但組間差異未達統計顯著</label></div>
+        <div class="radio-item"><input type="radio" name="q2" id="q2c"><label class="radio-label" for="q2c"><span class="r-dot"></span>對照組的社會支持顯著下降、焦慮顯著上升</label></div>
+        <div class="radio-item"><input type="radio" name="q2" id="q2d"><label class="radio-label" for="q2d"><span class="r-dot"></span>僅 75% 的介入組參與者實際使用 App，且存在年齡落差</label></div>
+        <div class="radio-item"><input type="radio" name="q2" id="q2e"><label class="radio-label" for="q2e"><span class="r-dot"></span>介入組 HDL-C 顯著上升、三酸甘油酯顯著下降</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q3. 「Greenhabit App」的核心設計理念最接近哪個描述？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q3" id="q3a"><label class="radio-label" for="q3a"><span class="r-dot"></span>透過每日挑戰與獎勵，培養涵蓋飲食、運動、放鬆、正向心態與社會支持的全人習慣</label></div>
+        <div class="radio-item"><input type="radio" name="q3" id="q3b"><label class="radio-label" for="q3b"><span class="r-dot"></span>主要功能是血糖監測紀錄與胰島素劑量計算</label></div>
+        <div class="radio-item"><input type="radio" name="q3" id="q3c"><label class="radio-label" for="q3c"><span class="r-dot"></span>以群體競賽排名激發外在動機，達成步數目標</label></div>
+        <div class="radio-item"><input type="radio" name="q3" id="q3d"><label class="radio-label" for="q3d"><span class="r-dot"></span>提供個人化飲食計畫並自動生成購物清單</label></div>
+      </div>
+    </div>
+  </section>
+  <hr class="div">
+
+  <!-- 二 -->
+  <section>
+    <div class="sec-header"><span class="sec-num">二</span><span class="sec-title">理解研究內容</span></div>
+    <p class="sec-desc">測試你對文獻核心概念與研究設計的掌握程度。</p>
+    <div class="q-block">
+      <div class="q-text">Q4. 本研究的主要結果（primary outcomes）是哪兩項？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q4" id="q4a"><label class="radio-label" for="q4a"><span class="r-dot"></span>糖化血色素（HbA1c）與空腹血漿葡萄糖（FPG）</label></div>
+        <div class="radio-item"><input type="radio" name="q4" id="q4b"><label class="radio-label" for="q4b"><span class="r-dot"></span>BMI 與腰圍</label></div>
+        <div class="radio-item"><input type="radio" name="q4" id="q4c"><label class="radio-label" for="q4c"><span class="r-dot"></span>收縮壓與舒張壓</label></div>
+        <div class="radio-item"><input type="radio" name="q4" id="q4d"><label class="radio-label" for="q4d"><span class="r-dot"></span>生活品質問卷分數與焦慮量表分數</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q5. 為何兩組 HbA1c 均改善卻未達組間顯著差異？研究者提到哪些可能解釋？<span class="q-note">（可複選）</span></div>
+      <div class="check-group">
+        <div class="check-item"><input type="checkbox" id="q5a"><label class="check-label" for="q5a"><span class="c-box">✓</span>霍桑效應：知道被觀察而改善行為</label></div>
+        <div class="check-item"><input type="checkbox" id="q5b"><label class="check-label" for="q5b"><span class="c-box">✓</span>基準 HbA1c 低於 8%，天花板效應限制了差距</label></div>
+        <div class="check-item"><input type="checkbox" id="q5c"><label class="check-label" for="q5c"><span class="c-box">✓</span>對照組也增加了與家庭醫師的互動與關注</label></div>
+        <div class="check-item"><input type="checkbox" id="q5d"><label class="check-label" for="q5d"><span class="c-box">✓</span>App 單獨使用短期內可能不足以驅動足夠的生活型態改變</label></div>
+        <div class="check-item"><input type="checkbox" id="q5e"><label class="check-label" for="q5e"><span class="c-box">✓</span>兩組接受了相同的面對面飲食諮詢</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q6. 「ANCOVA 調整基準值分析」相比單純 t 檢定有何優點？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q6" id="q6a"><label class="radio-label" for="q6a"><span class="r-dot"></span>控制基準值、年齡、性別等干擾因素，使組間比較更準確</label></div>
+        <div class="radio-item"><input type="radio" name="q6" id="q6b"><label class="radio-label" for="q6b"><span class="r-dot"></span>可以增加樣本數，讓統計力更強</label></div>
+        <div class="radio-item"><input type="radio" name="q6" id="q6c"><label class="radio-label" for="q6c"><span class="r-dot"></span>只適用於連續型變項，可以省略類別變項的分析</label></div>
+        <div class="radio-item"><input type="radio" name="q6" id="q6d"><label class="radio-label" for="q6d"><span class="r-dot"></span>讓研究者可以不用隨機分派，直接比較兩組</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q7. 這篇研究最重要的限制，你認為是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q7" id="q7a"><label class="radio-label" for="q7a"><span class="r-dot"></span>僅追蹤 12 週，無法評估長期效果與習慣維持</label></div>
+        <div class="radio-item"><input type="radio" name="q7" id="q7b"><label class="radio-label" for="q7b"><span class="r-dot"></span>單一中心招募，結果外推至其他族群須謹慎</label></div>
+        <div class="radio-item"><input type="radio" name="q7" id="q7c"><label class="radio-label" for="q7c"><span class="r-dot"></span>需要智慧型手機，可能排除低資源或數位能力弱的族群</label></div>
+        <div class="radio-item"><input type="radio" name="q7" id="q7d"><label class="radio-label" for="q7d"><span class="r-dot"></span>以上皆是重要限制</label></div>
+      </div>
+    </div>
+  </section>
+  <hr class="div">
+
+  <!-- 三 -->
+  <section>
+    <div class="sec-header"><span class="sec-num">三</span><span class="sec-title">連結自身經驗</span></div>
+    <p class="sec-desc">把研究發現對應到你的日常生活與學習情境。</p>
+    <div class="q-block">
+      <div class="q-text">Q8. 你曾使用 App 管理個人健康行為嗎？使用感受如何？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q8" id="q8a"><label class="radio-label" for="q8a"><span class="r-dot"></span>有，而且覺得很有效，改善了我的健康習慣</label></div>
+        <div class="radio-item"><input type="radio" name="q8" id="q8b"><label class="radio-label" for="q8b"><span class="r-dot"></span>有，但持續使用一陣子後就忘記或失去動力了</label></div>
+        <div class="radio-item"><input type="radio" name="q8" id="q8c"><label class="radio-label" for="q8c"><span class="r-dot"></span>有嘗試過，但覺得操作麻煩或不夠符合個人需求</label></div>
+        <div class="radio-item"><input type="radio" name="q8" id="q8d"><label class="radio-label" for="q8d"><span class="r-dot"></span>沒有，但讀完這篇研究讓我想試試看</label></div>
+        <div class="radio-item"><input type="radio" name="q8" id="q8e"><label class="radio-label" for="q8e"><span class="r-dot"></span>沒有，對於 mHealth App 的效果仍持保留態度</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q9. 研究中對照組焦慮上升、社會支持下降，這讓你聯想到哪種情境？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q9" id="q9a"><label class="radio-label" for="q9a"><span class="r-dot"></span>慢性病患者在缺乏支持下獨自面對病情管理的孤立感</label></div>
+        <div class="radio-item"><input type="radio" name="q9" id="q9b"><label class="radio-label" for="q9b"><span class="r-dot"></span>研究生在論文壓力期間，社交退縮加劇焦慮的狀況</label></div>
+        <div class="radio-item"><input type="radio" name="q9" id="q9c"><label class="radio-label" for="q9c"><span class="r-dot"></span>一般人知道「應該要改變生活型態」卻缺乏行動的無力感</label></div>
+        <div class="radio-item"><input type="radio" name="q9" id="q9d"><label class="radio-label" for="q9d"><span class="r-dot"></span>標準醫療照護模式中，衛教內容豐富但個人化支持不足</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q10. 若你是第二型糖尿病患者，哪個 Greenhabit 的設計元素對你最有幫助？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q10" id="q10a"><label class="radio-label" for="q10a"><span class="r-dot"></span>每日挑戰任務＋積分獎勵，製造小成就感</label></div>
+        <div class="radio-item"><input type="radio" name="q10" id="q10b"><label class="radio-label" for="q10b"><span class="r-dot"></span>邀請夥伴一起使用，互相支持與問責</label></div>
+        <div class="radio-item"><input type="radio" name="q10" id="q10c"><label class="radio-label" for="q10c"><span class="r-dot"></span>AI 個人化推薦內容，根據我的臨床數據調整介入</label></div>
+        <div class="radio-item"><input type="radio" name="q10" id="q10d"><label class="radio-label" for="q10d"><span class="r-dot"></span>整合飲食、運動、放鬆與心態的全方位健康教育</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q11. 本研究對象為新確診 T2D 患者（&lt; 2 年）。你認為這些結果對「老年慢性病患者」的適用性如何？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q11" id="q11a"><label class="radio-label" for="q11a"><span class="r-dot"></span>部分適用，但老年人使用智慧型手機的障礙更大</label></div>
+        <div class="radio-item"><input type="radio" name="q11" id="q11b"><label class="radio-label" for="q11b"><span class="r-dot"></span>適用，行為改變介入的心理機制不因年齡而改變</label></div>
+        <div class="radio-item"><input type="radio" name="q11" id="q11c"><label class="radio-label" for="q11c"><span class="r-dot"></span>不太適用，老年慢性病患者的共病與用藥複雜度高很多</label></div>
+        <div class="radio-item"><input type="radio" name="q11" id="q11d"><label class="radio-label" for="q11d"><span class="r-dot"></span>需要專為老年族群設計的研究才能判斷</label></div>
+      </div>
+    </div>
+  </section>
+  <hr class="div">
+
+  <!-- 四 -->
+  <section>
+    <div class="sec-header"><span class="sec-num">四</span><span class="sec-title">對專業與研究的反思</span></div>
+    <p class="sec-desc">思考這篇文獻對你學術訓練、未來研究或工作的影響。</p>
+    <div class="q-block">
+      <div class="q-text">Q12. 從「成人病理學」角度，第二型糖尿病最相關的心血管風險因素有哪些？<span class="q-note">（可複選）</span></div>
+      <div class="check-group">
+        <div class="check-item"><input type="checkbox" id="q12a"><label class="check-label" for="q12a"><span class="c-box">✓</span>高血壓加速動脈粥狀硬化</label></div>
+        <div class="check-item"><input type="checkbox" id="q12b"><label class="check-label" for="q12b"><span class="c-box">✓</span>三酸甘油酯升高增加胰臟炎與心血管風險</label></div>
+        <div class="check-item"><input type="checkbox" id="q12c"><label class="check-label" for="q12c"><span class="c-box">✓</span>HDL-C 偏低降低逆向膽固醇轉運能力</label></div>
+        <div class="check-item"><input type="checkbox" id="q12d"><label class="check-label" for="q12d"><span class="c-box">✓</span>中心性肥胖（腰圍過大）增加代謝症候群風險</label></div>
+        <div class="check-item"><input type="checkbox" id="q12e"><label class="check-label" for="q12e"><span class="c-box">✓</span>長期高血糖造成微血管與大血管病變</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q13. 讀完這篇研究，你對「設計數位健康介入方案」最重要的新認識是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q13" id="q13a"><label class="radio-label" for="q13a"><span class="r-dot"></span>光提供資訊不夠，需結合行為改變技術（CBT/MI）與持續支持</label></div>
+        <div class="radio-item"><input type="radio" name="q13" id="q13b"><label class="radio-label" for="q13b"><span class="r-dot"></span>數位工具需搭配面對面諮詢與電話追蹤，才能維持依從性</label></div>
+        <div class="radio-item"><input type="radio" name="q13" id="q13c"><label class="radio-label" for="q13c"><span class="r-dot"></span>社會支持（夥伴機制、社群）是維持健康行為的重要驅動力</label></div>
+        <div class="radio-item"><input type="radio" name="q13" id="q13d"><label class="radio-label" for="q13d"><span class="r-dot"></span>短期行為改變效果需更長追蹤才能確認是否持久</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q14. 若你未來要設計類似的 mHealth 研究，最可能納入哪個改進？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q14" id="q14a"><label class="radio-label" for="q14a"><span class="r-dot"></span>延長追蹤至 6–12 個月，評估長期效果與維持</label></div>
+        <div class="radio-item"><input type="radio" name="q14" id="q14b"><label class="radio-label" for="q14b"><span class="r-dot"></span>加入血糖變異性（CGM）指標，補充 HbA1c 的盲點</label></div>
+        <div class="radio-item"><input type="radio" name="q14" id="q14c"><label class="radio-label" for="q14c"><span class="r-dot"></span>分層分析老年族群與數位素養低族群，了解使用障礙</label></div>
+        <div class="radio-item"><input type="radio" name="q14" id="q14d"><label class="radio-label" for="q14d"><span class="r-dot"></span>設計主動控制組（積極標準照護），以排除霍桑效應</label></div>
+      </div>
+    </div>
+  </section>
+  <hr class="div">
+
+  <!-- 五 -->
+  <section>
+    <div class="sec-header"><span class="sec-num">五</span><span class="sec-title">未來行動意向</span></div>
+    <p class="sec-desc">讀完這篇文獻後，你打算怎麼做？</p>
+    <div class="q-block">
+      <div class="q-text">Q15. 讀完後你最想採取的行動是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q15" id="q15a"><label class="radio-label" for="q15a"><span class="r-dot"></span>開始嘗試用 App 追蹤自己的飲食與活動，體驗行為改變過程</label></div>
+        <div class="radio-item"><input type="radio" name="q15" id="q15b"><label class="radio-label" for="q15b"><span class="r-dot"></span>延伸閱讀 Greenhabit 所依據的行為改變輪（Behaviour Change Wheel）理論</label></div>
+        <div class="radio-item"><input type="radio" name="q15" id="q15c"><label class="radio-label" for="q15c"><span class="r-dot"></span>思考如何將 mHealth 介入設計應用在我的研究或未來臨床工作</label></div>
+        <div class="radio-item"><input type="radio" name="q15" id="q15d"><label class="radio-label" for="q15d"><span class="r-dot"></span>搜尋更多針對慢性病 mHealth RCT 的系統性回顧，了解整體證據</label></div>
+        <div class="radio-item"><input type="radio" name="q15" id="q15e"><label class="radio-label" for="q15e"><span class="r-dot"></span>跟同學或患者分享「行為改變搭配數位工具」的重要概念</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q16. 如果你是第一線衛教師，最優先採用哪種策略？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q16" id="q16a"><label class="radio-label" for="q16a"><span class="r-dot"></span>搭配 mHealth App 做個人化行為目標設定與追蹤</label></div>
+        <div class="radio-item"><input type="radio" name="q16" id="q16b"><label class="radio-label" for="q16b"><span class="r-dot"></span>引導患者找到內在動機（Why），再設計對應行為策略</label></div>
+        <div class="radio-item"><input type="radio" name="q16" id="q16c"><label class="radio-label" for="q16c"><span class="r-dot"></span>建立同儕支持小組，以社會支持維持行為改變</label></div>
+        <div class="radio-item"><input type="radio" name="q16" id="q16d"><label class="radio-label" for="q16d"><span class="r-dot"></span>三管齊下：App＋個別諮詢＋家庭／夥伴支持</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q17. 要讓 mHealth 介入對「數位能力弱的患者」也有效，最需要改善的是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q17" id="q17a"><label class="radio-label" for="q17a"><span class="r-dot"></span>簡化 App 介面，降低學習門檻</label></div>
+        <div class="radio-item"><input type="radio" name="q17" id="q17b"><label class="radio-label" for="q17b"><span class="r-dot"></span>提供設備補助或免費 App，消除硬體障礙</label></div>
+        <div class="radio-item"><input type="radio" name="q17" id="q17c"><label class="radio-label" for="q17c"><span class="r-dot"></span>加強初期操作訓練與持續電話支持</label></div>
+        <div class="radio-item"><input type="radio" name="q17" id="q17d"><label class="radio-label" for="q17d"><span class="r-dot"></span>同步設計非數位版替代方案（紙本日誌＋電話追蹤）</label></div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-text">Q18. 整體而言，這篇文獻對你個人的啟發價值是？<span class="q-note">（單選）</span></div>
+      <div class="radio-group">
+        <div class="radio-item"><input type="radio" name="q18" id="q18a"><label class="radio-label" for="q18a"><span class="r-dot"></span>⭐⭐⭐⭐⭐　非常有啟發，直接影響我對 mHealth 介入的看法與計畫</label></div>
+        <div class="radio-item"><input type="radio" name="q18" id="q18b"><label class="radio-label" for="q18b"><span class="r-dot"></span>⭐⭐⭐⭐　有不少新想法，但需要時間消化與實踐</label></div>
+        <div class="radio-item"><input type="radio" name="q18" id="q18c"><label class="radio-label" for="q18c"><span class="r-dot"></span>⭐⭐⭐　有參考價值，但與我專業的連結仍需再思考</label></div>
+        <div class="radio-item"><input type="radio" name="q18" id="q18d"><label class="radio-label" for="q18d"><span class="r-dot"></span>⭐⭐　研究方法設計有學習價值，但主題稍遠</label></div>
+        <div class="radio-item"><input type="radio" name="q18" id="q18e"><label class="radio-label" for="q18e"><span class="r-dot"></span>⭐　目前看不出與我研究方向的直接關聯</label></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="action-bar">
+    <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="generateSummary()">📋 生成個人反思摘要</button>
+      <button class="btn-secondary" onclick="clearAll()">清除所有內容</button>
+    </div>
+    <span style="font-size:0.72rem;color:var(--ink-light);">資料僅存於本機，不上傳</span>
+  </div>
+  <div id="summary-output">
+    <button class="copy-btn" onclick="copySummary()">複製</button>
+    <pre id="summary-text"></pre>
+  </div>
+</main>
+<script>
+  document.getElementById('f-date').valueAsDate = new Date();
+  const TOTAL = 18;
+  const RADIO_NAMES = ['q1','q2','q3','q4','q6','q7','q8','q9','q10','q11','q13','q14','q15','q16','q17','q18'];
+  const CB_GROUPS = [
+    { id: 'q5', ids: ['q5a','q5b','q5c','q5d','q5e'] },
+    { id: 'q12', ids: ['q12a','q12b','q12c','q12d','q12e'] },
+  ];
+  function updateProgress() {
+    let n = 0;
+    RADIO_NAMES.forEach(function(name) { if (document.querySelector('input[name="'+name+'"]:checked')) n++; });
+    CB_GROUPS.forEach(function(g) { if (g.ids.some(function(id) { var el = document.getElementById(id); return el && el.checked; })) n++; });
+    document.getElementById('prog-label').textContent = '答題進度：' + n + ' / ' + TOTAL;
+    document.getElementById('prog-fill').style.width = Math.round(n / TOTAL * 100) + '%';
+  }
+  document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function(el) { el.addEventListener('change', updateProgress); });
+  function getRadio(name) {
+    var el = document.querySelector('input[name="'+name+'"]:checked');
+    return el ? el.nextElementSibling.textContent.trim().replace(/\s+/g,' ') : null;
+  }
+  function getChecks(ids) {
+    return ids.map(function(id) { var el = document.getElementById(id); return (el && el.checked) ? el.nextElementSibling.textContent.trim().replace(/\s+/g,' ') : null; }).filter(Boolean);
+  }
+  function generateSummary() {
+    var name = document.getElementById('f-name').value.trim() || '（未填）';
+    var date = document.getElementById('f-date').value || '（未填）';
+    var course = document.getElementById('f-course').value.trim() || '（未填）';
+    var sections = [
+      { title: '【一、閱讀後的第一感受】', qs: [
+        { label: 'Q1 第一感想', val: getRadio('q1') },
+        { label: 'Q2 最印象深刻的發現', val: getRadio('q2') },
+        { label: 'Q3 Greenhabit 核心設計理念', val: getRadio('q3') },
+      ]},
+      { title: '【二、理解研究內容】', qs: [
+        { label: 'Q4 主要結果指標', val: getRadio('q4') },
+        { label: 'Q5 HbA1c 組間無顯著差異的可能原因（複選）', val: getChecks(['q5a','q5b','q5c','q5d','q5e']).join('、') || null },
+        { label: 'Q6 ANCOVA 的優點', val: getRadio('q6') },
+        { label: 'Q7 最重要的限制', val: getRadio('q7') },
+      ]},
+      { title: '【三、連結自身經驗】', qs: [
+        { label: 'Q8 個人使用 App 管理健康的經驗', val: getRadio('q8') },
+        { label: 'Q9 對對照組焦慮上升的聯想', val: getRadio('q9') },
+        { label: 'Q10 最有幫助的 App 設計元素', val: getRadio('q10') },
+        { label: 'Q11 結果對老年慢性病患者的適用性', val: getRadio('q11') },
+      ]},
+      { title: '【四、對專業與研究的反思】', qs: [
+        { label: 'Q12 T2D 相關心血管風險因素（複選）', val: getChecks(['q12a','q12b','q12c','q12d','q12e']).join('、') || null },
+        { label: 'Q13 設計數位健康介入的新認識', val: getRadio('q13') },
+        { label: 'Q14 未來研究可加入的改進', val: getRadio('q14') },
+      ]},
+      { title: '【五、未來行動意向】', qs: [
+        { label: 'Q15 讀後最想採取的行動', val: getRadio('q15') },
+        { label: 'Q16 衛教師的優先策略', val: getRadio('q16') },
+        { label: 'Q17 提升數位弱勢族群使用率的關鍵', val: getRadio('q17') },
+        { label: 'Q18 對個人的啟發價值', val: getRadio('q18') },
+      ]},
+    ];
+    var out = '═══════════════════════════════════════\n';
+    out += '  文獻閱讀反思摘要\n';
+    out += '  Ruiz-Leon et al. (2025)  J Med Internet Res\n';
+    out += '═══════════════════════════════════════\n';
+    out += '姓名：' + name + '　日期：' + date + '\n課程：' + course + '\n\n';
+    sections.forEach(function(sec) {
+      var filled = sec.qs.filter(function(q) { return q.val; });
+      if (!filled.length) return;
+      out += sec.title + '\n';
+      filled.forEach(function(q) { out += '  ' + q.label + '\n  → ' + q.val + '\n\n'; });
+    });
+    out += '───────────────────────────────────────\n';
+    out += 'DOI: https://doi.org/10.2196/58319\n';
+    document.getElementById('summary-text').textContent = out;
+    var el = document.getElementById('summary-output');
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function copySummary() {
+    navigator.clipboard.writeText(document.getElementById('summary-text').textContent).then(function() {
+      var btn = document.querySelector('.copy-btn');
+      btn.textContent = '已複製！';
+      setTimeout(function() { btn.textContent = '複製'; }, 2000);
+    });
+  }
+  function clearAll() {
+    if (!confirm('確定要清除所有作答內容？')) return;
+    document.querySelectorAll('input[type="radio"]').forEach(function(r) { r.checked = false; });
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(c) { c.checked = false; });
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-date').valueAsDate = new Date();
+    document.getElementById('summary-output').style.display = 'none';
+    updateProgress();
+  }
+</script>
+</body>
+</html>
