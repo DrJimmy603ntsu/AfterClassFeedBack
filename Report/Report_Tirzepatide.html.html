@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>課後問卷｜運動防護員／教練（反直覺版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --border: rgba(255,255,255,.08);
+      --text: #f0f0f0;
+      --muted: #888;
+      --lime: #c8ff00;
+      --orange: #ff6b00;
+      --cyan: #00e5ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,255,0,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,255,0,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none; z-index: 0;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 960px; margin: 0 auto;
+      padding: 0 16px 80px;
+    }
+
+    /* HEADER */
+    header {
+      padding: 48px 0 32px;
+      border-bottom: 2px solid var(--lime);
+      margin-bottom: 32px;
+      position: relative; overflow: hidden;
+    }
+    header::after {
+      content: 'SPORT';
+      position: absolute; right: -10px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 120px;
+      color: rgba(200,255,0,.04); letter-spacing: -4px;
+      pointer-events: none; user-select: none;
+    }
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 3px;
+      background: var(--lime); color: #000;
+    }
+    .tag.orange { background: var(--orange); color: #fff; }
+    .tag.cyan   { background: var(--cyan);   color: #000; }
+    .tag.outline{ background: transparent; border: 1px solid var(--muted); color: var(--muted); }
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(28px, 5vw, 52px); font-weight: 900;
+      margin: 0 0 8px; line-height: 1.05;
+      letter-spacing: -.5px; text-transform: uppercase;
+    }
+    h1 span { color: var(--lime); }
+    .sub { color: var(--muted); font-size: 13px; margin: 0; max-width: 600px; }
+
+    /* PROGRESS */
+    .progress-wrap { margin-bottom: 32px; }
+    .progress-info {
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: var(--muted); margin-bottom: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    }
+    .progress-info .pct { color: var(--lime); }
+    .progress-track { height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--lime), var(--cyan));
+      border-radius: 2px;
+      transition: width .4s cubic-bezier(.4,0,.2,1);
+      width: 0%;
+    }
+
+    /* SECTIONS */
+    form { display: grid; gap: 20px; }
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+    }
+    .sec-head {
+      padding: 14px 20px; background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sec-letter {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 36px;
+      line-height: 1; color: var(--lime); opacity: .9;
+    }
+    .sec-info h2 {
+      margin: 0 0 3px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px; font-weight: 700;
+      letter-spacing: .3px; text-transform: uppercase;
+    }
+    .sec-info p { margin: 0; font-size: 12px; color: var(--muted); }
+    .sec-body { padding: 0 20px 20px; }
+
+    /* QUESTIONS */
+    .q {
+      border-top: 1px solid var(--border);
+      padding-top: 20px; margin-top: 20px;
+      border-radius: 10px;
+      transition: background .4s ease;
+      scroll-margin-top: 80px;
+    }
+    .q:first-child { border-top: none; padding-top: 20px; margin-top: 0; }
+    .q.highlight { background: rgba(200,255,0,.05); }
+
+    .qtitle { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+    .qnum {
+      width: 30px; height: 30px; flex: 0 0 30px;
+      background: linear-gradient(135deg, var(--orange), #ff9500);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 15px; color: #000;
+      transition: background .3s ease;
+    }
+    .qnum.answered { background: linear-gradient(135deg, var(--lime), #a8e000); }
+    .qtext { font-size: 14px; font-weight: 500; margin: 4px 0 0; }
+    .req {
+      display: inline-block; font-size: 10px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      letter-spacing: .5px; text-transform: uppercase;
+      color: #000; background: var(--lime);
+      padding: 1px 5px; border-radius: 3px; margin-left: 6px; vertical-align: middle;
+    }
+    .hint {
+      margin: 6px 0 10px 42px; font-size: 12px; color: var(--orange);
+      border-left: 2px solid var(--orange); padding-left: 8px;
+    }
+    fieldset { border: none; padding: 0; margin: 0 0 0 42px; display: grid; gap: 7px; }
+    label.opt {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 14px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.07);
+      background: rgba(255,255,255,.02);
+      cursor: pointer; transition: all .12s ease; font-size: 13.5px;
+    }
+    label.opt:hover {
+      border-color: var(--lime); background: rgba(200,255,0,.05); transform: translateX(3px);
+    }
+    label.opt.selected {
+      border-color: rgba(200,255,0,.45); background: rgba(200,255,0,.07);
+    }
+    input[type="radio"], input[type="checkbox"] {
+      margin-top: 2px; accent-color: var(--lime);
+      transform: scale(1.1); flex: 0 0 auto;
+    }
+    label.opt small { display: block; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
+
+    /* LIKERT */
+    .likert {
+      display: grid; grid-template-columns: repeat(5, minmax(0,1fr));
+      gap: 8px; margin-left: 42px;
+    }
+    .likert label.opt {
+      flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 12px 6px; gap: 6px;
+    }
+    .likert label.opt .lnum {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px; font-weight: 900; color: var(--muted); transition: color .12s;
+    }
+    .likert label.opt:has(input:checked) .lnum { color: var(--lime); }
+    .likert label.opt:has(input:checked) { border-color: var(--lime); background: rgba(200,255,0,.07); }
+    .likert label.opt small { font-size: 10px; }
+
+    /* ACTIONS */
+    .actions {
+      display: flex; gap: 10px;
+      justify-content: flex-end; padding-top: 8px;
+    }
+    button {
+      border: none; border-radius: 8px; padding: 11px 20px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 14px; letter-spacing: .5px; text-transform: uppercase;
+      cursor: pointer; transition: all .1s ease;
+    }
+    button:hover { transform: translateY(-2px); }
+    button:active { transform: translateY(0); }
+    button:disabled { opacity: .35; cursor: default; transform: none; }
+    .btn-primary { background: var(--lime); color: #000; }
+    .btn-primary:hover { background: #d4ff1a; }
+    .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,.15); color: var(--muted); }
+    .btn-secondary:hover { border-color: rgba(255,255,255,.3); color: var(--text); }
+
+    /* COUNTDOWN BAR */
+    .countdown-bar {
+      display: none; margin-top: 12px; padding: 14px 18px;
+      border-radius: 12px; border: 1px solid rgba(0,229,255,.3);
+      background: rgba(0,229,255,.05);
+      align-items: center; gap: 14px;
+      animation: slideIn .3s ease;
+    }
+    .countdown-bar.show { display: flex; }
+    .countdown-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 40px; font-weight: 900; color: var(--cyan);
+      min-width: 40px; text-align: center; line-height: 1;
+    }
+    .countdown-info { flex: 1; }
+    .countdown-info .cd-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 13px; letter-spacing: .5px;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 6px;
+    }
+    .countdown-track { height: 3px; background: rgba(0,229,255,.15); border-radius: 2px; overflow: hidden; }
+    .countdown-fill { height: 100%; background: var(--cyan); border-radius: 2px; transition: width .25s linear; width: 100%; }
+
+    /* SUBMITTING */
+    .submitting-bar {
+      display: none; margin-top: 12px; padding: 12px 18px;
+      border-radius: 10px; border: 1px solid rgba(200,255,0,.3);
+      background: rgba(200,255,0,.05);
+      align-items: center; gap: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 13px; letter-spacing: .5px;
+      text-transform: uppercase; color: var(--lime);
+    }
+    .submitting-bar.show { display: flex; }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(200,255,0,.25); border-top-color: var(--lime);
+      border-radius: 50%; animation: spin .6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* SUCCESS TOAST */
+    .toast {
+      display: none; margin-top: 16px; padding: 20px 22px;
+      border-radius: 12px; animation: slideIn .3s ease;
+    }
+    .toast.success { border: 1px solid var(--lime); background: rgba(200,255,0,.06); }
+    .toast-head {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 20px;
+      font-weight: 900; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
+    }
+    .toast.success .toast-head { color: var(--lime); }
+    .toast p { margin: 0; font-size: 13px; color: var(--muted); }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* responsive */
+    @media (max-width: 560px) {
+      fieldset { margin-left: 0; }
+      .hint { margin-left: 0; }
+      .likert { gap: 5px; }
+      .likert label.opt { padding: 8px 4px; }
+      .likert label.opt .lnum { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>課後問卷<br><span>運動防護員／教練</span></h1>
+    <p class="sub">針對：NEJM SURMOUNT-5（tirzepatide vs semaglutide）讀後反思。全部題目皆為選項作答。</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span>答題進度</span>
+      <span class="pct" id="pctLabel">0 / 13</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <form id="survey" autocomplete="off">
+
+    <!-- A -->
+    <section>
+      <div class="sec-head">
+        <div class="sec-letter">A</div>
+        <div class="sec-info">
+          <h2>先不要談藥，先談你「直覺」想反駁什麼</h2>
+          <p>先從「你最不買單的點」開始，通常更接近真實判斷。</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="q" data-q="q1">
+          <div class="qtitle"><div class="qnum" id="num-q1">1</div>
+            <p class="qtext">這篇文章裡，你最想先質疑的焦點是？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q1" value="open_label_bias" />開放標籤（open-label）可能帶來偏差（期待效應、行為改變）</label>
+            <label class="opt"><input type="radio" name="q1" value="dose_strategy" />最大耐受劑量的設計與現場使用是否一致（加量/停藥/退回劑量）</label>
+            <label class="opt"><input type="radio" name="q1" value="generalizability" />受試者族群與我帶的人差很多（性別比例、訓練量、目標、背景）</label>
+            <label class="opt"><input type="radio" name="q1" value="meaningful_outcomes" />結果（體重、腰圍）很漂亮，但「功能/表現/生活」的意義不夠明確</label>
+            <label class="opt"><input type="radio" name="q1" value="safety_training" />副作用與訓練/恢復的衝突沒有被說清楚</label>
+            <label class="opt"><input type="radio" name="q1" value="other" />其他</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q2">
+          <div class="qtitle"><div class="qnum" id="num-q2">2</div>
+            <p class="qtext">如果你只能用一句話提醒學員「別把這篇研究當成萬靈丹」，你會選哪種語氣？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q2" value="gentle_check_in" />「有效不等於適合你，我們先把你的目標、賽季與生活狀態拼起來再談。」</label>
+            <label class="opt"><input type="radio" name="q2" value="risk_first" />「先把風險與副作用講清楚，再談你想要的效果。」</label>
+            <label class="opt"><input type="radio" name="q2" value="process_over_magic" />「這是『長期流程』，不是『短期奇蹟』；跟得上生活與訓練才算。」</label>
+            <label class="opt"><input type="radio" name="q2" value="team_care" />「這不是你一個人扛的事；需要教練/防護員/醫師/營養師一起合作。」</label>
+            <label class="opt"><input type="radio" name="q2" value="data_honest" />「數據很強，但你的身體反應才是主角；我們用追蹤來決定下一步。」</label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <!-- B -->
+    <section>
+      <div class="sec-head">
+        <div class="sec-letter">B</div>
+        <div class="sec-info">
+          <h2>把研究翻成「現場可用」的決策</h2>
+          <p>你不是在考試，你是在做會影響人的判斷。</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="q" data-q="q3">
+          <div class="qtitle"><div class="qnum" id="num-q3">3</div>
+            <p class="qtext">學員問：「我該用哪一個？」你第一個會先問的是？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q3" value="season_goal" />他的訓練目標與賽季時間點（現在是衝刺期、維持期、恢復期？）</label>
+            <label class="opt"><input type="radio" name="q3" value="biggest_fear" />他最擔心的副作用/風險是什麼（噁心、疲勞、補給困難、情緒等）</label>
+            <label class="opt"><input type="radio" name="q3" value="lifestyle_fit" />他的生活作息能不能配合（飲食、睡眠、壓力、輪班）</label>
+            <label class="opt"><input type="radio" name="q3" value="medical_referral" />是否有醫療禁忌/病史需要先轉介（我不直接做醫療決策）</label>
+            <label class="opt"><input type="radio" name="q3" value="other" />其他</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q4">
+          <div class="qtitle"><div class="qnum" id="num-q4">4</div>
+            <p class="qtext">這篇研究最「能」被你用在現場的地方是？<span class="req">至少選 1</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="checkbox" name="q4" value="timeline" />提醒學員：效果多是「週/月」尺度，不是「幾天」</label>
+            <label class="opt"><input type="checkbox" name="q4" value="waist_tracking" />用腰圍/圍度一起追蹤，而不只看體重</label>
+            <label class="opt"><input type="checkbox" name="q4" value="escalation_plan" />設計加量期的訓練調整策略（保護模式）</label>
+            <label class="opt"><input type="checkbox" name="q4" value="targets" />用 10/15/20/25% 的級距協助設定更務實目標</label>
+            <label class="opt"><input type="checkbox" name="q4" value="shared_care" />建立轉介與共同照護（教練/防護員 × 醫師/營養師）</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q5">
+          <div class="qtitle"><div class="qnum" id="num-q5">5</div>
+            <p class="qtext">反直覺題：體重掉很多，但學員看起來更累、訓練品質更差。你會更相信哪個訊號？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q5" value="weight" />體重下降幅度（我仍以體重為主）</label>
+            <label class="opt"><input type="radio" name="q5" value="waist" />腰圍/圍度（體態與脂肪分佈）</label>
+            <label class="opt"><input type="radio" name="q5" value="recovery" />訓練表現與恢復（RPE、睡眠、HR/HRV、酸痛、情緒）</label>
+            <label class="opt"><input type="radio" name="q5" value="nutrition_stability" />食慾與飲食穩定度（能不能吃夠、吃對、補得上）</label>
+            <label class="opt"><input type="radio" name="q5" value="no_rush" />先不下結論，回到整體評估與追蹤</label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <!-- C -->
+    <section>
+      <div class="sec-head">
+        <div class="sec-letter">C</div>
+        <div class="sec-info">
+          <h2>代價與衝突：副作用 × 訓練</h2>
+          <p>同一個介入，可能同時帶來「好處」與「摩擦」。</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="q" data-q="q6">
+          <div class="qtitle"><div class="qnum" id="num-q6">6</div>
+            <p class="qtext">若你要替學員做「風險提示」，你覺得最容易被忽略的是？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q6" value="fueling" />噁心/嘔吐影響補給 → 恢復與訓練品質變差</label>
+            <label class="opt"><input type="radio" name="q6" value="dehydration" />腹瀉/便祕 → 脫水/電解質風險 → 抽筋、頭痛、心率飄</label>
+            <label class="opt"><input type="radio" name="q6" value="low_energy" />食慾下降 → 熱量長期不足 → 肌力/免疫/情緒受影響</label>
+            <label class="opt"><input type="radio" name="q6" value="fatigue_injury" />疲勞 → 技術走樣 → 受傷風險上升</label>
+            <label class="opt"><input type="radio" name="q6" value="other" />其他</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q7">
+          <div class="qtitle"><div class="qnum" id="num-q7">7</div>
+            <p class="qtext">反直覺題：你覺得「體重掉很快」在運動情境下，最可能先帶來什麼？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q7" value="better" />表現先變好（更輕更快）</label>
+            <label class="opt"><input type="radio" name="q7" value="worse" />表現先變差（能量不足/恢復不足）</label>
+            <label class="opt"><input type="radio" name="q7" value="depends" />看個體差異；關鍵在「怎麼吃、怎麼練、怎麼睡」</label>
+            <label class="opt"><input type="radio" name="q7" value="unsure" />不確定</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q8">
+          <div class="qtitle"><div class="qnum" id="num-q8">8</div>
+            <p class="qtext">加量期我願意把訓練目標從「突破」改成「穩定保護」。<span class="req">必填</span></p></div>
+          <div class="hint">這題不是考你硬不硬，是在看你願不願意保護一段脆弱期。</div>
+          <div class="likert" role="group">
+            <label class="opt"><input required type="radio" name="q8" value="1" /><span class="lnum">1</span><small>非常不願意</small></label>
+            <label class="opt"><input type="radio" name="q8" value="2" /><span class="lnum">2</span></label>
+            <label class="opt"><input type="radio" name="q8" value="3" /><span class="lnum">3</span></label>
+            <label class="opt"><input type="radio" name="q8" value="4" /><span class="lnum">4</span></label>
+            <label class="opt"><input type="radio" name="q8" value="5" /><span class="lnum">5</span><small>非常願意</small></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- D -->
+    <section>
+      <div class="sec-head">
+        <div class="sec-letter">D</div>
+        <div class="sec-info">
+          <h2>讀研究的基本功：你看懂了哪些限制？</h2>
+          <p>把限制說清楚，才不會把研究「用得太滿」。</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="q" data-q="q9">
+          <div class="qtitle"><div class="qnum" id="num-q9">9</div>
+            <p class="qtext">你覺得 open-label（非盲）最可能讓哪一類結果被影響？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q9" value="behavior" />行為面：飲食/活動/依從性改變（知道自己用哪個就更努力或更放鬆）</label>
+            <label class="opt"><input type="radio" name="q9" value="reporting" />回報面：副作用或感受的回報差異（期待、焦慮）</label>
+            <label class="opt"><input type="radio" name="q9" value="clinician_interaction" />照護互動：臨床團隊可能無意識給不同支持與調整</label>
+            <label class="opt"><input type="radio" name="q9" value="minimal" />影響有限：主要終點是體重/腰圍，客觀性較高</label>
+            <label class="opt"><input type="radio" name="q9" value="unsure" />不確定，但我知道要把它放進解讀裡</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q10">
+          <div class="qtitle"><div class="qnum" id="num-q10">10</div>
+            <p class="qtext">反直覺題：如果結果剛好相反（semaglutide 更好），你覺得最可能是哪個原因？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q10" value="dose_tolerance" />劑量/耐受策略不同（誰更容易到達高劑量、誰更容易停）</label>
+            <label class="opt"><input type="radio" name="q10" value="population" />族群特性不同（性別比例、基線 BMI、合併症）</label>
+            <label class="opt"><input type="radio" name="q10" value="adherence" />依從性/生活型態介入差異（實際打的量、實際吃的量）</label>
+            <label class="opt"><input type="radio" name="q10" value="analysis" />統計/缺失值處理方式不同導致結果偏移</label>
+            <label class="opt"><input type="radio" name="q10" value="dont_know_but_check" />我不知道，但我願意去查補充資料再下結論</label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <!-- E -->
+    <section>
+      <div class="sec-head">
+        <div class="sec-letter">E</div>
+        <div class="sec-info">
+          <h2>最重要的：你會怎麼「更溫柔」地談體重</h2>
+          <p>既不騙人，也不傷人。</p>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="q" data-q="q11">
+          <div class="qtitle"><div class="qnum" id="num-q11">11</div>
+            <p class="qtext">如果學員只做到 5–8% 減重，你最可能採用哪種回應方式？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q11" value="validate_progress" />肯定進步＋對齊目標：「這已經有健康效益，我們再看你最在意的是體能、疼痛、睡眠還是數字。」</label>
+            <label class="opt"><input type="radio" name="q11" value="adjust_plan" />調整策略：「先把可持續性做穩，再討論要不要加大介入或轉介。」</label>
+            <label class="opt"><input type="radio" name="q11" value="data_tracking" />用追蹤說話：「我們看腰圍、恢復、訓練表現一起判斷，不只看體重。」</label>
+            <label class="opt"><input type="radio" name="q11" value="set_realistic" />回到現實：「目前生活壓力/作息是瓶頸，先把能做的 1–2 件事做好。」</label>
+            <label class="opt"><input type="radio" name="q11" value="push_harder" />要求更嚴格：「這樣不夠，必須更快更大幅度下降。」</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q12">
+          <div class="qtitle"><div class="qnum" id="num-q12">12</div>
+            <p class="qtext">反直覺題：你覺得學員真正想要的，通常不是「減重%」，而是什麼？<span class="req">至少選 1</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="checkbox" name="q12" value="respect_confidence" />自信/被尊重（不被羞辱、不被貼標籤）</label>
+            <label class="opt"><input type="checkbox" name="q12" value="function" />身體比較好用（不痛、好睡、好動）</label>
+            <label class="opt"><input type="checkbox" name="q12" value="performance" />表現/速度/爆發力</label>
+            <label class="opt"><input type="checkbox" name="q12" value="medical" />醫療指標改善（血壓、血糖、睡眠呼吸等）</label>
+            <label class="opt"><input type="checkbox" name="q12" value="sustainable" />可持續的生活方式（不是撐一陣子）</label>
+          </fieldset>
+        </div>
+        <div class="q" data-q="q13">
+          <div class="qtitle"><div class="qnum" id="num-q13">13</div>
+            <p class="qtext">加碼行動題：下次遇到正在用（或想用）這類藥物的學員，我最願意先做的一個小改變是？<span class="req">必填</span></p></div>
+          <fieldset>
+            <label class="opt"><input required type="radio" name="q13" value="waist" />加入腰圍/圍度追蹤</label>
+            <label class="opt"><input type="radio" name="q13" value="recovery" />加入疲勞/睡眠/恢復的週追蹤</label>
+            <label class="opt"><input type="radio" name="q13" value="protect_mode" />設計加量期的訓練「保護模式」</label>
+            <label class="opt"><input type="radio" name="q13" value="referral" />建立轉介流程（醫師/營養師/心理）</label>
+            <label class="opt"><input type="radio" name="q13" value="read_more" />我先不改，我想再多讀一點再開始</label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM ACTIONS -->
+    <div class="actions">
+      <button type="reset" class="btn-secondary" id="btnReset">清除重填</button>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-bar" id="countdownBar">
+      <div class="countdown-num" id="countdownNum">3</div>
+      <div class="countdown-info">
+        <div class="cd-label">全部答完！即將自動送出</div>
+        <div class="countdown-track"><div class="countdown-fill" id="countdownFill"></div></div>
+      </div>
+      <button type="button" class="btn-primary" id="btnNow" style="white-space:nowrap;padding:9px 16px;font-size:13px;">立即送出</button>
+    </div>
+
+    <!-- SUBMITTING -->
+    <div class="submitting-bar" id="submittingBar">
+      <div class="spinner"></div><span>送出中…</span>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="toast success" id="toastSuccess" role="status">
+      <div class="toast-head">✓ 問卷已送出！</div>
+      <p>感謝你完成這份反直覺問卷，你的回應已記錄完成。</p>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // ── CONFIG ──
+  // To send to a real backend, set SUBMIT_URL to your webhook / API endpoint.
+  // Leave as '' for demo mode (no network call, just shows success).
+  const SUBMIT_URL = '';
+  const COUNTDOWN_SEC = 3;
+
+  const QUESTIONS = [
+    { name:'q1',  type:'radio' },
+    { name:'q2',  type:'radio' },
+    { name:'q3',  type:'radio' },
+    { name:'q4',  type:'checkbox' },
+    { name:'q5',  type:'radio' },
+    { name:'q6',  type:'radio' },
+    { name:'q7',  type:'radio' },
+    { name:'q8',  type:'radio' },
+    { name:'q9',  type:'radio' },
+    { name:'q10', type:'radio' },
+    { name:'q11', type:'radio' },
+    { name:'q12', type:'checkbox' },
+    { name:'q13', type:'radio' },
+  ];
+  const TOTAL = QUESTIONS.length;
+
+  const progressFill  = document.getElementById('progressFill');
+  const pctLabel      = document.getElementById('pctLabel');
+  const countdownBar  = document.getElementById('countdownBar');
+  const countdownNum  = document.getElementById('countdownNum');
+  const countdownFill = document.getElementById('countdownFill');
+  const submittingBar = document.getElementById('submittingBar');
+  const toastSuccess  = document.getElementById('toastSuccess');
+
+  let countdownTimer = null;
+  let isSubmitted = false;
+
+  function isAnswered(q) {
+    return [...document.querySelectorAll(`[name="${q.name}"]`)].some(i => i.checked);
+  }
+  function countAnswered() {
+    return QUESTIONS.filter(q => isAnswered(q)).length;
+  }
+
+  function updateProgress() {
+    const n = countAnswered();
+    const pct = Math.round((n / TOTAL) * 100);
+    progressFill.style.width = pct + '%';
+    pctLabel.textContent = n + ' / ' + TOTAL;
+    QUESTIONS.forEach(q => {
+      const el = document.getElementById('num-' + q.name);
+      if (el) el.className = isAnswered(q) ? 'qnum answered' : 'qnum';
+    });
+  }
+
+  function scrollToNext(justAnsweredName) {
+    const idx = QUESTIONS.findIndex(q => q.name === justAnsweredName);
+    for (let i = idx + 1; i < QUESTIONS.length; i++) {
+      if (!isAnswered(QUESTIONS[i])) {
+        const el = document.querySelector(`[data-q="${QUESTIONS[i].name}"]`);
+        if (el) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('highlight');
+            setTimeout(() => el.classList.remove('highlight'), 900);
+          }, 180);
+        }
+        return; // found next unanswered, stop
+      }
+    }
+    // All answered → start countdown
+    if (!isSubmitted) startCountdown();
+  }
+
+  function collectData() {
+    const data = { submittedAt: new Date().toISOString() };
+    const fd = new FormData(document.getElementById('survey'));
+    for (const [k, v] of fd.entries()) {
+      if (data[k] === undefined)       data[k] = v;
+      else if (Array.isArray(data[k])) data[k].push(v);
+      else                             data[k] = [data[k], v];
+    }
+    return data;
+  }
+
+  async function doSubmit() {
+    if (isSubmitted) return;
+    isSubmitted = true;
+    clearInterval(countdownTimer);
+    countdownBar.classList.remove('show');
+    submittingBar.classList.add('show');
+
+    const data = collectData();
+
+    if (SUBMIT_URL) {
+      try {
+        await fetch(SUBMIT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          mode: 'no-cors'
+        });
+      } catch(_) {}
+    } else {
+      await new Promise(r => setTimeout(r, 900)); // demo delay
+    }
+
+    submittingBar.classList.remove('show');
+    toastSuccess.style.display = 'block';
+    toastSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.querySelectorAll('#survey input').forEach(i => i.disabled = true);
+    document.getElementById('btnReset').disabled = true;
+  }
+
+  function startCountdown() {
+    // cancel any existing
+    clearInterval(countdownTimer);
+    let elapsed = 0;
+    const interval = 100; // ms
+    const steps = (COUNTDOWN_SEC * 1000) / interval;
+
+    countdownNum.textContent = COUNTDOWN_SEC;
+    countdownFill.style.width = '100%';
+    countdownBar.classList.add('show');
+    setTimeout(() => countdownBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+
+    countdownTimer = setInterval(() => {
+      elapsed++;
+      const remaining = COUNTDOWN_SEC - (elapsed * interval / 1000);
+      countdownNum.textContent = Math.ceil(Math.max(0, remaining));
+      countdownFill.style.width = Math.max(0, (remaining / COUNTDOWN_SEC) * 100) + '%';
+      if (elapsed >= steps) {
+        clearInterval(countdownTimer);
+        doSubmit();
+      }
+    }, interval);
+  }
+
+  // Instant submit button
+  document.getElementById('btnNow').addEventListener('click', () => {
+    clearInterval(countdownTimer);
+    doSubmit();
+  });
+
+  // Change handler
+  document.getElementById('survey').addEventListener('change', e => {
+    const name = e.target.name;
+    if (!name) return;
+
+    // Update selected styling
+    const qEl = document.querySelector(`[data-q="${name}"]`);
+    if (qEl) {
+      qEl.querySelectorAll('label.opt').forEach(lbl => {
+        lbl.classList.toggle('selected', lbl.querySelector('input').checked);
+      });
+    }
+
+    updateProgress();
+
+    if (!isAnswered(QUESTIONS.find(q => q.name === name))) return;
+
+    // If countdown running but user went back and unfinished a Q → cancel
+    if (countdownTimer && countAnswered() < TOTAL) {
+      clearInterval(countdownTimer);
+      countdownTimer = null;
+      countdownBar.classList.remove('show');
+    }
+
+    if (!isSubmitted) scrollToNext(name);
+  });
+
+  // Reset
+  document.getElementById('btnReset').addEventListener('click', () => {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+    isSubmitted = false;
+    countdownBar.classList.remove('show');
+    submittingBar.classList.remove('show');
+    toastSuccess.style.display = 'none';
+    document.querySelectorAll('#survey input').forEach(i => {
+      i.disabled = false;
+      i.checked = false;
+    });
+    document.getElementById('btnReset').disabled = false;
+    document.querySelectorAll('label.opt').forEach(l => l.classList.remove('selected'));
+    setTimeout(updateProgress, 50);
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>
