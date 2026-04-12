@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文獻閱讀反思問卷｜Ruiz-Leon et al. (2025)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e; --ink-light: #3d3d5c; --paper: #f8f6f0; --paper-warm: #efeae0;
+    --accent: #185fa5; --accent-light: #378add; --accent-muted: #e6f1fb;
+    --gold: #ba7517; --line: #ccc8bc; --checked-bg: #185fa5; --radio-checked: #ba7517;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Noto Sans TC', sans-serif; font-weight: 300; line-height: 1.85; min-height: 100vh; }
+  header { background: var(--ink); color: #fff; padding: 2.6rem 2rem 2.2rem; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px); }
+  header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--gold) 100%); }
+  .header-inner { max-width: 760px; margin: 0 auto; position: relative; }
+  .eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #85b7eb; margin-bottom: 0.6rem; }
+  header h1 { font-family: 'DM Serif Display','Noto Serif TC',serif; font-size: clamp(1.35rem,3.5vw,1.9rem); font-weight: 400; line-height: 1.35; }
+  .header-meta { margin-top: 0.8rem; font-size: 0.78rem; color: rgba(255,255,255,0.5); display: flex; flex-wrap: wrap; gap: 1rem; }
+  .badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.67rem; letter-spacing: 0.1em; padding: 0.18em 0.7em; border-radius: 2px; margin-top: 0.9rem; }
+  main { max-width: 760px; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
+  .citation { background: var(--paper-warm); border-left: 3px solid var(--gold); padding: 0.9rem 1.1rem; font-size: 0.78rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 2rem; }
+  .citation a { color: var(--accent); }
+  .basic-info { background: #fff; border: 1px solid var(--line); border-radius: 4px; padding: 1.2rem 1.4rem; margin-bottom: 2.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:520px){ .basic-info { grid-template-columns: 1fr; } }
+  .field label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.35rem; }
+  .field input { width: 100%; border: none; border-bottom: 1.5px solid var(--line); background: transparent; font-family: 'Noto Sans TC',sans-serif; font-size: 0.88rem; color: var(--ink); padding: 0.25rem 0; outline: none; transition: border-color 0.2s; }
+  .field input:focus { border-color: var(--accent); }
+  .field.full { grid-column: 1/-1; }
+  .progress-bar-wrap { position: sticky; top: 0; z-index: 10; background: rgba(248,246,240,0.93); backdrop-filter: blur(4px); padding: 0.5rem 0 0.4rem; margin-bottom: 1.6rem; }
+  .progress-label { font-size: 0.72rem; color: var(--ink-light); margin-bottom: 0.25rem; text-align: right; }
+  .progress-track { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 2px; transition: width 0.35s ease; width: 0%; }
+  .q-block { margin-bottom: 1.8rem; }
+  .q-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.3rem; }
+  .q-text { font-size: 0.92rem; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; }
+  .q-note { font-size: 0.71rem; color: var(--ink-light); font-weight: 300; margin-left: 0.35rem; }
+  .radio-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .radio-item { position: relative; }
+  .radio-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .radio-label { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; background: #fff; border: 1.5px solid var(--line); border-radius: 3px; padding: 0.55rem 0.85rem; font-size: 0.85rem; color: var(--ink); transition: all 0.15s; user-select: none; }
+  .radio-label:hover { border-color: var(--accent); background: var(--accent-muted); }
+  .radio-item input:checked + .radio-label { background: var(--radio-checked); border-color: var(--radio-checked); color: #fff; font-weight: 500; }
+  .r-dot { width: 15px; height: 15px; border: 1.5px solid var(--line); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; }
+  .radio-item input:checked + .radio-label .r-dot { background: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.5); }
+  .r-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: transparent; transition: background 0.15s; }
+  .radio-item input:checked + .radio-label .r-dot::after { background: #fff; }
+  .check-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 0.4rem; }
+  .check-item { position: relative; }
+  .check-item input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+  .check-label { display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer; background: #fff; border: 1.5px solid var(--line); border-radius: 3px; padding: 0.55rem 0.85rem; font-size: 0.85rem; color: var(--ink); transition: all 0.15s; min-height: 48px; user-select: none; }
+  .check-label:hover { border-color: var(--accent); background: var(--accent-muted); }
+  .check-item input:checked + .check-label { background: var(--checked-bg); border-color: var(--checked-bg); color: #fff; }
+  .c-box { width: 15px; height: 15px; border: 1.5px solid var(--line); border-radius: 2px; flex-shrink: 0; margin-top: 3px; display: flex; align-items: center; justify-content: center; background: #fff; transition: all 0.15s; font-size: 0.65rem; color: transparent; }
+  .check-item input:checked + .check-label .c-box { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); color: #fff; }
+  hr.div { border: none; border-top: 1px dashed var(--line); margin: 1.6rem 0; }
+  .action-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; justify-content: space-between; margin-top: 1.8rem; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; font-family: 'Noto Sans TC',sans-serif; font-size: 0.88rem; letter-spacing: 0.04em; padding: 0.72rem 1.8rem; border-radius: 3px; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--accent-light); }
+  .btn-secondary { background: transparent; color: var(--ink-light); border: 1px solid var(--line); font-family: 'Noto Sans TC',sans-serif; font-size: 0.82rem; padding: 0.68rem 1.3rem; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
+  #summary-output { display: none; margin-top: 2.2rem; background: var(--ink); color: #fff; border-radius: 4px; padding: 1.8rem; position: relative; }
+  #summary-output::before { content: '個人反思摘要'; display: block; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #85b7eb; margin-bottom: 0.9rem; }
+  #summary-text { font-size: 0.85rem; line-height: 2; color: rgba(255,255,255,0.85); white-space: pre-wrap; }
+  .copy-btn { position: absolute; top: 1.1rem; right: 1.1rem; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.55); font-size: 0.72rem; padding: 0.25em 0.75em; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .copy-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">體育大學碩士班｜文獻閱讀反思問卷</div>
+    <h1>mHealth 行為介入於第二型糖尿病<br>自我管理之成效反思問卷</h1>
+    <div class="header-meta">
+      <span>📄 Ruiz-Leon et al. (2025)</span>
+      <span>🏫 J Med Internet Res</span>
+      <span>🔬 平行隨機對照試驗</span>
+    </div>
+    <div class="badge">mHealth · 行為改變 · 糖尿病自我管理 · 心血管風險</div>
+  </div>
+</header>
+<main>
+  <div class="citation">
+    <strong>文獻：</strong>Ruiz-Leon AM, Casas R, Castro-Barquero S, et al. (2025). Efficacy of a mobile health–based behavioral treatment for lifestyle modification in type 2 diabetes self-management: Greenhabit randomized controlled trial. <em>J Med Internet Res, 27</em>, e58319.
+    <a href="https://doi.org/10.2196/58319" target="_blank">https://doi.org/10.2196/58319</a>
+  </div>
+  <div class="basic-info">
+    <div class="field"><label>姓名（隱藏中間字）</label><input type="text" id="f-name" placeholder="例：王○明"></div>
+    <div class="field"><label>填寫日期</label><input type="date" id="f-date"></div>
+    <div class="field full"><label>所屬課程／教授</label><input type="text" id="f-course" value="成人病理學／陳進明"></div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-label" id="prog-label">答題進度：0 / 5</div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
 
+  <div class="q-block">
+    <div class="q-label">閱讀理解</div>
+    <div class="q-text">Q1. 本研究的主要結果指標（primary outcomes）是哪兩項？<span class="q-note">（單選）</span></div>
+    <div class="radio-group">
+      <div class="radio-item"><input type="radio" name="q1" id="q1a"><label class="radio-label" for="q1a"><span class="r-dot"></span>糖化血色素（HbA1c）與空腹血漿葡萄糖（FPG）</label></div>
+      <div class="radio-item"><input type="radio" name="q1" id="q1b"><label class="radio-label" for="q1b"><span class="r-dot"></span>BMI 與腰圍</label></div>
+      <div class="radio-item"><input type="radio" name="q1" id="q1c"><label class="radio-label" for="q1c"><span class="r-dot"></span>收縮壓與舒張壓</label></div>
+      <div class="radio-item"><input type="radio" name="q1" id="q1d"><label class="radio-label" for="q1d"><span class="r-dot"></span>生活品質問卷分數與焦慮量表分數</label></div>
+    </div>
+  </div>
+  <hr class="div">
+
+  <div class="q-block">
+    <div class="q-label">研究設計</div>
+    <div class="q-text">Q2. 兩組 HbA1c 均改善卻未見組間顯著差異，研究者提到哪些可能原因？<span class="q-note">（可複選）</span></div>
+    <div class="check-group">
+      <div class="check-item"><input type="checkbox" id="q2a"><label class="check-label" for="q2a"><span class="c-box">✓</span>霍桑效應：知道被觀察而改善行為</label></div>
+      <div class="check-item"><input type="checkbox" id="q2b"><label class="check-label" for="q2b"><span class="c-box">✓</span>基準 HbA1c 低於 8%，天花板效應限制差距</label></div>
+      <div class="check-item"><input type="checkbox" id="q2c"><label class="check-label" for="q2c"><span class="c-box">✓</span>對照組也增加了與家庭醫師的互動</label></div>
+      <div class="check-item"><input type="checkbox" id="q2d"><label class="check-label" for="q2d"><span class="c-box">✓</span>App 短期使用不足以驅動顯著行為改變</label></div>
+    </div>
+  </div>
+  <hr class="div">
+
+  <div class="q-block">
+    <div class="q-label">連結自身</div>
+    <div class="q-text">Q3. 若你是第二型糖尿病患者，Greenhabit 哪個設計元素對你最有幫助？<span class="q-note">（單選）</span></div>
+    <div class="radio-group">
+      <div class="radio-item"><input type="radio" name="q3" id="q3a"><label class="radio-label" for="q3a"><span class="r-dot"></span>每日挑戰任務＋積分獎勵，製造小成就感</label></div>
+      <div class="radio-item"><input type="radio" name="q3" id="q3b"><label class="radio-label" for="q3b"><span class="r-dot"></span>邀請夥伴一起使用，互相支持與問責</label></div>
+      <div class="radio-item"><input type="radio" name="q3" id="q3c"><label class="radio-label" for="q3c"><span class="r-dot"></span>AI 個人化推薦，根據臨床數據調整介入</label></div>
+      <div class="radio-item"><input type="radio" name="q3" id="q3d"><label class="radio-label" for="q3d"><span class="r-dot"></span>整合飲食、運動、放鬆與心態的全方位教育</label></div>
+    </div>
+  </div>
+  <hr class="div">
+
+  <div class="q-block">
+    <div class="q-label">專業反思</div>
+    <div class="q-text">Q4. 從「成人病理學」角度，久坐與代謝失調對 T2D 患者最直接帶來哪些心血管風險？<span class="q-note">（可複選）</span></div>
+    <div class="check-group">
+      <div class="check-item"><input type="checkbox" id="q4a"><label class="check-label" for="q4a"><span class="c-box">✓</span>高血壓加速動脈粥狀硬化</label></div>
+      <div class="check-item"><input type="checkbox" id="q4b"><label class="check-label" for="q4b"><span class="c-box">✓</span>三酸甘油酯升高增加心血管風險</label></div>
+      <div class="check-item"><input type="checkbox" id="q4c"><label class="check-label" for="q4c"><span class="c-box">✓</span>HDL-C 偏低降低逆向膽固醇轉運</label></div>
+      <div class="check-item"><input type="checkbox" id="q4d"><label class="check-label" for="q4d"><span class="c-box">✓</span>中心性肥胖增加代謝症候群風險</label></div>
+      <div class="check-item"><input type="checkbox" id="q4e"><label class="check-label" for="q4e"><span class="c-box">✓</span>長期高血糖造成微血管與大血管病變</label></div>
+    </div>
+  </div>
+  <hr class="div">
+
+  <div class="q-block">
+    <div class="q-label">整體評價</div>
+    <div class="q-text">Q5. 整體而言，這篇文獻對你個人的啟發價值是？<span class="q-note">（單選）</span></div>
+    <div class="radio-group">
+      <div class="radio-item"><input type="radio" name="q5" id="q5a"><label class="radio-label" for="q5a"><span class="r-dot"></span>⭐⭐⭐⭐⭐　非常有啟發，直接影響我對 mHealth 介入的看法與計畫</label></div>
+      <div class="radio-item"><input type="radio" name="q5" id="q5b"><label class="radio-label" for="q5b"><span class="r-dot"></span>⭐⭐⭐⭐　有不少新想法，但需要時間消化與實踐</label></div>
+      <div class="radio-item"><input type="radio" name="q5" id="q5c"><label class="radio-label" for="q5c"><span class="r-dot"></span>⭐⭐⭐　有參考價值，但與我專業的連結仍需再思考</label></div>
+      <div class="radio-item"><input type="radio" name="q5" id="q5d"><label class="radio-label" for="q5d"><span class="r-dot"></span>⭐⭐　研究方法有學習價值，但主題稍遠</label></div>
+      <div class="radio-item"><input type="radio" name="q5" id="q5e"><label class="radio-label" for="q5e"><span class="r-dot"></span>⭐　目前看不出與我研究方向的直接關聯</label></div>
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
+      <button class="btn-primary" onclick="generateSummary()">📋 生成個人反思摘要</button>
+      <button class="btn-secondary" onclick="clearAll()">清除所有內容</button>
+    </div>
+    <span style="font-size:0.72rem;color:var(--ink-light);">資料僅存於本機，不上傳</span>
+  </div>
+  <div id="summary-output">
+    <button class="copy-btn" onclick="copySummary()">複製</button>
+    <pre id="summary-text"></pre>
+  </div>
+</main>
+<script>
+  document.getElementById('f-date').valueAsDate = new Date();
+  const TOTAL = 5;
+  const RADIOS = ['q1','q3','q5'];
+  const CHECKS = [
+    { ids: ['q2a','q2b','q2c','q2d'] },
+    { ids: ['q4a','q4b','q4c','q4d','q4e'] },
+  ];
+  function updateProgress() {
+    var n = 0;
+    RADIOS.forEach(function(name) { if (document.querySelector('input[name="'+name+'"]:checked')) n++; });
+    CHECKS.forEach(function(g) { if (g.ids.some(function(id) { var el=document.getElementById(id); return el&&el.checked; })) n++; });
+    document.getElementById('prog-label').textContent = '答題進度：' + n + ' / ' + TOTAL;
+    document.getElementById('prog-fill').style.width = Math.round(n/TOTAL*100) + '%';
+  }
+  document.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(function(el){ el.addEventListener('change', updateProgress); });
+  function getRadio(name) { var el=document.querySelector('input[name="'+name+'"]:checked'); return el ? el.nextElementSibling.textContent.trim().replace(/\s+/g,' ') : null; }
+  function getChecks(ids) { return ids.map(function(id){ var el=document.getElementById(id); return (el&&el.checked)?el.nextElementSibling.textContent.trim().replace(/\s+/g,' '):null; }).filter(Boolean); }
+  function generateSummary() {
+    var name = document.getElementById('f-name').value.trim()||'（未填）';
+    var date = document.getElementById('f-date').value||'（未填）';
+    var course = document.getElementById('f-course').value.trim()||'（未填）';
+    var qs = [
+      { label: 'Q1 主要結果指標', val: getRadio('q1') },
+      { label: 'Q2 HbA1c 組間無差異的可能原因（複選）', val: getChecks(['q2a','q2b','q2c','q2d']).join('、')||null },
+      { label: 'Q3 最有幫助的 App 設計元素', val: getRadio('q3') },
+      { label: 'Q4 T2D 相關心血管風險因素（複選）', val: getChecks(['q4a','q4b','q4c','q4d','q4e']).join('、')||null },
+      { label: 'Q5 對個人的啟發價值', val: getRadio('q5') },
+    ];
+    var out = '═══════════════════════════════════════\n';
+    out += '  文獻閱讀反思摘要\n';
+    out += '  Ruiz-Leon et al. (2025)  J Med Internet Res\n';
+    out += '═══════════════════════════════════════\n';
+    out += '姓名：'+name+'　日期：'+date+'\n課程：'+course+'\n\n';
+    qs.forEach(function(q){ if(q.val){ out += '  '+q.label+'\n  → '+q.val+'\n\n'; } });
+    out += '───────────────────────────────────────\n';
+    out += 'DOI: https://doi.org/10.2196/58319\n';
+    document.getElementById('summary-text').textContent = out;
+    var el = document.getElementById('summary-output');
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function copySummary() {
+    navigator.clipboard.writeText(document.getElementById('summary-text').textContent).then(function(){
+      var btn=document.querySelector('.copy-btn'); btn.textContent='已複製！';
+      setTimeout(function(){ btn.textContent='複製'; }, 2000);
+    });
+  }
+  function clearAll() {
+    if(!confirm('確定要清除所有作答內容？')) return;
+    document.querySelectorAll('input[type="radio"]').forEach(function(r){ r.checked=false; });
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(c){ c.checked=false; });
+    document.getElementById('f-name').value='';
+    document.getElementById('f-date').valueAsDate=new Date();
+    document.getElementById('summary-output').style.display='none';
+    updateProgress();
+  }
+</script>
+</body>
+</html>
