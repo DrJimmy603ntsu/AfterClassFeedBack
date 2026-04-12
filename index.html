@@ -145,8 +145,7 @@
     font-weight: 500;
     letter-spacing: 0.05em;
   }
-
-  /* ── After Reading Card (expanded) ── */
+  /* ── Expanded Cards ── */
   .card.card--expanded {
     gap: 0;
     cursor: default;
@@ -154,7 +153,6 @@
   .card.card--expanded .card-icon { margin-bottom: 10px; }
   .card.card--expanded .card-title { margin-bottom: 6px; }
   .card.card--expanded .card-sub  { margin-bottom: 20px; }
-
   .card-sub-links {
     display: flex;
     flex-direction: column;
@@ -186,7 +184,6 @@
     color: var(--accent-light);
     flex-shrink: 0;
   }
-
   /* ── Footer ── */
   footer {
     text-align: center;
@@ -215,17 +212,33 @@
   <p>你今天的生活，正在寫你未來的診斷書。<br>這裡不是課程，是一條看見未來的路。</p>
   <div class="hero-divider"></div>
 </section>
-
 <main class="grid-section">
   <p class="section-label">選擇你的入口</p>
   <div class="grid">
 
-    <a class="card" href="journal.html">
+    <!-- Journal Reading Club — expanded with article sub-links -->
+    <div class="card card--expanded">
       <div class="card-icon">📚</div>
       <div class="card-title">Journal Reading Club</div>
       <div class="card-sub">從醫學證據出發，讀懂生活與疾病的關聯</div>
-      <div class="card-arrow">從證據開始 →</div>
-    </a>
+      <div class="card-sub-links">
+        <a class="card-sub-link" href="Article/CBT.html">
+          <span class="card-sub-link-icon">🧠</span>
+          <span class="card-sub-link-text">認知行為治療 CBT</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/DunigKrugStudy.html">
+          <span class="card-sub-link-icon">📊</span>
+          <span class="card-sub-link-text">Dunning–Kruger 研究</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/MobileDeviceHelp.html">
+          <span class="card-sub-link-icon">📱</span>
+          <span class="card-sub-link-text">手機與螢幕時間</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
 
     <!-- After Reading Club — expanded with sub-links -->
     <div class="card card--expanded">
@@ -248,6 +261,16 @@
           <span class="card-sub-link-text">表觀遺傳學</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
+        <a class="card-sub-link" href="Report/Report_CBT_iPA_iSED.html">
+          <span class="card-sub-link-icon">📋</span>
+          <span class="card-sub-link-text">Report：CBT iPA &amp; iSED</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Report/Report_Tirzepatide.html">
+          <span class="card-sub-link-icon">💊</span>
+          <span class="card-sub-link-text">Report：Tirzepatide</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
       </div>
     </div>
 
@@ -257,14 +280,12 @@
       <div class="card-sub">理解行為背後的心理機制，突破慣性</div>
       <div class="card-arrow">理解行為 →</div>
     </a>
-
     <a class="card" href="social.html">
       <div class="card-icon">🤝</div>
       <div class="card-title">Social Club</div>
       <div class="card-sub">環境如何悄悄塑造你的每一個選擇</div>
       <div class="card-arrow">環境塑造你 →</div>
     </a>
-
     <a class="card" href="future.html">
       <div class="card-icon">🔮</div>
       <div class="card-title">To See the Future Club</div>
@@ -274,7 +295,6 @@
 
   </div>
 </main>
-
 <footer>
   <p>你現在的選擇，正在形成未來的診斷</p>
 </footer>
