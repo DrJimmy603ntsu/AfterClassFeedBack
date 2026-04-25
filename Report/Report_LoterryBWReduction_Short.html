@@ -1,1 +1,64 @@
 
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>文獻反思問卷（精簡版）</title>
+<style>
+body{font-family:sans-serif;padding:20px;background:#f5f5f5}
+.box{max-width:600px;margin:auto;background:#fff;padding:20px;border-radius:10px}
+.progress{height:10px;background:#ddd;border-radius:5px;margin-bottom:10px}
+.bar{height:100%;width:0;background:#4caf50}
+</style>
+</head>
+<body>
+<div class="box">
+<h3>文獻反思問卷（精簡版）</h3>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<p id="p">0 / 5</p>
+
+<form id="f">
+
+<p>Q1. 核心設計？</p>
+<input type="radio" name="q1">Factorial
+<input type="radio" name="q1">樣本數
+
+<p>Q2. 無差異原因？</p>
+<input type="checkbox" name="q2">Hawthorne
+<input type="checkbox" name="q2">強度不足
+
+<p>Q3. 金錢誘因問題？</p>
+<input type="radio" name="q3">無法長期
+<input type="radio" name="q3">金額低
+
+<p>Q4. 最易失效？</p>
+<input type="radio" name="q4">金錢
+<input type="radio" name="q4">環境
+
+<p>Q5. 小幅減重效益？</p>
+<input type="checkbox" name="q5">血壓
+<input type="checkbox" name="q5">血糖
+
+<br><button type="button" onclick="s()">提交</button>
+</form>
+
+<p id="fb"></p>
+</div>
+
+<script>
+const total=5;
+document.querySelectorAll("input").forEach(e=>e.onchange=()=>{
+let a=0;
+for(let i=1;i<=total;i++){
+if(document.querySelector(`[name=q${i}]:checked`))a++}
+document.getElementById("bar").style.width=(a/total*100)+"%";
+document.getElementById("p").innerText=a+" / "+total;
+});
+
+function s(){
+document.getElementById("fb").innerText="重點：外在誘因短期有效，但長期需內在動機";
+}
+</script>
+</body>
+</html>
