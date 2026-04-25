@@ -2,123 +2,407 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文獻閱讀反思問卷</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body {font-family: Arial, sans-serif; background:#f5f7fa; padding:20px;}
-.container {max-width:800px; margin:auto; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);} 
-h2 {color:#2c3e50;}
-.question {margin:20px 0;}
-.progress {height:20px; background:#ddd; border-radius:10px; overflow:hidden;}
-.progress-bar {height:100%; width:0%; background:#4caf50; transition:0.3s;}
-.feedback {color:#888; font-size:14px; margin-top:5px;}
-button {padding:10px 20px; background:#4caf50; color:white; border:none; border-radius:5px; cursor:pointer;}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-200:#5DCAA5;--teal-600:#0F6E56;--teal-800:#085041;
+  --blue-50:#E6F1FB;--blue-100:#B5D4F4;--blue-200:#85B7EB;--blue-600:#185FA5;--blue-800:#0C447C;
+  --amber-50:#FAEEDA;--amber-600:#854F0B;--amber-800:#633806;
+  --purple-50:#EEEDFE;--purple-600:#534AB7;--purple-800:#3C3489;
+  --coral-50:#FAECE7;--coral-600:#993C1D;--coral-800:#712B13;
+  --green-50:#EAF3DE;--green-600:#3B6D11;--green-800:#27500A;
+  --gray-50:#F1EFE8;--gray-200:#B4B2A9;--gray-600:#5F5E5A;
+}
+body{font-family:'Noto Sans TC',sans-serif;background:transparent;color:var(--color-text-primary);font-size:14px;line-height:1.6}
+
+.wrap{padding:2rem 0 3rem;max-width:720px;margin:0 auto}
+
+/* ── Header ── */
+.header-card{
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  background:var(--color-background-primary);
+  padding:1.5rem;margin-bottom:1.75rem;
+}
+.header-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:1rem}
+.header-icon{
+  width:48px;height:48px;border-radius:var(--border-radius-md);
+  background:var(--blue-50);display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.header-icon svg{width:22px;height:22px;color:var(--blue-600)}
+.header-title{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--color-text-primary);line-height:1.6}
+.header-subtitle{font-size:12px;color:var(--color-text-secondary);margin-top:3px}
+.meta-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;line-height:1.5}
+.badge-blue{background:var(--blue-50);color:var(--blue-800)}
+.badge-teal{background:var(--teal-50);color:var(--teal-800)}
+.badge-amber{background:var(--amber-50);color:var(--amber-800)}
+.badge-purple{background:var(--purple-50);color:var(--purple-800)}
+.badge-coral{background:var(--coral-50);color:var(--coral-800)}
+.badge-green{background:var(--green-50);color:var(--green-800)}
+.citation{
+  font-size:11.5px;color:var(--color-text-secondary);line-height:1.7;
+  padding:0.875rem 1rem;
+  background:var(--color-background-secondary);
+  border-radius:var(--border-radius-md);
+  border-left:3px solid var(--blue-100)
+}
+
+/* ── User fields ── */
+.user-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.75rem}
+@media(max-width:520px){.user-fields{grid-template-columns:1fr}}
+.field-group{display:flex;flex-direction:column;gap:5px}
+.field-label{font-size:11px;color:var(--color-text-secondary);font-weight:500;letter-spacing:0.03em}
+.field-input{
+  padding:8px 11px;font-size:13px;
+  border:0.5px solid var(--color-border-secondary);
+  border-radius:var(--border-radius-md);
+  background:var(--color-background-primary);
+  color:var(--color-text-primary);
+  font-family:'Noto Sans TC',sans-serif;
+  outline:none;transition:border-color 0.15s,box-shadow 0.15s
+}
+.field-input:focus{border-color:var(--blue-600);box-shadow:0 0 0 3px rgba(24,95,165,0.08)}
+
+/* ── Progress ── */
+.progress-section{margin-bottom:1.75rem}
+.progress-label{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--color-text-secondary);margin-bottom:8px}
+.progress-count{font-weight:500;color:var(--blue-600)}
+.progress-track{height:4px;background:var(--color-background-secondary);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue-200),var(--blue-600));border-radius:99px;transition:width 0.4s cubic-bezier(.4,0,.2,1)}
+
+/* ── Section label ── */
+.section-label{
+  font-size:10.5px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--color-text-tertiary);margin:2rem 0 0.875rem;
+  display:flex;align-items:center;gap:8px
+}
+.section-label::after{content:'';flex:1;height:0.5px;background:var(--color-border-tertiary)}
+
+/* ── Question cards ── */
+.q-card{
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-lg);
+  background:var(--color-background-primary);
+  padding:1.125rem 1.375rem;margin-bottom:0.875rem;
+  transition:border-color 0.2s,box-shadow 0.2s
+}
+.q-card:hover{border-color:var(--color-border-secondary)}
+.q-card.answered{border-color:var(--blue-100)}
+.q-card.revealed{border-color:var(--blue-200)}
+
+.q-header{display:flex;gap:12px;align-items:flex-start;margin-bottom:1rem}
+.q-num{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--color-background-secondary);
+  font-size:11px;font-weight:500;color:var(--color-text-secondary);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+  transition:background 0.2s,color 0.2s
+}
+.q-card.answered .q-num,.q-card.revealed .q-num{background:var(--blue-50);color:var(--blue-800)}
+.q-text{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.6}
+.q-meta{font-size:11px;color:var(--color-text-tertiary);margin-top:3px}
+
+/* ── Options ── */
+.options{display:flex;flex-direction:column;gap:6px}
+.opt{
+  display:flex;align-items:flex-start;gap:9px;
+  padding:8px 11px;
+  border:0.5px solid var(--color-border-tertiary);
+  border-radius:var(--border-radius-md);
+  cursor:pointer;
+  transition:background 0.12s,border-color 0.12s;
+  font-size:13px;color:var(--color-text-primary);line-height:1.55;
+  user-select:none
+}
+.opt:hover{background:var(--color-background-secondary);border-color:var(--color-border-secondary)}
+.opt.selected{background:var(--blue-50);border-color:var(--blue-100);color:var(--blue-800)}
+.opt input{margin-top:2px;accent-color:var(--blue-600);flex-shrink:0}
+
+/* ── Feedback ── */
+.feedback-box{
+  margin-top:0.875rem;padding:11px 14px;
+  border-radius:var(--border-radius-md);
+  background:var(--blue-50);border-left:3px solid var(--blue-200);
+  font-size:13px;color:var(--blue-800);line-height:1.7;
+  display:none;animation:fadeIn 0.25s ease
+}
+.feedback-box.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* ── Buttons ── */
+.actions{display:flex;gap:10px;margin-top:2rem;flex-wrap:wrap}
+button{font-family:'Noto Sans TC',sans-serif;cursor:pointer;transition:opacity 0.15s,background 0.15s}
+.btn-primary{
+  padding:10px 22px;background:var(--blue-600);color:#fff;
+  border:none;border-radius:var(--border-radius-md);
+  font-size:13px;font-weight:500;
+  display:inline-flex;align-items:center;gap:7px
+}
+.btn-primary:hover{opacity:0.88}
+.btn-primary:active{transform:scale(0.98)}
+.btn-secondary{
+  padding:10px 18px;background:transparent;
+  color:var(--color-text-secondary);
+  border:0.5px solid var(--color-border-secondary);
+  border-radius:var(--border-radius-md);font-size:13px
+}
+.btn-secondary:hover{background:var(--color-background-secondary)}
+.btn-secondary:active{transform:scale(0.98)}
+
+/* ── Summary ── */
+.summary-card{
+  border:0.5px solid var(--blue-100);
+  border-radius:var(--border-radius-lg);
+  background:var(--color-background-primary);
+  padding:1.5rem;margin-top:1.75rem;display:none
+}
+.summary-card.show{display:block;animation:fadeIn 0.3s ease}
+.summary-header{display:flex;align-items:center;gap:10px;margin-bottom:1.125rem;padding-bottom:0.875rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.summary-icon{width:36px;height:36px;border-radius:var(--border-radius-md);background:var(--blue-50);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.summary-icon svg{width:18px;height:18px;color:var(--blue-600)}
+.summary-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.summary-body{font-size:13px;color:var(--color-text-primary);line-height:1.9;white-space:pre-wrap}
+
+.note{font-size:11px;color:var(--color-text-tertiary);margin-top:1.25rem;display:flex;align-items:center;gap:5px}
+.note svg{width:12px;height:12px;flex-shrink:0;color:var(--color-text-tertiary)}
+
+.score-row{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.score-pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px}
+.pill-ok{background:var(--green-50);color:var(--green-800)}
+.pill-ng{background:var(--coral-50);color:var(--coral-800)}
+.pill-info{background:var(--purple-50);color:var(--purple-800)}
 </style>
-</head>
-<body>
-<div class="container">
-<h2>體育大學碩士班｜文獻閱讀反思問卷</h2>
 
-<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-<p id="progressText">進度：0 / 7</p>
+<div class="wrap">
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">財務誘因與環境策略對體重控制成效之反思問卷</h2>
 
-<form id="quizForm">
-
-<div class="question">
-<p>Q1. 本研究最關鍵的設計優勢？</p>
-<label><input type="radio" name="q1">樣本數多</label><br>
-<label><input type="radio" name="q1">長期追蹤</label><br>
-<label><input type="radio" name="q1">2x2 factorial design</label><br>
-<label><input type="radio" name="q1">科技介入</label>
-<div class="feedback" id="f1"></div>
+<div class="header-card">
+  <div class="header-top">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+    </div>
+    <div>
+      <div class="header-title">財務誘因與環境策略對職場肥胖員工<br>體重控制成效之反思問卷</div>
+      <div class="header-subtitle">體育大學碩士班｜文獻閱讀反思</div>
+    </div>
+  </div>
+  <div class="meta-row">
+    <span class="badge badge-blue">Glanz et al. (2021)</span>
+    <span class="badge badge-teal">JAMA Network Open</span>
+    <span class="badge badge-amber">2×2 隨機臨床試驗</span>
+  </div>
+  <div class="meta-row">
+    <span class="badge badge-purple">行為經濟學</span>
+    <span class="badge badge-teal">財務誘因</span>
+    <span class="badge badge-coral">環境介入</span>
+    <span class="badge badge-blue">職場健康促進</span>
+    <span class="badge badge-amber">體重管理</span>
+  </div>
+  <div class="citation">
+    Glanz K, Shaw PA, Kwong PL, et al. (2021). Effect of financial incentives and environmental strategies on weight loss in the Healthy Weigh Study: A randomized clinical trial. <em>JAMA Network Open</em>, 4(9), e2124132. https://doi.org/10.1001/jamanetworkopen.2021.24132
+  </div>
 </div>
 
-<div class="question">
-<p>Q2. 為何沒有顯著差異？（可複選）</p>
-<label><input type="checkbox" name="q2">Usual care有效</label><br>
-<label><input type="checkbox" name="q2">Hawthorne effect</label><br>
-<label><input type="checkbox" name="q2">介入強度不足</label><br>
-<label><input type="checkbox" name="q2">減重難維持</label>
-<div class="feedback" id="f2"></div>
+<div class="user-fields">
+  <div class="field-group">
+    <div class="field-label">姓名（隱藏中間字）</div>
+    <input class="field-input" id="uname" type="text" placeholder="例：王○明">
+  </div>
+  <div class="field-group">
+    <div class="field-label">填寫日期</div>
+    <input class="field-input" id="udate" type="date">
+  </div>
+  <div class="field-group">
+    <div class="field-label">所屬課程／教授</div>
+    <input class="field-input" id="ucourse" type="text" placeholder="例：運動生理學／王老師">
+  </div>
 </div>
 
-<div class="question">
-<p>Q3. 財務誘因失效原因？</p>
-<label><input type="radio" name="q3">金額太少</label><br>
-<label><input type="radio" name="q3">人類不重視錢</label><br>
-<label><input type="radio" name="q3">外在動機無法內化</label><br>
-<label><input type="radio" name="q3">減重不需動機</label>
-<div class="feedback" id="f3"></div>
+<div class="progress-section">
+  <div class="progress-label">
+    <span>答題進度</span>
+    <span class="progress-count"><span id="prog-num">0</span> / 5</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-bar"></div></div>
 </div>
 
-<div class="question">
-<p>Q4. 哪個最可能後期失效？</p>
-<label><input type="radio" name="q4">每日量體重</label><br>
-<label><input type="radio" name="q4">金錢誘因</label><br>
-<label><input type="radio" name="q4">環境改變</label><br>
-<label><input type="radio" name="q4">訊息提醒</label>
-<div class="feedback" id="f4"></div>
+<!-- Q1 -->
+<div class="section-label">閱讀理解</div>
+<div class="q-card" id="qc1">
+  <div class="q-header">
+    <div class="q-num" id="qn1">1</div>
+    <div>
+      <div class="q-text">本研究最關鍵的設計優勢為何？</div>
+      <div class="q-meta">單選</div>
+    </div>
+  </div>
+  <div class="options">
+    <label class="opt"><input type="radio" name="q1" value="a"> 樣本數龐大（超過千人）</label>
+    <label class="opt"><input type="radio" name="q1" value="b"> 採用 2×2 factorial design，可同時比較各介入與交互作用</label>
+    <label class="opt"><input type="radio" name="q1" value="c"> 追蹤期長達 10 年以上</label>
+    <label class="opt"><input type="radio" name="q1" value="d"> 採用科技裝置（無線體重計）取代人工量測</label>
+  </div>
+  <div class="feedback-box" id="fb1">✓ 正確答案為 b。2×2 factorial design 讓研究者能在單一試驗中同時評估財務誘因、環境策略，以及兩者合併的效果，也能偵測交互作用，是本研究設計的核心優勢。</div>
 </div>
 
-<div class="question">
-<p>Q5. 小幅減重效益？（可複選）</p>
-<label><input type="checkbox" name="q5">改善胰島素阻抗</label><br>
-<label><input type="checkbox" name="q5">降低血壓</label><br>
-<label><input type="checkbox" name="q5">改善血脂</label><br>
-<label><input type="checkbox" name="q5">降低發炎</label>
-<div class="feedback" id="f5"></div>
+<!-- Q2 -->
+<div class="section-label">研究設計</div>
+<div class="q-card" id="qc2">
+  <div class="q-header">
+    <div class="q-num" id="qn2">2</div>
+    <div>
+      <div class="q-text">四組在 18 個月時均未見顯著組間差異，下列哪些原因最可能解釋此結果？</div>
+      <div class="q-meta">可複選</div>
+    </div>
+  </div>
+  <div class="options">
+    <label class="opt"><input type="checkbox" name="q2" value="a"> 對照組（usual care）本身亦產生減重效果，壓縮了組間差距</label>
+    <label class="opt"><input type="checkbox" name="q2" value="b"> 所有參與者均安裝無線體重計，可能產生 Hawthorne effect</label>
+    <label class="opt"><input type="checkbox" name="q2" value="c"> 介入強度或個人化程度不足，難以長期維持行為改變</label>
+    <label class="opt"><input type="checkbox" name="q2" value="d"> 研究場域限於費城，外部效度不足</label>
+  </div>
+  <div class="feedback-box" id="fb2">✓ 正確選項為 a、b、c。usual care 組同步接受員工健康福利與定期量體重，本身即可引發改變（Hawthorne effect）；研究者也指出需要更強烈的個人化介入。選項 d 為外部效度限制，但非解釋組間無差異的主因。</div>
 </div>
 
-<div class="question">
-<p>Q6. 現實最大限制？</p>
-<label><input type="radio" name="q6">成本</label><br>
-<label><input type="radio" name="q6">參與度</label><br>
-<label><input type="radio" name="q6">長期效果</label><br>
-<label><input type="radio" name="q6">管理</label>
-<div class="feedback" id="f6"></div>
+<!-- Q3 -->
+<div class="section-label">連結自身</div>
+<div class="q-card" id="qc3">
+  <div class="q-header">
+    <div class="q-num" id="qn3">3</div>
+    <div>
+      <div class="q-text">財務誘因（每日彩券，期望值 $3）未顯著優於對照組，最可能的理論解釋是？</div>
+      <div class="q-meta">單選</div>
+    </div>
+  </div>
+  <div class="options">
+    <label class="opt"><input type="radio" name="q3" value="a"> 金額設計太低，無法引發動機</label>
+    <label class="opt"><input type="radio" name="q3" value="b"> 外在動機（金錢）難以內化為長期自主行為習慣</label>
+    <label class="opt"><input type="radio" name="q3" value="c"> 人類普遍不重視金錢誘因</label>
+    <label class="opt"><input type="radio" name="q3" value="d"> 減重本身不需要動機支持</label>
+  </div>
+  <div class="feedback-box" id="fb3">✓ 正確答案為 b。根據自我決定理論（SDT），外在動機難以轉化為內在動機；當誘因移除（或遞減）後，行為往往無法持續。本研究亦發現 24 個月（停止介入後 6 個月）各組差異仍相似，支持此解釋。選項 a 亦有部分道理，但理論層次較淺。</div>
 </div>
 
-<div class="question">
-<p>Q7. 最顛覆觀念？</p>
-<label><input type="radio" name="q7">金錢無效</label><br>
-<label><input type="radio" name="q7">環境有限</label><br>
-<label><input type="radio" name="q7">合併不更好</label><br>
-<label><input type="radio" name="q7">減重很難</label>
-<div class="feedback" id="f7"></div>
+<!-- Q4 -->
+<div class="section-label">專業反思</div>
+<div class="q-card" id="qc4">
+  <div class="q-header">
+    <div class="q-num" id="qn4">4</div>
+    <div>
+      <div class="q-text">本研究指出「約減重 10 lb（4.5 kg）即可降低糖尿病發生率並改善心血管風險因子」。小幅度減重最直接帶來哪些臨床效益？</div>
+      <div class="q-meta">可複選</div>
+    </div>
+  </div>
+  <div class="options">
+    <label class="opt"><input type="checkbox" name="q4" value="a"> 改善胰島素阻抗與血糖控制</label>
+    <label class="opt"><input type="checkbox" name="q4" value="b"> 降低血壓（高血壓改善）</label>
+    <label class="opt"><input type="checkbox" name="q4" value="c"> 改善血脂異常（三酸甘油酯、HDL）</label>
+    <label class="opt"><input type="checkbox" name="q4" value="d"> 完全消除心臟病風險</label>
+  </div>
+  <div class="feedback-box" id="fb4">✓ 正確選項為 a、b、c。研究原文明確提及減重約 4.5 kg 可降低糖尿病發生率，並改善高血壓與高血糖等風險因子。血脂改善亦為文獻一致性發現。選項 d 錯誤——小幅減重可降低風險，但無法「完全消除」心臟病風險。</div>
 </div>
 
-<button type="button" onclick="submitQuiz()">提交</button>
+<!-- Q5 -->
+<div class="section-label">整體評價</div>
+<div class="q-card" id="qc5">
+  <div class="q-header">
+    <div class="q-num" id="qn5">5</div>
+    <div>
+      <div class="q-text">本研究最顛覆你原有認知的發現是？</div>
+      <div class="q-meta">單選（主觀反思，無標準答案）</div>
+    </div>
+  </div>
+  <div class="options">
+    <label class="opt"><input type="radio" name="q5" value="a"> 財務誘因（金錢）竟未能顯著提升減重效果</label>
+    <label class="opt"><input type="radio" name="q5" value="b"> 環境策略介入的效果比預期更為有限</label>
+    <label class="opt"><input type="radio" name="q5" value="c"> 財務誘因＋環境策略合併，效果並未疊加優於單一策略</label>
+    <label class="opt"><input type="radio" name="q5" value="d"> 長期維持體重減輕本身就極為困難，無論何種介入</label>
+  </div>
+  <div class="feedback-box" id="fb5">此題為主觀反思，無標準答案。四個選項均指向本研究的核心反思：多策略合併不一定更有效（c）、外在誘因的侷限（a）、環境介入的現實困難（b），以及體重長期維持的根本挑戰（d）。思考哪個發現最衝擊你對「行為介入」的既有假設。</div>
+</div>
 
-</form>
+<div class="actions">
+  <button class="btn-primary" onclick="submitAll()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    生成個人反思摘要
+  </button>
+  <button class="btn-secondary" onclick="clearAll()">清除所有內容</button>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-header">
+    <div class="summary-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <div>
+      <div class="summary-title">個人反思摘要</div>
+    </div>
+    <div id="score-badges" style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"></div>
+  </div>
+  <div class="summary-body" id="summary-body"></div>
+</div>
+
+<div class="note">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+  資料僅存於本機，不上傳至任何伺服器
+</div>
 </div>
 
 <script>
-const total = 7;
-
-function updateProgress() {
-let answered = 0;
-for (let i = 1; i <= total; i++) {
-let q = document.querySelectorAll(`[name=q${i}]:checked`);
-if (q.length > 0) answered++;
+const total=5,correctQ2=['a','b','c'],correctQ4=['a','b','c'];
+function isMultiCorrect(n,c){const v=[...document.querySelectorAll(`[name=${n}]:checked`)].map(x=>x.value).sort();return JSON.stringify(v)===JSON.stringify([...c].sort())}
+function updateProgress(){
+  let done=0;
+  for(let i=1;i<=total;i++){
+    const sel=document.querySelectorAll(`[name=q${i}]:checked`);
+    if(sel.length>0){done++;document.getElementById('qc'+i).classList.add('answered')}
+    else document.getElementById('qc'+i).classList.remove('answered')
+  }
+  document.getElementById('prog-num').textContent=done;
+  document.getElementById('prog-bar').style.width=(done/total*100)+'%';
 }
-document.getElementById("progressBar").style.width = (answered/total*100)+"%";
-document.getElementById("progressText").innerText = `進度：${answered} / ${total}`;
-}
-
-document.querySelectorAll("input").forEach(el => {
-el.addEventListener("change", updateProgress);
+document.querySelectorAll('input[type=radio],input[type=checkbox]').forEach(el=>{
+  el.addEventListener('change',()=>{
+    el.closest('.opt').parentElement.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+    if(el.type==='radio'){el.closest('.opt').classList.add('selected')}
+    else{el.closest('.opt').classList.toggle('selected',el.checked)}
+    updateProgress()
+  })
 });
-
-function submitQuiz() {
-document.getElementById("f1").innerText = "關鍵在於 factorial design 可同時比較與交互作用";
-document.getElementById("f2").innerText = "重點在於研究參與本身即產生效果";
-document.getElementById("f3").innerText = "外在動機難轉為長期習慣";
-document.getElementById("f4").innerText = "金錢誘因常出現遞減效果";
-document.getElementById("f5").innerText = "小幅減重仍具臨床價值";
-document.getElementById("f6").innerText = "真實世界最大挑戰通常是長期維持";
-document.getElementById("f7").innerText = "多策略不一定更有效是核心反思";
+function getRadioText(n){const e=document.querySelector(`[name=${n}]:checked`);return e?e.closest('.opt').textContent.trim():'（未作答）'}
+function getCheckText(n){const es=[...document.querySelectorAll(`[name=${n}]:checked`)];return es.length?es.map(x=>x.closest('.opt').textContent.trim()).join('、'):'（未作答）'}
+function submitAll(){
+  for(let i=1;i<=5;i++){document.getElementById('fb'+i).classList.add('show');document.getElementById('qc'+i).classList.add('revealed')}
+  const name=document.getElementById('uname').value||'（未填）';
+  const date=document.getElementById('udate').value||'（未填）';
+  const course=document.getElementById('ucourse').value||'（未填）';
+  const q1v=document.querySelector('[name=q1]:checked')?.value;
+  const q1ok=q1v==='b';const q2ok=isMultiCorrect('q2',correctQ2);
+  const q3ok=document.querySelector('[name=q3]:checked')?.value==='b';
+  const q4ok=isMultiCorrect('q4',correctQ4);
+  let correct=0;if(q1ok)correct++;if(q2ok)correct++;if(q3ok)correct++;if(q4ok)correct++;
+  const sb=document.getElementById('score-badges');
+  sb.innerHTML=`<span class="score-pill pill-info">答題得分 ${correct}/4</span>`;
+  const body=`姓名：${name}　日期：${date}　課程：${course}\n\n【閱讀理解】Q1 本研究最關鍵的設計優勢\n作答：${getRadioText('q1')}\n判斷：${q1ok?'✓ 正確':'✗ 需修正 → 正確答案為「2×2 factorial design，可同時比較各介入與交互作用」'}\n\n【研究設計】Q2 組間無顯著差異之可能原因\n作答：${getCheckText('q2')}\n判斷：${q2ok?'✓ 正確（a、b、c 均選）':'✗ 需修正 → 應選 a（usual care 具效益）、b（Hawthorne effect）、c（介入強度不足）'}\n\n【連結自身】Q3 財務誘因失效的理論解釋\n作答：${getRadioText('q3')}\n判斷：${q3ok?'✓ 正確':'✗ 需修正 → 最佳解釋為「外在動機難以內化為長期自主行為習慣」（自我決定理論）'}\n\n【專業反思】Q4 小幅減重的臨床效益\n作答：${getCheckText('q4')}\n判斷：${q4ok?'✓ 正確（a、b、c 均選）':'✗ 需修正 → 應選 a（血糖改善）、b（血壓降低）、c（血脂改善）；選項 d 錯誤，小幅減重無法完全消除心臟病風險'}\n\n【整體評價】Q5 最顛覆認知的研究發現\n作答：${getRadioText('q5')}\n說明：此題為主觀反思。無論選擇哪項，建議進一步思考：若你在職場設計健康促進介入，如何彌補財務誘因與環境策略的不足，設計更有效的個人化策略？`;
+  document.getElementById('summary-body').textContent=body;
+  document.getElementById('summary').classList.add('show');
+  document.getElementById('summary').scrollIntoView({behavior:'smooth',block:'start'})
 }
+function clearAll(){
+  document.querySelectorAll('input[type=radio]').forEach(x=>{x.checked=false;x.closest('.opt').classList.remove('selected')});
+  document.querySelectorAll('input[type=checkbox]').forEach(x=>{x.checked=false;x.closest('.opt').classList.remove('selected')});
+  ['uname','ucourse'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('udate').value=new Date().toISOString().split('T')[0];
+  document.querySelectorAll('.feedback-box').forEach(x=>x.classList.remove('show'));
+  document.querySelectorAll('.q-card').forEach(x=>x.classList.remove('answered','revealed'));
+  document.getElementById('summary').classList.remove('show');
+  document.getElementById('summary-body').textContent='';
+  document.getElementById('score-badges').innerHTML='';
+  updateProgress()
+}
+document.getElementById('udate').value=new Date().toISOString().split('T')[0];
+updateProgress();
 </script>
-
-</body>
-</html>
