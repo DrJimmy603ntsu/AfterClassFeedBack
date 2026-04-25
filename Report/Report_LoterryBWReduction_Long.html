@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文獻閱讀反思問卷</title>
+<style>
+body {font-family: Arial, sans-serif; background:#f5f7fa; padding:20px;}
+.container {max-width:800px; margin:auto; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);} 
+h2 {color:#2c3e50;}
+.question {margin:20px 0;}
+.progress {height:20px; background:#ddd; border-radius:10px; overflow:hidden;}
+.progress-bar {height:100%; width:0%; background:#4caf50; transition:0.3s;}
+.feedback {color:#888; font-size:14px; margin-top:5px;}
+button {padding:10px 20px; background:#4caf50; color:white; border:none; border-radius:5px; cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>體育大學碩士班｜文獻閱讀反思問卷</h2>
 
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+<p id="progressText">進度：0 / 7</p>
+
+<form id="quizForm">
+
+<div class="question">
+<p>Q1. 本研究最關鍵的設計優勢？</p>
+<label><input type="radio" name="q1">樣本數多</label><br>
+<label><input type="radio" name="q1">長期追蹤</label><br>
+<label><input type="radio" name="q1">2x2 factorial design</label><br>
+<label><input type="radio" name="q1">科技介入</label>
+<div class="feedback" id="f1"></div>
+</div>
+
+<div class="question">
+<p>Q2. 為何沒有顯著差異？（可複選）</p>
+<label><input type="checkbox" name="q2">Usual care有效</label><br>
+<label><input type="checkbox" name="q2">Hawthorne effect</label><br>
+<label><input type="checkbox" name="q2">介入強度不足</label><br>
+<label><input type="checkbox" name="q2">減重難維持</label>
+<div class="feedback" id="f2"></div>
+</div>
+
+<div class="question">
+<p>Q3. 財務誘因失效原因？</p>
+<label><input type="radio" name="q3">金額太少</label><br>
+<label><input type="radio" name="q3">人類不重視錢</label><br>
+<label><input type="radio" name="q3">外在動機無法內化</label><br>
+<label><input type="radio" name="q3">減重不需動機</label>
+<div class="feedback" id="f3"></div>
+</div>
+
+<div class="question">
+<p>Q4. 哪個最可能後期失效？</p>
+<label><input type="radio" name="q4">每日量體重</label><br>
+<label><input type="radio" name="q4">金錢誘因</label><br>
+<label><input type="radio" name="q4">環境改變</label><br>
+<label><input type="radio" name="q4">訊息提醒</label>
+<div class="feedback" id="f4"></div>
+</div>
+
+<div class="question">
+<p>Q5. 小幅減重效益？（可複選）</p>
+<label><input type="checkbox" name="q5">改善胰島素阻抗</label><br>
+<label><input type="checkbox" name="q5">降低血壓</label><br>
+<label><input type="checkbox" name="q5">改善血脂</label><br>
+<label><input type="checkbox" name="q5">降低發炎</label>
+<div class="feedback" id="f5"></div>
+</div>
+
+<div class="question">
+<p>Q6. 現實最大限制？</p>
+<label><input type="radio" name="q6">成本</label><br>
+<label><input type="radio" name="q6">參與度</label><br>
+<label><input type="radio" name="q6">長期效果</label><br>
+<label><input type="radio" name="q6">管理</label>
+<div class="feedback" id="f6"></div>
+</div>
+
+<div class="question">
+<p>Q7. 最顛覆觀念？</p>
+<label><input type="radio" name="q7">金錢無效</label><br>
+<label><input type="radio" name="q7">環境有限</label><br>
+<label><input type="radio" name="q7">合併不更好</label><br>
+<label><input type="radio" name="q7">減重很難</label>
+<div class="feedback" id="f7"></div>
+</div>
+
+<button type="button" onclick="submitQuiz()">提交</button>
+
+</form>
+</div>
+
+<script>
+const total = 7;
+
+function updateProgress() {
+let answered = 0;
+for (let i = 1; i <= total; i++) {
+let q = document.querySelectorAll(`[name=q${i}]:checked`);
+if (q.length > 0) answered++;
+}
+document.getElementById("progressBar").style.width = (answered/total*100)+"%";
+document.getElementById("progressText").innerText = `進度：${answered} / ${total}`;
+}
+
+document.querySelectorAll("input").forEach(el => {
+el.addEventListener("change", updateProgress);
+});
+
+function submitQuiz() {
+document.getElementById("f1").innerText = "關鍵在於 factorial design 可同時比較與交互作用";
+document.getElementById("f2").innerText = "重點在於研究參與本身即產生效果";
+document.getElementById("f3").innerText = "外在動機難轉為長期習慣";
+document.getElementById("f4").innerText = "金錢誘因常出現遞減效果";
+document.getElementById("f5").innerText = "小幅減重仍具臨床價值";
+document.getElementById("f6").innerText = "真實世界最大挑戰通常是長期維持";
+document.getElementById("f7").innerText = "多策略不一定更有效是核心反思";
+}
+</script>
+
+</body>
+</html>
