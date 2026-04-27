@@ -1,1 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effect of Food Order on Ghrelin Suppression</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: 'Georgia', serif;
+      font-size: 16px;
+      line-height: 1.75;
+      color: #222;
+      background: #f5f7fa;
+    }
+
+    .page-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 3px solid #1a5276;
+      padding-bottom: 22px;
+      margin-bottom: 30px;
+    }
+
+    .journal-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #1a5276;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+      line-height: 1.3;
+      color: #111;
+      margin-bottom: 14px;
+    }
+
+    .authors {
+      font-size: 0.9rem;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    .affiliations {
+      font-size: 0.8rem;
+      color: #888;
+      font-family: Arial, sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .citation {
+      font-size: 0.8rem;
+      color: #999;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── Key Takeaway Banner ── */
+    .key-takeaway {
+      background: #1a5276;
+      color: #fff;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 32px;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .key-takeaway strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 36px;
+    }
+
+    h2.section-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #1a5276;
+      border-bottom: 1px solid #aec6d8;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      font-family: Arial, sans-serif;
+    }
+
+    p {
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    /* ── Study Design Cards ── */
+    .meal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .meal-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+      border-top: 3px solid #1a5276;
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .meal-card .meal-name {
+      font-weight: bold;
+      color: #1a5276;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .meal-card .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    .meal-card .step-num {
+      background: #1a5276;
+      color: #fff;
+      border-radius: 50%;
+      min-width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .meal-card .step-interval {
+      font-size: 0.75rem;
+      color: #888;
+      margin: 4px 0 4px 28px;
+      font-style: italic;
+    }
+
+    /* ── Results highlight ── */
+    .result-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .result-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+    }
+
+    .result-card .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      font-family: Arial, sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .result-card .value {
+      font-size: 1.3rem;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      color: #1a5276;
+    }
+
+    .result-card .desc {
+      font-size: 0.82rem;
+      color: #555;
+      font-family: Arial, sans-serif;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .result-card.highlight {
+      border-left: 4px solid #e74c3c;
+    }
+
+    .result-card.positive {
+      border-left: 4px solid #27ae60;
+    }
+
+    /* ── Figure Box ── */
+    .figure-box {
+      background: #fff;
+      border: 1px solid #d5e8f5;
+      border-radius: 8px;
+      padding: 20px 22px;
+      margin: 20px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .figure-box .fig-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #1a5276;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    /* Simple SVG chart of ghrelin change */
+    .chart-area {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .figure-box .fig-caption {
+      font-size: 0.78rem;
+      color: #777;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ── Timeline / Methods ── */
+    .timeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 16px 0;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tl-point {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .tl-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #1a5276;
+      margin-bottom: 6px;
+      flex-shrink: 0;
+    }
+
+    .tl-label {
+      font-size: 0.72rem;
+      font-family: Arial, sans-serif;
+      color: #555;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .tl-line {
+      flex: 1;
+      height: 2px;
+      background: #aec6d8;
+      min-width: 20px;
+      margin-bottom: 18px;
+    }
+
+    /* ── Correlation ── */
+    .stat-box {
+      display: inline-block;
+      background: #eaf2f8;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: #1a5276;
+      margin: 4px 0;
+    }
+
+    /* ── References ── */
+    .references {
+      font-size: 0.8rem;
+      font-family: Arial, sans-serif;
+      color: #666;
+    }
+
+    .references p {
+      margin-bottom: 7px;
+      text-align: left;
+    }
+
+    /* ── Funding / Disclosure ── */
+    .meta-box {
+      background: #f0f4f8;
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-size: 0.82rem;
+      font-family: Arial, sans-serif;
+      color: #555;
+      margin-bottom: 18px;
+    }
+
+    .meta-box strong {
+      color: #1a5276;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.3rem; }
+      .meal-grid { grid-template-columns: 1fr; }
+      .result-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header>
+    <div class="journal-label">Diabetes Care · Volume 41, May 2018 · e-Letters/Observations · doi: 10.2337/dc17-2244</div>
+    <h1>Effect of Food Order on Ghrelin Suppression</h1>
+    <p class="authors">
+      Alpana P. Shukla, Elizabeth Mauer, Leon I. Igel, Wanda Truong,
+      Anthony Casper, Rekha B. Kumar, Katherine H. Saunders, and Louis J. Aronne
+    </p>
+    <p class="affiliations">
+      Comprehensive Weight Control Center, Division of Endocrinology, Diabetes and Metabolism, Weill Cornell Medicine, New York, NY &nbsp;|&nbsp;
+      Department of Healthcare Policy and Research, Weill Cornell Medicine, New York, NY
+    </p>
+    <p class="citation">Received 25 October 2017 · Accepted 6 February 2018 · © 2018 American Diabetes Association</p>
+  </header>
+
+  <!-- Key Takeaway -->
+  <div class="key-takeaway">
+    <strong>Key Finding</strong>
+    This is the first study to demonstrate that manipulation of macronutrient order during a meal can impact gut hormone excursions. Eating carbohydrates <em>last</em> maintained ghrelin suppression at 180 min, whereas eating carbohydrates <em>first</em> allowed ghrelin to rebound to pre-meal levels — a difference that may have implications for satiety and weight regulation.
+  </div>
+
+  <!-- Background -->
+  <section>
+    <h2 class="section-title">Background</h2>
+    <p>
+      The temporal sequence of carbohydrate ingestion during a meal has a significant impact on postprandial glucose, insulin, and GLP-1 excursions in type 2 diabetes. However, the effects of food order on ghrelin suppression and satiety had not previously been reported.
+    </p>
+    <p>
+      Ghrelin is the only known orexigenic (hunger-stimulating) gut peptide, while GLP-1 is one of several anorexigenic (satiety-inducing) signaling hormones. Understanding how meal composition and order affect these hormones may offer practical dietary strategies for appetite and weight control.
+    </p>
+  </section>
+
+  <!-- Study Design -->
+  <section>
+    <h2 class="section-title">Study Design</h2>
+    <p>
+      Using a <strong>crossover design</strong>, 16 subjects with overweight/obesity and metformin-treated type 2 diabetes consumed the same meal on 3 separate days in random order. All three meals contained identical foods and calories — only the eating sequence differed.
+    </p>
+
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-name">🍞 Carbohydrate-First</div>
+        <div class="step"><span class="step-num">1</span><span>Carbohydrates<br><em>(bread + orange juice)</em></span></div>
+        <div class="step-interval">⏱ Wait 10 min</div>
+        <div class="step"><span class="step-num">2</span><span>Protein + Vegetables<br><em>(chicken)</em></span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-name">🥩 Carbohydrate-Last</div>
+        <div class="step"><span class="step-num">1</span><span>Protein + Vegetables<br><em>(chicken)</em></span></div>
+        <div class="step-interval">⏱ Wait 10 min</div>
+        <div class="step"><span class="step-num">2</span><span>Carbohydrates<br><em>(bread + orange juice)</em></span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-name">🥪 Sandwich (Control)</div>
+        <div class="step"><span class="step-num">1</span><span>All components together<br><em>(first half, over 10 min)</em></span></div>
+        <div class="step-interval">⏱ Wait 10 min</div>
+        <div class="step"><span class="step-num">2</span><span>All components together<br><em>(second half, over 10 min)</em></span></div>
+      </div>
+    </div>
+
+    <p><strong>Sampling protocol:</strong></p>
+    <div class="timeline">
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">0 min<br>Baseline</div></div>
+      <div class="tl-line"></div>
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">30 min</div></div>
+      <div class="tl-line"></div>
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">60 min</div></div>
+      <div class="tl-line"></div>
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">90 min</div></div>
+      <div class="tl-line"></div>
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">120 min</div></div>
+      <div class="tl-line"></div>
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">150 min</div></div>
+      <div class="tl-line"></div>
+      <div class="tl-point"><div class="tl-dot"></div><div class="tl-label">180 min</div></div>
+    </div>
+    <p style="font-size:0.82rem; color:#666; font-family:Arial,sans-serif;">
+      Blood sampled for glucose, insulin, active GLP-1, and total ghrelin at each time point. Hunger and fullness rated via visual analog scale (VAS).
+    </p>
+  </section>
+
+  <!-- Results -->
+  <section>
+    <h2 class="section-title">Results</h2>
+    <p>
+      Baseline glucose, insulin, GLP-1, and ghrelin concentrations, as well as hunger and satiety scores, were similar across all three meal conditions.
+    </p>
+
+    <!-- Key result cards -->
+    <div class="result-row">
+      <div class="result-card positive">
+        <div class="label">Ghrelin at 180 min — Carbohydrate-Last</div>
+        <div class="value">−11.45%</div>
+        <div class="desc">Ghrelin remained suppressed below baseline at 180 min (mean ± SEM: −11.45 ± 3.86%)</div>
+      </div>
+      <div class="result-card highlight">
+        <div class="label">Ghrelin at 180 min — Carbohydrate-First</div>
+        <div class="value">+4.13%</div>
+        <div class="desc">Ghrelin rebounded to — and above — pre-meal levels at 180 min (mean ± SEM: +4.13 ± 4.38%)</div>
+      </div>
+    </div>
+
+    <div class="result-row">
+      <div class="result-card">
+        <div class="label">Statistical Significance</div>
+        <div class="value">P = 0.003</div>
+        <div class="desc">Linear mixed-effects model comparing carbs-first vs. carbs-last at 180 min</div>
+      </div>
+      <div class="result-card">
+        <div class="label">Decremental AUC (0–180 min)</div>
+        <div class="value">No difference</div>
+        <div class="desc">Similar across all three meal conditions — the key difference emerged specifically at the 180-min endpoint</div>
+      </div>
+    </div>
+
+    <!-- Ghrelin chart (SVG) -->
+    <div class="figure-box">
+      <div class="fig-title">Figure 1 — Ghrelin % Change from Baseline (Schematic)</div>
+      <div class="chart-area">
+        <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;">
+          <!-- Axes -->
+          <line x1="60" y1="20" x2="60" y2="200" stroke="#ccc" stroke-width="1.5"/>
+          <line x1="60" y1="120" x2="570" y2="120" stroke="#999" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="60" y1="200" x2="570" y2="200" stroke="#ccc" stroke-width="1.5"/>
+
+          <!-- Y-axis labels -->
+          <text x="52" y="24" font-size="10" fill="#888" text-anchor="end" font-family="Arial">+20%</text>
+          <text x="52" y="72" font-size="10" fill="#888" text-anchor="end" font-family="Arial">+10%</text>
+          <text x="52" y="123" font-size="10" fill="#888" text-anchor="end" font-family="Arial">0%</text>
+          <text x="52" y="162" font-size="10" fill="#888" text-anchor="end" font-family="Arial">−10%</text>
+          <text x="52" y="204" font-size="10" fill="#888" text-anchor="end" font-family="Arial">−20%</text>
+
+          <!-- X-axis labels -->
+          <text x="60"  y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">0</text>
+          <text x="145" y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">30</text>
+          <text x="230" y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">60</text>
+          <text x="315" y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">90</text>
+          <text x="400" y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">120</text>
+          <text x="485" y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">150</text>
+          <text x="565" y="216" font-size="10" fill="#888" text-anchor="middle" font-family="Arial">180 min</text>
+
+          <!-- Carbs-first line (red) — rebounds to +4% -->
+          <polyline points="60,120 145,80 230,75 315,88 400,100 485,112 565,108"
+            fill="none" stroke="#e74c3c" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- Carbs-last line (blue) — stays suppressed at -11% -->
+          <polyline points="60,120 145,78 230,72 315,80 400,92 485,152 565,163"
+            fill="none" stroke="#1a5276" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- Sandwich line (gray) -->
+          <polyline points="60,120 145,82 230,77 315,86 400,98 485,118 565,128"
+            fill="none" stroke="#888" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6,3"/>
+
+          <!-- Significance marker -->
+          <line x1="565" y1="108" x2="565" y2="163" stroke="#333" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="575" y="138" font-size="9" fill="#333" font-family="Arial">*P=0.003</text>
+
+          <!-- Legend -->
+          <rect x="68" y="24" width="14" height="3" fill="#e74c3c" rx="1"/>
+          <text x="86" y="28" font-size="10" fill="#444" font-family="Arial">Carbs first</text>
+          <rect x="148" y="24" width="14" height="3" fill="#1a5276" rx="1"/>
+          <text x="166" y="28" font-size="10" fill="#444" font-family="Arial">Carbs last</text>
+          <line x1="230" y1="26" x2="244" y2="26" stroke="#888" stroke-width="2" stroke-dasharray="4,2"/>
+          <text x="248" y="28" font-size="10" fill="#444" font-family="Arial">Sandwich</text>
+        </svg>
+      </div>
+      <p class="fig-caption">
+        Schematic representation of ghrelin percent change from baseline following carbohydrate-first, carbohydrate-last, and sandwich meal orders. Values are mean ± SEM, n = 16. *Statistically significant difference (P = 0.003, linear mixed-effects model) between carbs-first and carbs-last at 180 min. Figure is illustrative; exact curve shapes are based on reported endpoint values.
+      </p>
+    </div>
+
+    <!-- Correlation finding -->
+    <p>
+      An inverse correlation was observed between percent change in ghrelin and percent change in glucose from baseline across all participants and time points:
+    </p>
+    <div style="margin: 8px 0 14px;">
+      <span class="stat-box">r = −0.204 &nbsp;|&nbsp; P &lt; 0.001</span>
+    </div>
+    <p>
+      No significant effect of food order was observed on subjective VAS appetite measures (hunger or fullness ratings) across the three meal conditions.
+    </p>
+  </section>
+
+  <!-- Discussion -->
+  <section>
+    <h2 class="section-title">Discussion</h2>
+    <p>
+      Prior work by this group established that the carbohydrate-last meal pattern reduces postprandial glucose excursions. Controlling for carbohydrate amount, this meal pattern also stimulates lower insulin and higher GLP-1 response compared with the carbohydrate-first pattern.
+    </p>
+    <p>
+      Taken together with the new findings on ghrelin suppression, macronutrient order during a meal modifies the pattern of postprandial insulin and gut hormone secretion, which <em>could potentially</em> impact satiety and weight regulation. However, consistent with earlier studies investigating isocaloric meal interventions, these disparate hormonal responses did not translate into significant differences in subjective hunger/satiety scores.
+    </p>
+    <p>
+      The authors note two likely explanations for this dissociation: (1) the inherent subjectivity and limitations of the VAS tool for capturing appetite, and (2) the complexity of appetite regulation — ghrelin is the only known hunger-promoting peptide, whereas GLP-1 is just one of several satiety-signaling gut hormones.
+    </p>
+    <p>
+      Further study with extended observation periods, assessment of additional gut hormones, meals with varied macronutrient composition, and more objective satiety measures is needed before firm clinical recommendations can be made.
+    </p>
+  </section>
+
+  <!-- Conclusion -->
+  <section>
+    <h2 class="section-title">Conclusion</h2>
+    <p>
+      This is the first study to demonstrate that manipulation of macronutrient order can impact gut hormone excursions — specifically ghrelin suppression. Eating protein and vegetables before carbohydrates maintains ghrelin suppression for at least 3 hours post-meal, whereas eating carbohydrates first allows ghrelin to rebound to pre-meal levels by 180 minutes. The clinical implications for satiety and weight management require further study.
+    </p>
+  </section>
+
+  <!-- Funding & Disclosures -->
+  <div class="meta-box">
+    <strong>Funding:</strong> Louis and Rachel Rudin Foundation; Diane and Darryl Mallah Family Foundation; partially supported by grant UL1 TR000457-06, Clinical and Translational Science Center at Weill Cornell Medicine.<br>
+    <strong>Duality of Interest:</strong> L.J.A. reports receiving royalties for books on nutrition and obesity. No other potential conflicts of interest reported.<br>
+    <strong>Prior Presentation:</strong> Late-breaking abstract, Obesity Society Annual Scientific Meeting (ObesityWeek), Washington, DC, 29 October–2 November 2017.
+  </div>
+
+  <!-- References -->
+  <section>
+    <h2 class="section-title">References</h2>
+    <div class="references">
+      <p>1. Imai S, Fukui M, Kajiyama S. Effect of eating vegetables before carbohydrates on glucose excursions in patients with type 2 diabetes. <em>J Clin Biochem Nutr</em> 2014;54:7–11.</p>
+      <p>2. Shukla AP, Iliescu RG, Thomas CE, Aronne LJ. Food order has a significant impact on postprandial glucose and insulin levels. <em>Diabetes Care</em> 2015;38:e98–e99.</p>
+      <p>3. Trico D, Filice E, Trifirò S, Natali A. Manipulating the sequence of food ingestion improves glycemic control in type 2 diabetic patients under free-living conditions. <em>Nutr Diabetes</em> 2016;6:e226.</p>
+      <p>4. Shukla AP, Andono J, Touhamy SH, et al. Carbohydrate-last meal pattern lowers postprandial glucose and insulin excursions in type 2 diabetes. <em>BMJ Open Diabetes Res Care</em> 2017;5:e000440.</p>
+      <p>5. Foster-Schubert KE, Overduin J, Prudom CE, et al. Acyl and total ghrelin are suppressed strongly by ingested proteins, weakly by lipids, and biphasically by carbohydrates. <em>J Clin Endocrinol Metab</em> 2008;93:1971–1979.</p>
+      <p>6. Bowen J, Noakes M, Trenerry C, Clifton PM. Energy intake, ghrelin, and cholecystokinin after different carbohydrate and protein preloads in overweight men. <em>J Clin Endocrinol Metab</em> 2006;91:1477–1483.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
