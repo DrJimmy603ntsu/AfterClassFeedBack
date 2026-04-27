@@ -3,69 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Psychological Understand Club</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<title>認知偏誤 — Psychology Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --cream: #f5f0e8; --ink: #1a1614; --ink-light: #5a4e47; --ink-faint: #9a8f88; --accent: #8b4513; --accent-light: #d4956a; --white: #ffffff; --card-border: rgba(139,69,19,0.15); }
-  body { font-family: 'Noto Sans TC', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
-  .topbar { padding: 20px 40px; border-bottom: 1px solid var(--card-border); display: flex; align-items: center; gap: 12px; }
-  .topbar a { font-size: 0.82rem; color: var(--ink-faint); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
-  .topbar a:hover { color: var(--accent); }
-  .topbar-sep { color: var(--ink-faint); font-size: 0.8rem; }
-  .page { max-width: 720px; margin: 0 auto; padding: 64px 40px 100px; }
-  .page-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; }
-  .page h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.4; margin-bottom: 8px; }
-  .tagline { font-family: 'Noto Serif TC', serif; font-size: 1.05rem; color: var(--accent); font-weight: 400; margin-bottom: 36px; padding-bottom: 32px; border-bottom: 1px solid var(--card-border); }
-  .body-text { font-size: 1rem; line-height: 1.9; color: var(--ink-light); font-weight: 300; margin-bottom: 40px; }
-  .body-text p + p { margin-top: 16px; }
-  .learn-block { background: var(--white); border: 1px solid var(--card-border); border-radius: 14px; padding: 28px 32px; margin-bottom: 40px; }
-  .learn-block h3 { font-family: 'Noto Serif TC', serif; font-size: 0.85rem; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 18px; }
-  .learn-block ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .learn-block ul li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--ink-light); line-height: 1.6; }
-  .learn-block ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light); flex-shrink: 0; margin-top: 8px; }
-  .cta { font-family: 'Noto Serif TC', serif; font-size: 1rem; color: var(--ink); line-height: 1.8; }
-  @media (max-width: 560px) { .page { padding: 48px 24px 80px; } .topbar { padding: 16px 24px; } }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0d0d;
+  --surface:#161616;
+  --surface2:#1f1f1f;
+  --ink:#f0ece4;
+  --ink2:#b0a99e;
+  --ink3:#6e6760;
+  --accent:#e8c87a;
+  --accent2:#c49a3c;
+  --red:#d45e5e;
+  --teal:#5ebfa8;
+  --purple:#9b87d4;
+  --border:rgba(240,236,228,0.08);
+}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+
+/* noise texture overlay */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+nav{position:relative;z-index:10;padding:20px 48px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+nav a{font-size:0.78rem;color:var(--ink3);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s}
+nav a:hover{color:var(--accent)}
+.nav-sep{color:var(--ink3);font-size:0.8rem}
+
+.hero{position:relative;z-index:1;padding:80px 48px 0;max-width:1100px;margin:0 auto}
+.hero-label{font-size:10px;font-weight:500;letter-spacing:0.3em;color:var(--accent2);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.hero-label::before{content:'';width:32px;height:1px;background:var(--accent2)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:400}
+.hero-sub{font-size:1.05rem;color:var(--ink2);line-height:1.8;max-width:560px;font-weight:300;margin-bottom:48px}
+
+.hero-stats{display:flex;gap:48px;padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:80px}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:0.78rem;color:var(--ink3);margin-top:6px;letter-spacing:0.05em}
+
+/* bias grid */
+.section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 48px 100px}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px}
+.section-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700}
+.section-count{font-size:0.78rem;color:var(--ink3);letter-spacing:0.1em}
+
+.bias-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.bias-card{background:var(--bg);padding:32px 28px;position:relative;overflow:hidden;cursor:default;transition:background 0.3s}
+.bias-card:hover{background:var(--surface)}
+.bias-card::before{content:attr(data-num);position:absolute;top:16px;right:20px;font-family:'Playfair Display',serif;font-size:4rem;font-weight:700;color:rgba(240,236,228,0.04);line-height:1;pointer-events:none}
+.bias-tag{display:inline-block;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;border-radius:2px;margin-bottom:16px}
+.tag-red{background:rgba(212,94,94,0.15);color:var(--red)}
+.tag-teal{background:rgba(94,191,168,0.15);color:var(--teal)}
+.tag-purple{background:rgba(155,135,212,0.15);color:var(--purple)}
+.tag-amber{background:rgba(232,200,122,0.15);color:var(--accent)}
+.bias-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:10px;line-height:1.3}
+.bias-en{font-size:0.75rem;color:var(--ink3);letter-spacing:0.08em;margin-bottom:16px;font-style:italic}
+.bias-desc{font-size:0.9rem;color:var(--ink2);line-height:1.75;font-weight:300}
+.bias-example{margin-top:16px;padding:14px 16px;background:var(--surface2);border-left:2px solid var(--accent2);font-size:0.82rem;color:var(--ink2);line-height:1.6;font-style:italic}
+.bias-example strong{font-style:normal;color:var(--accent);font-weight:400}
+
+/* spotlight section */
+.spotlight{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 48px 80px}
+.spotlight-inner{background:var(--surface);border:1px solid var(--border);padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.spotlight-eyebrow{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--accent2);margin-bottom:20px}
+.spotlight-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1.3;margin-bottom:20px}
+.spotlight-body{font-size:0.92rem;color:var(--ink2);line-height:1.85;font-weight:300}
+.spotlight-body p+p{margin-top:14px}
+.fogg-diagram{display:flex;flex-direction:column;gap:0}
+.fogg-axis-label{font-size:0.7rem;color:var(--ink3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+.fogg-row{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.fogg-bar-wrap{flex:1;height:40px;background:var(--surface2);position:relative;overflow:hidden}
+.fogg-bar{height:100%;display:flex;align-items:center;padding:0 14px;font-size:0.78rem;font-weight:500;white-space:nowrap;transition:width 0.8s ease}
+.fogg-label{font-size:0.72rem;color:var(--ink3);width:60px;text-align:right}
+
+.cta-strip{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 48px 100px}
+.cta-inner{border:1px solid var(--border);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+.cta-text{font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--ink2)}
+.cta-links{display:flex;gap:12px;flex-wrap:wrap}
+.cta-link{display:inline-block;padding:10px 20px;font-size:0.8rem;letter-spacing:0.08em;text-decoration:none;transition:all 0.2s}
+.cta-link.primary{background:var(--accent);color:#0d0d0d;font-weight:500}
+.cta-link.primary:hover{background:var(--accent2)}
+.cta-link.secondary{border:1px solid var(--border);color:var(--ink2)}
+.cta-link.secondary:hover{border-color:var(--ink3);color:var(--ink)}
+
+@media(max-width:768px){
+  nav{padding:16px 24px}
+  .hero,.section,.spotlight,.cta-strip{padding-left:24px;padding-right:24px}
+  .hero-stats{gap:24px;flex-wrap:wrap}
+  .spotlight-inner{grid-template-columns:1fr;gap:32px;padding:32px}
+  .cta-inner{flex-direction:column;align-items:flex-start;padding:28px 24px}
+}
 </style>
 </head>
 <body>
-<nav class="topbar">
-  <a href="index.html">← 首頁</a>
-  <span class="topbar-sep">/</span>
-  <span style="font-size:0.82rem; color: var(--ink);">Psychological Understand Club</span>
+<nav>
+  <a href="../index.html">← 首頁</a>
+  <span class="nav-sep">/</span>
+  <a href="index.html">Psychology Club</a>
+  <span class="nav-sep">/</span>
+  <span style="font-size:0.78rem;color:var(--ink2)">認知偏誤</span>
 </nav>
-<main class="page">
-  <p class="page-eyebrow">🧠 理解行為</p>
-  <h1>Psychological Understand Club</h1>
-  <p class="tagline">病理之前，先有心理。</p>
-  <div class="body-text">
-    <p>你知道該運動，但為什麼做不到？</p>
-    <p>你知道要健康，但為什麼會拖延？</p>
-    <p>這不是意志力問題，而是心理機制。</p>
+
+<section class="hero">
+  <p class="hero-label">認知心理學</p>
+  <h1>你的大腦<br>正在<em>欺騙</em>你</h1>
+  <p class="hero-sub">認知偏誤是人類大腦演化出的捷徑，在遠古時代幫助我們快速決策——但在現代社會，它們往往讓我們陷入系統性的思維錯誤。</p>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">180+</div>
+      <div class="stat-label">已知的認知偏誤種類</div>
+    </div>
+    <div>
+      <div class="stat-num">95%</div>
+      <div class="stat-label">決策由潛意識驅動</div>
+    </div>
+    <div>
+      <div class="stat-num">0.5s</div>
+      <div class="stat-label">大腦做出直覺判斷的時間</div>
+    </div>
   </div>
-  <div class="learn-block">
-    <h3>你會學到</h3>
-       <!-- Psychological Club -->
-    <div class="card card--expanded">
-      <div class="card-icon">🧠</div>
-      <div class="card-title"><a href="psychology.html">Psychological Club</a></div>
-      <div class="card-sub">理解行為背後的心理機制，突破慣性</div>
-      <div class="card-sub-links">
-        <a class="card-sub-link" href="Psychology/Psycho_MobileDeviceHelp.html">
-          <span class="card-sub-link-icon">🔄</span>
-          <span class="card-sub-link-text">行為習慣的形成或改變</span>
-          <span class="card-sub-link-arrow">→</span>
-        </a>
-      </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">常見認知偏誤</h2>
+    <span class="section-count">06 TYPES</span>
+  </div>
+  <div class="bias-grid">
+
+    <div class="bias-card" data-num="01">
+      <span class="bias-tag tag-red">判斷 &amp; 決策</span>
+      <div class="bias-name">確認偏誤</div>
+      <div class="bias-en">Confirmation Bias</div>
+      <div class="bias-desc">傾向於尋找、詮釋、偏好那些能夠確認或支持自己既有信念的資訊，並忽視與之矛盾的證據。</div>
+      <div class="bias-example"><strong>日常例子：</strong>支持某政黨的人，只看符合自己立場的新聞報導，自動過濾相反的觀點。</div>
     </div>
 
-    <ul>
-      <li>習慣形成的原理</li>
-      <li>拖延與焦慮的關係</li>
-      <li>自我欺騙與認知偏誤</li>
-    </ul>
+    <div class="bias-card" data-num="02">
+      <span class="bias-tag tag-teal">記憶 &amp; 感知</span>
+      <div class="bias-name">錨定效應</div>
+      <div class="bias-en">Anchoring Effect</div>
+      <div class="bias-desc">在做決策時，過度依賴第一個接觸到的資訊（「錨」），後續的判斷都會以這個初始資訊為基準來調整。</div>
+      <div class="bias-example"><strong>日常例子：</strong>看到原價 $5,000 打折到 $3,000，覺得撿到便宜——但也許 $3,000 本來就是合理價格。</div>
+    </div>
+
+    <div class="bias-card" data-num="03">
+      <span class="bias-tag tag-purple">社會 &amp; 群體</span>
+      <div class="bias-name">從眾效應</div>
+      <div class="bias-en">Bandwagon Effect</div>
+      <div class="bias-desc">因為其他人相信某件事或採取某種行動，而跟隨潮流，不加批判地採納多數人的觀點或行為。</div>
+      <div class="bias-example"><strong>日常例子：</strong>看到排隊人潮就跟著排，覺得「這麼多人排一定很好吃」，即使不知道賣什麼。</div>
+    </div>
+
+    <div class="bias-card" data-num="04">
+      <span class="bias-tag tag-amber">風險 &amp; 損失</span>
+      <div class="bias-name">損失厭惡</div>
+      <div class="bias-en">Loss Aversion</div>
+      <div class="bias-desc">失去某樣東西的痛苦，遠比獲得同等價值事物的快樂強烈——心理學研究指出，損失的感受約為獲得的兩倍。</div>
+      <div class="bias-example"><strong>日常例子：</strong>輸掉 $1,000 的難受程度，遠大於贏得 $1,000 的開心，即使金額相同。</div>
+    </div>
+
+    <div class="bias-card" data-num="05">
+      <span class="bias-tag tag-red">自我 &amp; 歸因</span>
+      <div class="bias-name">基本歸因謬誤</div>
+      <div class="bias-en">Fundamental Attribution Error</div>
+      <div class="bias-desc">在解釋他人行為時，過度強調其個人性格因素，忽略環境、情境等外在因素的影響。</div>
+      <div class="bias-example"><strong>日常例子：</strong>看到有人在路上闖紅燈，馬上認為「這人道德敗壞」，而非考慮他可能有緊急狀況。</div>
+    </div>
+
+    <div class="bias-card" data-num="06">
+      <span class="bias-tag tag-teal">記憶 &amp; 感知</span>
+      <div class="bias-name">可得性捷思</div>
+      <div class="bias-en">Availability Heuristic</div>
+      <div class="bias-desc">在評估事件發生的機率時，傾向於依賴腦海中最容易想到的例子——越容易被想起，就認為越常發生。</div>
+      <div class="bias-example"><strong>日常例子：</strong>看完飛機失事新聞後覺得搭飛機很危險，其實統計上飛機比汽車安全得多。</div>
+    </div>
+
   </div>
-  <p class="cta">👉 行為的背後，永遠有心理</p>
-</main>
+</section>
+
+<section class="spotlight">
+  <div class="spotlight-inner">
+    <div>
+      <p class="spotlight-eyebrow">深度解析</p>
+      <h2 class="spotlight-title">為什麼我們<br>無法客觀思考？</h2>
+      <div class="spotlight-body">
+        <p>大腦有兩種思維系統：系統一是快速、直覺、自動的；系統二是緩慢、深思、消耗能量的。</p>
+        <p>大多數時候，我們依賴系統一運作。認知偏誤正是系統一的「捷徑」——它幫助我們在資訊爆炸的環境中快速決策，但代價是準確度。</p>
+        <p>覺察偏誤的存在，是突破它的第一步。</p>
+      </div>
+    </div>
+    <div>
+      <p class="fogg-axis-label">思維模式比較</p>
+      <div class="fogg-row">
+        <span class="fogg-label">速度</span>
+        <div class="fogg-bar-wrap">
+          <div class="fogg-bar" style="width:92%;background:rgba(232,200,122,0.2);color:var(--accent)">系統一：極快</div>
+        </div>
+      </div>
+      <div class="fogg-row">
+        <span class="fogg-label"></span>
+        <div class="fogg-bar-wrap">
+          <div class="fogg-bar" style="width:30%;background:rgba(94,191,168,0.2);color:var(--teal)">系統二：慢</div>
+        </div>
+      </div>
+      <div style="height:24px"></div>
+      <div class="fogg-row">
+        <span class="fogg-label">耗能</span>
+        <div class="fogg-bar-wrap">
+          <div class="fogg-bar" style="width:20%;background:rgba(232,200,122,0.2);color:var(--accent)">低</div>
+        </div>
+      </div>
+      <div class="fogg-row">
+        <span class="fogg-label"></span>
+        <div class="fogg-bar-wrap">
+          <div class="fogg-bar" style="width:85%;background:rgba(94,191,168,0.2);color:var(--teal)">高</div>
+        </div>
+      </div>
+      <div style="height:24px"></div>
+      <div class="fogg-row">
+        <span class="fogg-label">偏誤風險</span>
+        <div class="fogg-bar-wrap">
+          <div class="fogg-bar" style="width:88%;background:rgba(212,94,94,0.2);color:var(--red)">系統一：極高</div>
+        </div>
+      </div>
+      <div class="fogg-row">
+        <span class="fogg-label"></span>
+        <div class="fogg-bar-wrap">
+          <div class="fogg-bar" style="width:28%;background:rgba(155,135,212,0.2);color:var(--purple)">系統二：低</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-strip">
+  <div class="cta-inner">
+    <p class="cta-text">「認識自己的偏誤，<br>才能做出真正理性的選擇。」</p>
+    <div class="cta-links">
+      <a href="Procrastination.html" class="cta-link primary">下一主題：拖延症 →</a>
+      <a href="FoggBehaviorModel.html" class="cta-link secondary">Fogg 行為模型</a>
+    </div>
+  </div>
+</section>
+
 </body>
 </html>
