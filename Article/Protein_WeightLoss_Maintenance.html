@@ -1,1 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Role of Protein in Weight Loss and Maintenance</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: 'Georgia', serif;
+      font-size: 16px;
+      line-height: 1.75;
+      color: #222;
+      background: #f9f7f4;
+    }
+
+    .page-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 3px solid #2c5f2e;
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+
+    .journal-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #2c5f2e;
+      font-family: Arial, sans-serif;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      line-height: 1.3;
+      color: #1a1a1a;
+      margin-bottom: 14px;
+    }
+
+    .authors {
+      font-size: 0.92rem;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .citation {
+      font-size: 0.82rem;
+      color: #888;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── Abstract ── */
+    .abstract {
+      background: #fff;
+      border-left: 4px solid #2c5f2e;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      border-radius: 0 6px 6px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .abstract h2 {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2c5f2e;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .abstract p {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .keywords {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .keywords strong {
+      color: #2c5f2e;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2.section-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #2c5f2e;
+      border-bottom: 1px solid #c8dfc9;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    h3.subsection-title {
+      font-size: 1rem;
+      font-style: italic;
+      color: #333;
+      margin: 20px 0 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    /* ── Key Findings Cards ── */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .finding-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+      border-top: 3px solid #2c5f2e;
+    }
+
+    .finding-card .metric {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #2c5f2e;
+      font-family: Arial, sans-serif;
+    }
+
+    .finding-card .label {
+      font-size: 0.82rem;
+      color: #555;
+      font-family: Arial, sans-serif;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── Table ── */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    thead {
+      background: #2c5f2e;
+      color: #fff;
+    }
+
+    thead th {
+      padding: 10px 8px;
+      text-align: left;
+      font-weight: 600;
+      border: 1px solid #245025;
+    }
+
+    tbody tr:nth-child(even) { background: #f0f5f0; }
+    tbody tr:hover { background: #e3ede3; }
+
+    tbody td {
+      padding: 7px 8px;
+      border: 1px solid #ddd;
+      color: #333;
+      vertical-align: top;
+    }
+
+    .symbol-up   { color: #2c5f2e; font-weight: bold; }
+    .symbol-down { color: #c0392b; font-weight: bold; }
+    .symbol-none { color: #888; }
+
+    /* ── Summary Table ── */
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      font-family: Arial, sans-serif;
+      margin-top: 16px;
+    }
+
+    .summary-table th {
+      background: #2c5f2e;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .summary-table td {
+      padding: 10px 14px;
+      border: 1px solid #c8dfc9;
+      vertical-align: top;
+    }
+
+    .summary-table tr:nth-child(even) td { background: #f0f5f0; }
+
+    .bullet-list {
+      padding-left: 18px;
+    }
+
+    .bullet-list li {
+      margin-bottom: 6px;
+    }
+
+    /* ── References ── */
+    .references {
+      font-size: 0.8rem;
+      font-family: Arial, sans-serif;
+      color: #555;
+      column-count: 2;
+      column-gap: 28px;
+    }
+
+    .references p {
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.35rem; }
+      .references { column-count: 1; }
+      .findings-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header>
+    <div class="journal-label">American Journal of Clinical Nutrition · 2015;101(Suppl):1320S–9S</div>
+    <h1>The Role of Protein in Weight Loss and Maintenance</h1>
+    <p class="authors">
+      Heather J Leidy, Peter M Clifton, Arne Astrup, Thomas P Wycherley,
+      Margriet S Westerterp-Plantenga, Natalie D Luscombe-Marsh,
+      Stephen C Woods, and Richard D Mattes
+    </p>
+    <p class="citation">First published online April 29, 2015 · doi: 10.3945/ajcn.114.084038</p>
+  </header>
+
+  <!-- Abstract -->
+  <div class="abstract">
+    <h2>Abstract</h2>
+    <p>
+      Over the past 20 years, higher-protein diets have been touted as a successful strategy to prevent or treat obesity through improvements in body weight management. These improvements are thought to be due, in part, to modulations in energy metabolism, appetite, and energy intake. Recent evidence also supports higher-protein diets for improvements in cardiometabolic risk factors.
+    </p>
+    <p>
+      This article provides an overview of the literature exploring the mechanisms of action after acute protein consumption and the clinical health outcomes after consumption of long-term, higher-protein diets. Several meta-analyses showed greater weight loss, fat mass loss, and preservation of lean mass after higher-protein energy-restriction diets. Dietary compliance appears to be the primary contributor to discrepant findings in longer-term studies.
+    </p>
+    <p>
+      Collectively, these data suggest that higher-protein diets containing between <strong>1.2 and 1.6 g protein · kg⁻¹ · d⁻¹</strong> and potentially including meal-specific quantities of at least <strong>~25–30 g protein/meal</strong> provide improvements in appetite, body weight management, and cardiometabolic risk factors.
+    </p>
+    <p class="keywords">
+      <strong>Keywords:</strong> appetite control, compliance, high protein, satiety, weight management
+    </p>
+  </div>
+
+  <!-- Key Metrics -->
+  <section>
+    <h2 class="section-title">Key Findings at a Glance</h2>
+    <div class="findings-grid">
+      <div class="finding-card">
+        <div class="metric">−0.79 kg</div>
+        <div class="label">Greater weight loss with higher-protein vs. lower-protein energy-restriction diets (Wycherley et al. meta-analysis, n=1063)</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric">−0.87 kg</div>
+        <div class="label">Greater fat mass loss with higher-protein diets in controlled feeding studies</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric">+0.43 kg</div>
+        <div class="label">Greater lean mass preserved during energy restriction with higher-protein diets</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric">+142 kcal/d</div>
+        <div class="label">Greater preservation of resting energy expenditure with higher-protein diets</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric">1.2–1.6 g/kg/d</div>
+        <div class="label">Recommended protein intake range for improved weight management</div>
+      </div>
+      <div class="finding-card">
+        <div class="metric">25–30 g</div>
+        <div class="label">Minimum protein per meal to elicit satiety and protein-synthesis benefits</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section>
+    <h2 class="section-title">Introduction</h2>
+    <p>
+      Substantial evidence supports the consumption of increased dietary protein (1.2–1.6 g · kg⁻¹ · d⁻¹) as a successful strategy to prevent or treat obesity through reductions in body weight and fat mass, concomitant with the preservation of lean mass. The effectiveness of these diets may be due, in part, to modulations in energy metabolism and appetitive signaling leading to reduced energy intake.
+    </p>
+    <p>
+      This article provides an overview of the literature exploring the mechanisms of action after acute protein consumption and the clinical health outcomes after long-term, higher-protein diets. Acceptability and compliance to the chronic consumption of increased dietary protein are also considered, along with novel recommendations for protein quantity and timing of consumption.
+    </p>
+  </section>
+
+  <!-- Mechanistic Outcomes -->
+  <section>
+    <h2 class="section-title">Mechanistic Outcomes with Acute Protein Consumption</h2>
+
+    <h3 class="subsection-title">Thermic Effect of Food and Resting Energy Expenditure</h3>
+    <p>
+      Higher-protein diets increase energy expenditure through increased postprandial thermogenesis and resting metabolism. Dietary protein requires 20–30% of its usable energy to be expended for metabolism and/or storage, whereas carbohydrates require 5–10% and dietary fats require only 0–3%. Protein intake is positively associated with the thermic effect of food (TEF) after adjustment for covariates (r = 0.43, P = 0.009).
+    </p>
+    <p>
+      During weight loss, higher-protein diets also prevent a decline in resting energy expenditure (REE). A meta-analysis of 24 randomized controlled trials found that higher-protein diets led to greater preservation of REE (mean difference: +142 kcal/d; 95% CI: 16–269 kcal/d; P &lt; 0.03) compared with lower-protein diets. This is likely due to the concomitant retention of lean mass observed with higher-protein diets.
+    </p>
+
+    <h3 class="subsection-title">Protein-Specific Appetite</h3>
+    <p>
+      A protein-specific appetite purportedly exists to maintain protein requirements and prevent excess protein consumption. This is summarized by the <em>protein leverage hypothesis</em>, which suggests that a protein-specific appetite stimulates drive for increased food intake when dietary protein density is low, but reduces intake when protein density is higher.
+    </p>
+    <p>
+      Gosby et al. found that when protein content was lowered from 15% to 10% of diet energy, daily energy intake increased by 12 ± 4.5% (+259 kcal/d). However, a recent analysis of 38 ad libitum feeding trials noted that the negative association between dietary protein percentage and total daily energy intake was observed only when protein intakes were between 10% and 20%; amounts above this resulted in no further reductions. The existing evidence from high-quality studies in humans fails to fully support the protein leverage hypothesis.
+    </p>
+
+    <h3 class="subsection-title">Non-Specific Satiety and Gut Hormones</h3>
+    <p>
+      Dietary protein is an effective stimulus for the release or inhibition of many appetite-regulating peptides. Ghrelin, which enhances hunger and initiates eating, is suppressed more strongly by protein ingestion than by carbohydrates or fats. Peptide YY (PYY) and glucagon-like peptide-1 (GLP-1), which are associated with satiety and reduced subsequent food intake, are stimulated by the ingestion of dietary protein, with evidence of a dose-response relationship.
+    </p>
+  </section>
+
+  <!-- Appetite After Higher-Protein Meals -->
+  <section>
+    <h2 class="section-title">Appetite and Subsequent Food Intake After Higher-Protein Meals</h2>
+    <p>
+      Twenty-four tightly controlled acute feeding trials were reviewed. Among these, 71% reported at least one beneficial alteration in appetite index after higher-protein meals. However, only 3 studies (18%) observed a reduction in energy intake at the next eating occasion. None of the studies reported weakened appetite control after higher-protein meals.
+    </p>
+
+    <h3 class="subsection-title">Summary of Acute Feeding Trials (Table 1)</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>First Author, Year</th>
+            <th>LP Protein (g)</th>
+            <th>HP Protein (g)</th>
+            <th>Meal Type</th>
+            <th>Hunger</th>
+            <th>Fullness</th>
+            <th>Ghrelin</th>
+            <th>PYY/GLP-1</th>
+            <th>Next Meal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Stubbs, 1999</td><td>66</td><td>207</td><td>Solid</td><td class="symbol-down">↓</td><td class="symbol-up">↑</td><td class="symbol-none">—</td><td class="symbol-none">—</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Stubbs, 1996</td><td>58</td><td>185</td><td>Solid</td><td class="symbol-none">Ø</td><td class="symbol-up">↑</td><td class="symbol-none">—</td><td class="symbol-none">—</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Batterham, 2006</td><td>46</td><td>178</td><td>Solid</td><td class="symbol-down">↓</td><td class="symbol-none">—</td><td class="symbol-none">Ø</td><td class="symbol-up">↑ PYY</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Brennan, 2012</td><td>28</td><td>127</td><td>Solid</td><td class="symbol-down">↓</td><td class="symbol-up">↑</td><td class="symbol-down">↓</td><td class="symbol-none">Ø</td><td class="symbol-down">↓(148)</td></tr>
+          <tr><td>Belza, 2013</td><td>24</td><td>88</td><td>Solid</td><td class="symbol-down">↓</td><td class="symbol-up">↑</td><td class="symbol-down">↓</td><td class="symbol-up">↑ both</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Belza, 2013</td><td>24</td><td>44</td><td>Solid</td><td class="symbol-down">↓</td><td class="symbol-up">↑</td><td class="symbol-none">Ø</td><td class="symbol-up">↑ both</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Veldhorst, 2009 (whey)</td><td>15</td><td>38</td><td>Semisolid</td><td class="symbol-none">—</td><td class="symbol-up">↑</td><td class="symbol-down">↓</td><td class="symbol-up">↑ GLP-1</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Veldhorst, 2009 (casein)</td><td>15</td><td>38</td><td>Semisolid</td><td class="symbol-none">—</td><td class="symbol-up">↑</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Leidy, 2013</td><td>13</td><td>35</td><td>Solid</td><td class="symbol-none">Ø</td><td class="symbol-up">↑</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Leidy, 2007</td><td>17</td><td>28</td><td>Solid</td><td class="symbol-down">↓</td><td class="symbol-none">Ø</td><td class="symbol-down">↓</td><td class="symbol-none">—</td><td class="symbol-none">—</td></tr>
+          <tr><td>Makris, 2011</td><td>12</td><td>24</td><td>Solid</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td><td class="symbol-none">—</td><td class="symbol-none">—</td><td class="symbol-none">Ø</td></tr>
+          <tr><td>Karhunen, 2010</td><td>3</td><td>20</td><td>Solid</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td><td class="symbol-none">Ø</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem; color:#666; margin-top:6px; font-family:Arial,sans-serif;">
+      ↑ = increased; ↓ = reduced; Ø = no difference; — = not assessed. LP = lower-protein; HP = higher-protein.
+    </p>
+
+    <p>
+      A protein quantity threshold of ~25–30 g per meal appears necessary to elicit protein synthesis benefits; preliminary data suggest a similar threshold may exist for satiety. Neither of the studies that included &lt;25 g protein demonstrated a satiety effect.
+    </p>
+  </section>
+
+  <!-- Clinical Outcomes ≤1 year -->
+  <section>
+    <h2 class="section-title">Clinical Outcomes with Controlled Higher-Protein Diets (≤1 Year)</h2>
+    <p>
+      Three major meta-analyses examined the effects of higher-protein diets on body weight management and cardiometabolic outcomes:
+    </p>
+    <ul class="bullet-list">
+      <li>
+        <strong>Wycherley et al.</strong> (24 RCTs, n=1,063, 12±9 weeks): Higher-protein diets (27–35% energy as protein) led to greater weight loss (MD: −0.79 kg), greater fat loss (MD: −0.87 kg), and greater lean mass preservation (MD: +0.43 kg). Fasting triglycerides were also lower (MD: −0.23 mmol/L).
+      </li>
+      <li>
+        <strong>Dong et al.</strong> (9 RCTs in type 2 diabetes, n=418): Higher-protein diets led to greater weight loss (MD: −2.08 kg), reductions in glycated hemoglobin (MD: −0.52%), and reductions in both systolic and diastolic blood pressure.
+      </li>
+      <li>
+        <strong>Santesso et al.</strong> (74 RCTs): Higher-protein diets led to greater weight loss (MD: −0.36 kg), greater reductions in BMI (MD: −0.37 kg/m²), and greater reductions in waist circumference (MD: −0.43 cm).
+      </li>
+    </ul>
+  </section>
+
+  <!-- Long-term outcomes -->
+  <section>
+    <h2 class="section-title">Clinical Outcomes with Long-Term Higher-Protein Diets (≥1 Year)</h2>
+
+    <h3 class="subsection-title">Very-Low-Carbohydrate (Ketogenic) Diets</h3>
+    <p>
+      Bueno et al. completed a meta-analysis of 13 long-term (&gt;12 months) trials comparing VLCKDs (~20% protein) with conventional low-fat diets. VLCKDs led to greater weight loss (WMD: −0.91 kg) and improvements in triglycerides, HDL cholesterol, and diastolic blood pressure. However, adherence was low (~40% dropout rate).
+    </p>
+
+    <h3 class="subsection-title">Low-Fat, Higher-Protein Diets</h3>
+    <p>
+      Schwingshackl and Hoffmann found no significant differences in weight loss or cardiometabolic outcomes between higher-protein (&gt;25% of intake) and lower-protein (&lt;20% of intake) low-fat diets at ≥12 months. However, Clifton et al., in a more comprehensive meta-analysis (32 studies, n=3,492), found small but significant benefits with higher-protein diets: a standardized MD of −0.14 for body weight (P=0.008) and −0.22 for fat mass (P&lt;0.001). A difference of ≥5% in protein intake was associated with a 3-fold greater reduction in fat mass.
+    </p>
+
+    <h3 class="subsection-title">The Diogenes Study</h3>
+    <p>
+      This pan-European trial (938 adults, 253 children) is the largest trial comparing lower- vs. higher-protein diets for weight-loss maintenance. Following an 8-week energy-restriction period, adults consumed ad libitum diets for 26 weeks. The higher-protein diet (25% of intake as protein) led to significantly less weight regain (MD: −0.93 kg; P=0.003) compared with the lower-protein diet (13% protein). Children following the higher-protein regimen showed reductions in waist circumference and LDL cholesterol.
+    </p>
+  </section>
+
+  <!-- Compliance -->
+  <section>
+    <h2 class="section-title">Compliance with High-Protein Diets</h2>
+    <p>
+      Dropout rates across meta-analysis studies ranged from 7% to 55% (average: 30±12%). Most studies showed poor compliance: higher-protein diet groups reduced their protein intake throughout the study, while lower-protein groups increased theirs — both trending back toward habitual intake levels.
+    </p>
+    <p>
+      Strategies that improved compliance include:
+    </p>
+    <ul class="bullet-list">
+      <li><strong>Regular dietary counseling:</strong> Weekly counseling over 12 months (Layman et al.) resulted in a lower dropout rate in the higher-protein group (36%) versus lower-protein group (55%).</li>
+      <li><strong>Family-based strategies:</strong> The Diogenes study showed that the higher-protein diet group had a lower dropout rate than the lower-protein group (26% vs. 37%; P=0.02).</li>
+      <li><strong>Palatability:</strong> Several studies reported greater overall satisfaction and palatability with higher-protein diets, potentially due to their satiating effects.</li>
+    </ul>
+  </section>
+
+  <!-- Protein Quantity -->
+  <section>
+    <h2 class="section-title">Protein Quantity Recommendations</h2>
+    <p>
+      The evidence supports a daily protein intake of <strong>1.2–1.6 g · kg⁻¹ · d⁻¹</strong> (~89–119 g/d for women, ~104–138 g/d for men) to improve weight management and cardiometabolic outcomes. An increase of only ~25–30 g/d above habitual intake (~88 g/d in US adults) may be sufficient.
+    </p>
+    <p>
+      With respect to meal-specific timing, ~<strong>25–30 g protein per eating occasion</strong> is required to elicit protein-synthesis and appetite benefits. Many Americans already consume adequate protein at lunch and dinner but fall well short at breakfast. Evidence supports unique benefits of higher protein at breakfast for improved satiety and reduced unhealthy evening snacking.
+    </p>
+    <p>
+      Under isoenergetic conditions, the increase in protein — rather than the reduction in carbohydrates or fat — appears to be the critical component for improved weight management.
+    </p>
+  </section>
+
+  <!-- Conclusions -->
+  <section>
+    <h2 class="section-title">Conclusions and Summary</h2>
+    <div class="table-wrapper">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th style="width:50%">Conclusions</th>
+            <th style="width:50%">Limitations &amp; Gaps</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Higher-protein energy-restriction diets lead to greater weight loss, fat mass loss, and lean mass preservation, along with improvements in select cardiometabolic outcomes in the shorter term.</td>
+            <td>Research is needed to examine whether satiety effects of protein promote voluntary long-term reductions in energy intake and body weight management.</td>
+          </tr>
+          <tr>
+            <td>Although long-term data are less consistent, persistent effects of increased protein are evident with respect to weight maintenance and prevention of weight regain.</td>
+            <td>Future long-term research including family-based interventions with dietary counseling and meal-specific protein quantities are warranted.</td>
+          </tr>
+          <tr>
+            <td>Higher-protein diets (1.2–1.6 g · kg⁻¹ · d⁻¹) with meal-specific quantities of ≥25–30 g provide improvements in appetite, body weight, and cardiometabolic risk factors.</td>
+            <td>Future research exploring meal-specific protein quantity and timing of consumption are warranted.</td>
+          </tr>
+          <tr>
+            <td>Dietary compliance appears to be the primary contributor to discrepant findings; improvements were detected in those who adhered to higher-protein regimens.</td>
+            <td>Further strategies to increase dietary compliance with long-term dietary interventions are warranted.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- References -->
+  <section>
+    <h2 class="section-title">References</h2>
+    <div class="references">
+      <p>1. Westerterp-Plantenga MS, et al. Dietary protein—its role in satiety, energetics, weight loss and health. <em>Br J Nutr</em> 2012;108(Suppl 2):S105–12.</p>
+      <p>2. Clifton P. Effects of a high protein diet on body weight and comorbidities associated with obesity. <em>Br J Nutr</em> 2012;108(Suppl 2):S122–9.</p>
+      <p>3. Te Morenga L, Mann J. The role of high-protein diets in body weight management and health. <em>Br J Nutr</em> 2012;108(Suppl 2):S130–8.</p>
+      <p>4. Dong JY, et al. Effects of high-protein diets on body weight, glycaemic control, blood lipids and blood pressure in type 2 diabetes. <em>Br J Nutr</em> 2013;110:781–9.</p>
+      <p>5. Sacks FM, et al. Comparison of weight-loss diets with different compositions of fat, protein, and carbohydrates. <em>N Engl J Med</em> 2009;360:859–73.</p>
+      <p>7. Westerterp-Plantenga MS, et al. Dietary protein, weight loss, and weight maintenance. <em>Annu Rev Nutr</em> 2009;29:21–41.</p>
+      <p>10. Ravn AM, et al. Thermic effect of a meal and appetite in adults: an individual participant data meta-analysis of meal-test trials. <em>Food Nutr Res</em> 2013:57.</p>
+      <p>11. Wycherley TP, et al. Effects of energy-restricted high-protein, low-fat compared with standard-protein, low-fat diets. <em>Am J Clin Nutr</em> 2012;96:1281–98.</p>
+      <p>13. Batterham RL, et al. Critical role for peptide YY in protein-mediated satiation and body-weight regulation. <em>Cell Metab</em> 2006;4:223–33.</p>
+      <p>17. Gosby AK, et al. Testing protein leverage in lean humans: a randomised controlled experimental study. <em>PLoS ONE</em> 2011;6:e25929.</p>
+      <p>18. Martens EA, et al. Protein leverage affects energy intake of high-protein diets in humans. <em>Am J Clin Nutr</em> 2013;97:86–93.</p>
+      <p>30. Belza A, et al. Contribution of gastroenteropancreatic appetite hormones to protein-induced satiety. <em>Am J Clin Nutr</em> 2013;97:980–9.</p>
+      <p>55. Leidy HJ, et al. Beneficial effects of a higher-protein breakfast on appetitive, hormonal, and neural signals controlling energy intake regulation. <em>Am J Clin Nutr</em> 2013;97:677–88.</p>
+      <p>71. Wycherley TP, et al. Comparison of the effects of weight loss from a high-protein versus standard-protein energy-restricted diet on strength and aerobic capacity. <em>Eur J Nutr</em> 2013;52:317–25.</p>
+      <p>72. Santesso N, et al. Effects of higher- versus lower-protein diets on health outcomes: a systematic review and meta-analysis. <em>Eur J Clin Nutr</em> 2012;66:780–8.</p>
+      <p>73. Bueno NB, et al. Very-low-carbohydrate ketogenic diet v. low-fat diet for long-term weight loss: a meta-analysis. <em>Br J Nutr</em> 2013;110:1178–87.</p>
+      <p>74. Schwingshackl L, Hoffmann G. Long-term effects of low-fat diets either low or high in protein on cardiovascular and metabolic risk factors. <em>Nutr J</em> 2013;12:48.</p>
+      <p>75. Clifton PM, et al. Long term weight maintenance after advice to consume low carbohydrate, higher protein diets. <em>Nutr Metab Cardiovasc Dis</em> 2014;24:224–35.</p>
+      <p>76–77. Larsen TM, et al. Diets with high or low protein content and glycemic index for weight-loss maintenance. <em>N Engl J Med</em> 2010;363:2102–13.</p>
+      <p>85. Layman DK, et al. A moderate-protein diet produces sustained weight loss and long-term changes in body composition. <em>J Nutr</em> 2009;139:514–21.</p>
+      <p>90. Bosse JD, Dixon BM. Dietary protein in weight management: a review proposing protein spread and change theories. <em>Nutr Metab</em> 2012;9:81.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
