@@ -129,6 +129,14 @@
     color: var(--ink);
     line-height: 1.4;
   }
+  .card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .card-title a:hover {
+    color: var(--accent);
+  }
   .card-sub {
     font-size: 0.78rem;
     color: var(--ink-faint);
@@ -210,93 +218,11 @@
 <main class="grid-section">
   <p class="section-label">選擇你的入口</p>
   <div class="grid">
-   <!-- Journal Reading Club -->
-<div class="card card--expanded">
-  <div class="card-icon">📚</div>
-  <div class="card-title">Journal Reading Club</div>
-  <div class="card-sub">從醫學證據出發，讀懂生活與疾病的關聯</div>
-  <div class="card-sub-links">
-    <a class="card-sub-link" href="Article/CBT.html">
-      <span class="card-sub-link-icon">🧠</span>
-      <span class="card-sub-link-text">認知行為治療 CBT</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/CHO_FAT_Diet_Mortality.html">
-      <span class="card-sub-link-icon">🥩</span>
-      <span class="card-sub-link-text">醣脂飲食與死亡率</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/CHO_Last_Food_Order.html">
-      <span class="card-sub-link-icon">🍽️</span>
-      <span class="card-sub-link-text">進食順序與血糖控制</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/DunnigKrugStudy.html">
-      <span class="card-sub-link-icon">📊</span>
-      <span class="card-sub-link-text">Dunning–Kruger 研究</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/Eating_Order_Ghrelin.html">
-      <span class="card-sub-link-icon">⏱️</span>
-      <span class="card-sub-link-text">進食順序與飢餓素</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/Epigenetics.html">
-      <span class="card-sub-link-icon">🧬</span>
-      <span class="card-sub-link-text">表觀遺傳學</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/GoalDirectToBodyWeightReduction.html">
-      <span class="card-sub-link-icon">🎯</span>
-      <span class="card-sub-link-text">目標導向法減重</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/Intermittent_Fasting_Health_Aging.html">
-      <span class="card-sub-link-icon">⏳</span>
-      <span class="card-sub-link-text">間歇性斷食與健康老化</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/LotteryToBodyWeightReduction.html">
-      <span class="card-sub-link-icon">🎰</span>
-      <span class="card-sub-link-text">彩券法減重</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/Low_CHO_DM.html">
-      <span class="card-sub-link-icon">🩸</span>
-      <span class="card-sub-link-text">低醣飲食與糖尿病</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/MindfulnessToAnxiety.html">
-      <span class="card-sub-link-icon">🧘</span>
-      <span class="card-sub-link-text">正念減輕焦慮</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/MindfulnessToCardiovascular.html">
-      <span class="card-sub-link-icon">❤️</span>
-      <span class="card-sub-link-text">正念減少心血管疾病</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/MobileDeviceHelp.html">
-      <span class="card-sub-link-icon">📱</span>
-      <span class="card-sub-link-text">手機軟體能幫助糖尿病控制</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/Protein_WeightLoss_Maintenance.html">
-      <span class="card-sub-link-icon">💪</span>
-      <span class="card-sub-link-text">蛋白質與體重維持</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-    <a class="card-sub-link" href="Article/Time_Restricted_Eating.html">
-      <span class="card-sub-link-icon">🕐</span>
-      <span class="card-sub-link-text">限時飲食法</span>
-      <span class="card-sub-link-arrow">→</span>
-    </a>
-  </div>
-</div>
-   <!-- Journal Reading Club -->
+
+    <!-- Journal Reading Club -->
     <div class="card card--expanded">
       <div class="card-icon">📚</div>
-      <div class="card-title">Journal Reading Club</div>
+      <div class="card-title"><a href="journal.html">Journal Reading Club</a></div>
       <div class="card-sub">從醫學證據出發，讀懂生活與疾病的關聯</div>
       <div class="card-sub-links">
         <a class="card-sub-link" href="Article/CBT.html">
@@ -304,14 +230,29 @@
           <span class="card-sub-link-text">認知行為治療 CBT</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
-        <a class="card-sub-link" href="Article/DunigKrugStudy.html">
+        <a class="card-sub-link" href="Article/CHO_FAT_Diet_Mortality.html">
+          <span class="card-sub-link-icon">🥩</span>
+          <span class="card-sub-link-text">醣脂飲食與死亡率</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/CHO_Last_Food_Order.html">
+          <span class="card-sub-link-icon">🍽️</span>
+          <span class="card-sub-link-text">進食順序與血糖控制</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/DunnigKrugStudy.html">
           <span class="card-sub-link-icon">📊</span>
           <span class="card-sub-link-text">Dunning–Kruger 研究</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
-        <a class="card-sub-link" href="Article/MobileDeviceHelp.html">
-          <span class="card-sub-link-icon">📱</span>
-          <span class="card-sub-link-text">手機軟體能幫助糖尿病控制</span>
+        <a class="card-sub-link" href="Article/Eating_Order_Ghrelin.html">
+          <span class="card-sub-link-icon">⏱️</span>
+          <span class="card-sub-link-text">進食順序與飢餓素</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/Epigenetics.html">
+          <span class="card-sub-link-icon">🧬</span>
+          <span class="card-sub-link-text">表觀遺傳學</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
         <a class="card-sub-link" href="Article/GoalDirectToBodyWeightReduction.html">
@@ -319,9 +260,19 @@
           <span class="card-sub-link-text">目標導向法減重</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
+        <a class="card-sub-link" href="Article/Intermittent_Fasting_Health_Aging.html">
+          <span class="card-sub-link-icon">⏳</span>
+          <span class="card-sub-link-text">間歇性斷食與健康老化</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
         <a class="card-sub-link" href="Article/LotteryToBodyWeightReduction.html">
           <span class="card-sub-link-icon">🎰</span>
           <span class="card-sub-link-text">彩券法減重</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/Low_CHO_DM.html">
+          <span class="card-sub-link-icon">🩸</span>
+          <span class="card-sub-link-text">低醣飲食與糖尿病</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
         <a class="card-sub-link" href="Article/MindfulnessToAnxiety.html">
@@ -334,12 +285,28 @@
           <span class="card-sub-link-text">正念減少心血管疾病</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
+        <a class="card-sub-link" href="Article/MobileDeviceHelp.html">
+          <span class="card-sub-link-icon">📱</span>
+          <span class="card-sub-link-text">手機軟體能幫助糖尿病控制</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/Protein_WeightLoss_Maintenance.html">
+          <span class="card-sub-link-icon">💪</span>
+          <span class="card-sub-link-text">蛋白質與體重維持</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+        <a class="card-sub-link" href="Article/Time_Restricted_Eating.html">
+          <span class="card-sub-link-icon">🕐</span>
+          <span class="card-sub-link-text">限時飲食法</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
       </div>
     </div>
+
     <!-- After Reading Club -->
     <div class="card card--expanded">
       <div class="card-icon">🧾</div>
-      <div class="card-title">After Reading Club</div>
+      <div class="card-title"><a href="report.html">After Reading Club</a></div>
       <div class="card-sub">輸出才能內化知識，讓學習真正改變人生</div>
       <div class="card-sub-links">
         <a class="card-sub-link" href="reflections/cbt.html">
@@ -372,22 +339,23 @@
           <span class="card-sub-link-text">手機幫助糖尿病控制_精簡版</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
-               <a class="card-sub-link" href="Report/Report_LoterryBWReduction_Long.html">
+        <a class="card-sub-link" href="Report/Report_LoterryBWReduction_Long.html">
           <span class="card-sub-link-icon">📱</span>
           <span class="card-sub-link-text">樂透助減重，有效嗎?完整版</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
         <a class="card-sub-link" href="Report/Report_LoterryBWReduction_Short.html">
           <span class="card-sub-link-icon">📱</span>
-          <span class="card-sub-link-text">樂透助減重，有效嗎?棈簡版</span>
+          <span class="card-sub-link-text">樂透助減重，有效嗎?精簡版</span>
           <span class="card-sub-link-arrow">→</span>
         </a>
       </div>
     </div>
+
     <!-- Psychological Club -->
     <div class="card card--expanded">
       <div class="card-icon">🧠</div>
-      <div class="card-title">Psychological Club</div>
+      <div class="card-title"><a href="pyschology.html">Psychological Club</a></div>
       <div class="card-sub">理解行為背後的心理機制，突破慣性</div>
       <div class="card-sub-links">
         <a class="card-sub-link" href="Psychology/Psycho_MobileDeviceHelp.html">
@@ -397,15 +365,19 @@
         </a>
       </div>
     </div>
+
+    <!-- Social Club -->
     <a class="card" href="social.html">
       <div class="card-icon">🤝</div>
       <div class="card-title">Social Club</div>
       <div class="card-sub">環境如何悄悄塑造你的每一個選擇</div>
       <div class="card-arrow">環境塑造你 →</div>
     </a>
+
+    <!-- To See the Future Club -->
     <div class="card card--expanded">
       <div class="card-icon">🔮</div>
-      <div class="card-title">To See the Future Club</div>
+      <div class="card-title"><a href="future.html">To See the Future Club</a></div>
       <div class="card-sub">整合所有維度，預見並設計你想要的人生</div>
       <div class="card-sub-links">
         <a class="card-sub-link" href="future/Future_MobileDeviceHelp.html">
@@ -415,6 +387,7 @@
         </a>
       </div>
     </div>
+
   </div>
 </main>
 <footer>
