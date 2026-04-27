@@ -1,1 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Efficacy and safety of low and very low carbohydrate diets for type 2 diabetes remission — BMJ 2021</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bmj-red: #c8102e;
+    --bmj-dark: #1a1a2e;
+    --bmj-mid: #2d2d4e;
+    --text-primary: #1c1c1c;
+    --text-secondary: #444;
+    --text-muted: #666;
+    --border: #d0d0d8;
+    --bg-light: #f8f7f4;
+    --bg-box: #eef2f7;
+    --accent-blue: #1a4a8a;
+    --accent-teal: #0d7377;
+    --link: #1a4a8a;
+  }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    background: #fff;
+  }
+
+  /* ── HEADER ── */
+  .journal-header {
+    background: var(--bmj-red);
+    color: #fff;
+    padding: 10px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-align: center;
+  }
+  .journal-header span { opacity: .85; }
+
+  .article-label-bar {
+    background: var(--bmj-dark);
+    color: #e0e0f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: 6px 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── LAYOUT ── */
+  .page-wrap {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 36px 0;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    border-right: 2px solid var(--bmj-red);
+    padding-right: 20px;
+  }
+  .sidebar .sidebar-section { margin-bottom: 18px; }
+  .sidebar .sidebar-section strong {
+    display: block;
+    color: var(--text-primary);
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .sidebar a { color: var(--link); text-decoration: none; }
+  .sidebar a:hover { text-decoration: underline; }
+
+  /* ── MAIN CONTENT ── */
+  .main-content {}
+
+  /* Title block */
+  .article-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--bmj-dark);
+    margin-bottom: 14px;
+    border-bottom: 3px solid var(--bmj-red);
+    padding-bottom: 14px;
+  }
+
+  .authors {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+  .authors sup { font-size: 10px; color: var(--bmj-red); font-style: normal; }
+
+  .doi-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .doi-line a { color: var(--link); }
+
+  /* Open Access badge */
+  .oa-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff8e6;
+    border: 1px solid #f0c040;
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #7a5c00;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .06em;
+  }
+
+  /* ── ABSTRACT ── */
+  .abstract-block {
+    background: var(--bg-light);
+    border-left: 4px solid var(--bmj-red);
+    padding: 22px 26px;
+    margin-bottom: 28px;
+    border-radius: 0 6px 6px 0;
+  }
+  .abstract-block h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--bmj-red);
+    margin-bottom: 14px;
+  }
+  .abstract-section { margin-bottom: 12px; }
+  .abstract-section h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 4px;
+  }
+  .abstract-section p { font-size: 14px; line-height: 1.65; }
+
+  /* ── WHAT IS KNOWN BOXES ── */
+  .knowledge-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .knowledge-box {
+    border: 2px solid var(--accent-blue);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .knowledge-box.adds { border-color: var(--accent-teal); }
+  .knowledge-box h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 10px;
+  }
+  .knowledge-box.adds h3 { color: var(--accent-teal); }
+  .knowledge-box ul { padding-left: 16px; font-size: 13px; line-height: 1.6; }
+  .knowledge-box ul li { margin-bottom: 6px; }
+
+  /* ── BODY SECTIONS ── */
+  .section { margin-bottom: 30px; }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bmj-dark);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .section h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin: 16px 0 8px;
+  }
+  .section p { margin-bottom: 10px; font-size: 15px; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+  .table-caption {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--bmj-dark);
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    background: var(--bmj-dark);
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+  }
+  th {
+    background: var(--accent-blue);
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--bg-light); }
+  tr:hover td { background: #e8f0fb; }
+
+  .table-footnote {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* ── FIGURES ── */
+  .figure-block {
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .figure-block .fig-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--bmj-red);
+    margin-bottom: 10px;
+  }
+  .figure-block .fig-caption {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* Forest plot text representation */
+  .forest-plot {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px;
+    overflow-x: auto;
+  }
+  .forest-header {
+    display: grid;
+    grid-template-columns: 130px 80px 80px 1fr 60px 160px;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--accent-blue);
+    border-bottom: 2px solid var(--accent-blue);
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    font-size: 10px;
+    letter-spacing: .05em;
+  }
+  .forest-row {
+    display: grid;
+    grid-template-columns: 130px 80px 80px 1fr 60px 160px;
+    gap: 6px;
+    align-items: center;
+    padding: 3px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 11px;
+  }
+  .forest-row.total {
+    font-weight: 700;
+    background: #eef3fb;
+    padding: 5px 0;
+    border-top: 2px solid var(--accent-blue);
+  }
+  .bar-cell { position: relative; height: 18px; }
+  .bar-track {
+    position: absolute;
+    top: 8px; left: 0; right: 0;
+    height: 2px;
+    background: #ddd;
+  }
+  .bar-diamond {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px; height: 8px;
+    background: var(--accent-blue);
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .bar-ci {
+    position: absolute;
+    top: 50%;
+    height: 2px;
+    background: var(--accent-blue);
+    transform: translateY(-50%);
+  }
+  .bar-total-diamond {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px; height: 6px;
+    background: var(--bmj-red);
+    clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
+  }
+
+  /* PRISMA flow */
+  .prisma-flow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin: 16px 0;
+    line-height: 1.5;
+  }
+  .prisma-box {
+    border: 2px solid var(--accent-blue);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin: 8px auto;
+    width: fit-content;
+    min-width: 280px;
+    text-align: center;
+    background: #fff;
+    position: relative;
+  }
+  .prisma-box .prisma-num { font-weight: 700; color: var(--bmj-red); font-size: 15px; }
+  .prisma-box.side-box {
+    border-color: var(--text-muted);
+    background: var(--bg-light);
+    float: right;
+    min-width: 220px;
+    font-size: 11px;
+    text-align: left;
+    margin: 0 0 8px 16px;
+  }
+  .prisma-arrow {
+    text-align: center;
+    color: var(--accent-blue);
+    font-size: 18px;
+    margin: 2px 0;
+    clear: both;
+  }
+
+  /* Risk of bias bar */
+  .rob-bar {
+    display: flex;
+    height: 28px;
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+    margin: 8px 0;
+  }
+  .rob-low    { background: #2e7d32; color: #fff; display:flex; align-items:center; justify-content:center; }
+  .rob-some   { background: #f9a825; color: #333; display:flex; align-items:center; justify-content:center; }
+  .rob-high   { background: #c62828; color: #fff; display:flex; align-items:center; justify-content:center; }
+
+  /* ── REFERENCES ── */
+  .references-list {
+    list-style: none;
+    counter-reset: ref-counter;
+    font-size: 13px;
+    line-height: 1.55;
+    columns: 2;
+    gap: 20px;
+  }
+  .references-list li {
+    counter-increment: ref-counter;
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 8px;
+    break-inside: avoid;
+  }
+  .references-list li::before {
+    content: counter(ref-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--bmj-red);
+    font-weight: 600;
+    background: #fff0f0;
+    border-radius: 2px;
+    padding: 1px 4px;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  /* ── AUTHOR INFO BOX ── */
+  .author-info-box {
+    background: var(--bg-light);
+    border-top: 3px solid var(--bmj-dark);
+    padding: 20px 24px;
+    margin-top: 36px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .author-info-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--bmj-dark);
+  }
+  .affil-list { list-style: none; }
+  .affil-list li { padding: 3px 0; }
+  .affil-list li span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--bmj-red);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bmj-dark);
+    color: #aab;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-align: center;
+    padding: 18px 24px;
+    margin-top: 50px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 760px) {
+    .two-col { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 2px solid var(--bmj-red); padding-right: 0; padding-bottom: 16px; }
+    .knowledge-boxes { grid-template-columns: 1fr; }
+    .references-list { columns: 1; }
+    .forest-header, .forest-row { grid-template-columns: 110px 65px 65px 1fr 50px 130px; font-size: 9.5px; }
+  }
+
+  /* sup/sub */
+  sup, sub { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+  sup { top: -.4em; }
+  sub { bottom: -.25em; }
+
+  /* highlight */
+  .stat-highlight {
+    font-family: 'JetBrains Mono', monospace;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: .88em;
+    color: #5a3e00;
+  }
+</style>
+</head>
+<body>
+
+<!-- Journal header -->
+<div class="journal-header">
+  <span>THE BMJ &nbsp;|&nbsp; BMJ 2021;372:m4743 &nbsp;|&nbsp; doi: 10.1136/bmj.m4743 &nbsp;|&nbsp; OPEN ACCESS</span>
+</div>
+<div class="article-label-bar">
+  <span>RESEARCH ARTICLE</span>
+  <span>SYSTEMATIC REVIEW &amp; META-ANALYSIS</span>
+  <span>Published: 13 January 2021 &nbsp;|&nbsp; Accepted: 30 October 2020</span>
+</div>
+
+<div class="page-wrap">
+<div class="two-col">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <strong>Correspondence</strong>
+      B C Johnston<br>
+      <a href="mailto:bradley.johnston@tamu.edu">bradley.johnston@tamu.edu</a><br>
+      @methodsnerd (Twitter)<br>
+      ORCID 0000-0001-8872-8626
+    </div>
+    <div class="sidebar-section">
+      <strong>Additional material</strong>
+      Published online only. Visit the journal online.
+    </div>
+    <div class="sidebar-section">
+      <strong>Cite as</strong>
+      <em>BMJ</em> 2021;372:m4743<br>
+      <a href="http://dx.doi.org/10.1136/bmj.m4743">dx.doi.org/10.1136/bmj.m4743</a>
+    </div>
+    <div class="sidebar-section">
+      <strong>Registration</strong>
+      PROSPERO CRD42020161795
+    </div>
+    <div class="sidebar-section">
+      <strong>License</strong>
+      CC BY-NC 4.0
+    </div>
+    <div class="sidebar-section">
+      <strong>Data sharing</strong>
+      Available on request from corresponding author.
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main-content">
+
+    <div class="oa-badge">⊕ OPEN ACCESS</div>
+
+    <h1 class="article-title">
+      Efficacy and safety of low and very low carbohydrate diets for type 2 diabetes remission: systematic review and meta-analysis of published and unpublished randomized trial data
+    </h1>
+
+    <p class="authors">
+      Joshua Z Goldenberg,<sup>1,2</sup> Andrew Day,<sup>3</sup> Grant D Brinkworth,<sup>4</sup>
+      Junko Sato,<sup>5</sup> Satoru Yamada,<sup>6</sup> Tommy Jönsson,<sup>7</sup>
+      Jennifer Beardsley,<sup>8</sup> Jeffrey A Johnson,<sup>9</sup> Lehana Thabane,<sup>10,11</sup>
+      Bradley C Johnston<sup>1,10</sup>
+    </p>
+
+    <p class="doi-line">
+      <em>BMJ</em> 2021;372:m4743 &nbsp;|&nbsp;
+      doi: <a href="https://doi.org/10.1136/bmj.m4743">10.1136/bmj.m4743</a>
+    </p>
+
+    <!-- ── ABSTRACT ── -->
+    <div class="abstract-block">
+      <h2>Abstract</h2>
+
+      <div class="abstract-section">
+        <h3>Objective</h3>
+        <p>To determine the efficacy and safety of low carbohydrate diets (LCDs) and very low carbohydrate diets (VLCDs) for people with type 2 diabetes.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Design</h3>
+        <p>Systematic review and meta-analysis.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Data Sources</h3>
+        <p>Searches of CENTRAL, Medline, Embase, CINAHL, CAB, and grey literature sources from inception to 25 August 2020.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Study Selection</h3>
+        <p>Randomized clinical trials evaluating LCDs (&lt;130 g/day or &lt;26% of a 2000 kcal/day diet) and VLCDs (&lt;10% calories from carbohydrates) for at least 12 weeks in adults with type 2 diabetes were eligible.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Data Extraction</h3>
+        <p>Primary outcomes were remission of diabetes (HbA<sub>1c</sub> &lt;6.5% or fasting glucose &lt;7.0 mmol/L, with or without the use of diabetes medication), weight loss, HbA<sub>1c</sub>, fasting glucose, and adverse events. Secondary outcomes included health related quality of life and biochemical laboratory data. All articles and outcomes were independently screened, extracted, and assessed for risk of bias and GRADE certainty of evidence at six and 12 month follow-up. Risk estimates and 95% confidence intervals were calculated using random effects meta-analysis. Outcomes were assessed according to a priori determined minimal important differences to determine clinical importance, and heterogeneity was investigated on the basis of risk of bias and seven a priori subgroups. Any subgroup effects with a statistically significant test of interaction were subjected to a five point credibility checklist.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Results</h3>
+        <p>Searches identified 14,759 citations yielding 23 trials (1,357 participants), and 40.6% of outcomes were judged to be at low risk of bias. At six months, compared with control diets, LCDs achieved higher rates of diabetes remission (defined as HbA<sub>1c</sub> &lt;6.5%) (<span class="stat-highlight">76/133 (57%) v 41/131 (31%); risk difference 0.32, 95% CI 0.17 to 0.47; 8 studies, n=264, I²=58%</span>). Conversely, smaller, non-significant effect sizes occurred when a remission definition of HbA<sub>1c</sub> &lt;6.5% without medication was used. Subgroup assessments determined as meeting credibility criteria indicated that remission with LCDs markedly decreased in studies that included patients using insulin. At 12 months, data on remission were sparse, ranging from a small effect to a trivial increased risk of diabetes. Large clinically important improvements were seen in weight loss, triglycerides, and insulin sensitivity at six months, which diminished at 12 months. On the basis of subgroup assessments deemed credible, VLCDs were less effective than less restrictive LCDs for weight loss at six months. However, this effect was explained by diet adherence. That is, among highly adherent patients on VLCDs, a clinically important reduction in weight was seen compared with studies with less adherent patients on VLCDs. Participants experienced no significant difference in quality of life at six months but did experience clinically important, but not statistically significant, worsening of quality of life and low density lipoprotein cholesterol at 12 months. Otherwise, no significant or clinically important between group differences were found in terms of adverse events or blood lipids at six and 12 months.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Conclusions</h3>
+        <p>On the basis of moderate to low certainty evidence, patients adhering to an LCD for six months may experience remission of diabetes without adverse consequences. Limitations include continued debate around what constitutes remission of diabetes, as well as the efficacy, safety, and dietary satisfaction of longer term LCDs.</p>
+      </div>
+
+      <div class="abstract-section">
+        <h3>Systematic Review Registration</h3>
+        <p>PROSPERO CRD42020161795.</p>
+      </div>
+    </div><!-- /abstract -->
+
+    <!-- ── KNOWLEDGE BOXES ── -->
+    <div class="knowledge-boxes">
+      <div class="knowledge-box">
+        <h3>What Is Already Known on This Topic</h3>
+        <ul>
+          <li>Previous systematic reviews have used broad definitions of low carbohydrate (e.g., &lt;45% of calories from carbohydrates) and have not systematically assessed remission of diabetes</li>
+          <li>Results from reviews based on a subgroup of 10 randomized trials assessing low carbohydrate diets (LCDs) (&lt;26–45% of daily calories from carbohydrate) have been encouraging</li>
+        </ul>
+      </div>
+      <div class="knowledge-box adds">
+        <h3>What This Study Adds</h3>
+        <ul>
+          <li>This systematic review of the effect of LCDs on remission of type 2 diabetes included 23 trials, including unpublished HbA<sub>1c</sub> and medication use data from five trials</li>
+          <li>Compared with (mostly low fat) control diets, on the basis of moderate certainty evidence at six months, LCDs were associated with a large (32%) increase in remission of diabetes</li>
+          <li>According to a priori determined minimal important difference estimates, large and clinically important improvements in weight loss, triglycerides, and insulin resistance were also seen, without adverse events</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── INTRODUCTION ── -->
+    <div class="section">
+      <h2>Introduction</h2>
+      <p>Diabetes is a common, deadly, and expensive medical condition. It is estimated that 1 in 11 adults worldwide have diabetes and that it is responsible for 11% of deaths annually, costing $760bn (£570bn; €626bn) in direct costs alone.<sup>1</sup> Type 2 diabetes is the most common form of diabetes, accounting for 90–95% of cases, and for decades has been a rapidly growing international concern.<sup>2</sup> Type 2 diabetes is characterized by insulin resistance driven by chronic hyperglycemia and is commonly diagnosed by measures of glycemia such as fasting blood glucose concentrations of 7.0 mmol/L or above or glycated hemoglobin (HbA<sub>1c</sub>) values of 6.5% (48 mmol/mol) or above.<sup>3</sup> It is associated with several risk factors including genetics and lifestyle influences, but by far the most common risk factor is obesity.<sup>1</sup></p>
+      <p>Structured dietary interventions are commonly recommended for patients with diabetes, with varied recommendations from authoritative organizations.<sup>4</sup> Before the discovery of insulin, diets emphasizing carbohydrate restriction had been used extensively in the management of diabetes, but more recently they have fallen out of favor.<sup>5</sup> Because a key underlying mechanism of type 2 diabetes is insulin resistance driven in part by chronic hyperglycemia, lowering dietary intake of carbohydrate, most of which is absorbed as glucose or fructose, has been suggested to improve blood glucose control and outcomes of type 2 diabetes.<sup>6</sup> Structured diets with carbohydrate restriction have been variably described in the research literature but have been commonly grouped into three categories: 20–50 g/day carbohydrates or less than 10% of the 2000 kcal/day diet that is generally sufficient to induce ketosis; less than 130 g/day or less than 26% of the 2000 kcal/day diet; and less than 45% of the 2000 kcal/day diet.<sup>7,8</sup> For the purposes of this review, we refer to diets with less than 130 g/day or less than 26% of calories from carbohydrates based on 2000 kcal/day as a low carbohydrate diet (LCD).</p>
+      <p>Type 2 diabetes remains a significant and worsening problem worldwide, despite many pharmaceutical developments and a global emphasis on glycemic control.<sup>9</sup> Structured diets are recognized as an essential component of treating diabetes,<sup>10</sup> but confusion remains about which diet to choose.<sup>11</sup> Systematic reviews and meta-analyses to date have attempted to pool carbohydrate restricted diets for diabetic populations, reporting mixed results.<sup>12–14</sup> Among the limitations, as a whole, the systematic reviews and meta-analyses have included interventions with moderate carbohydrate intake that may dilute the effect of LCDs. Other limitations include an exclusive focus on surrogate outcomes (for example, blood lipids), with the largest systematic reviews and meta-analysis to date identifying only 10 trials that meet strict eligibility criteria of LCDs three months or more in length, limiting the certainty and precision in effect estimates.<sup>15</sup> Furthermore, no review to date has attempted to report the effect of LCDs on rates of remission of diabetes,<sup>16</sup> and no review has presented effect estimates with consideration of minimal important difference thresholds, thresholds that will assist patients and clinicians with interpreting the magnitude of treatment effects.<sup>17,18</sup> We aimed to systematically assess the efficacy, safety, and certainty of estimates for both surrogate outcomes and outcomes important to patients of strict LCDs for people with type 2 diabetes.</p>
+    </div>
+
+    <!-- ── METHODS ── -->
+    <div class="section">
+      <h2>Methods</h2>
+
+      <h3>Search Strategy and Selection Criteria</h3>
+      <p>On the basis of an a priori and publicly available protocol (PROSPERO CRD42020161795), we did a systematic review with meta-analysis of randomized controlled trials assessing the efficacy and safety of LCDs among adult patients with a diagnosis of type 2 diabetes. We included people with or without cardiovascular conditions regardless of medication use or glucose concentration and HbA<sub>1c</sub> level.</p>
+      <p>We included trials comparing LCDs with any wait list controls or any active controls including competing dietary programs higher in carbohydrates (≥26%), with or without exercise, lifestyle, and behavioral recommendations. No language, date, or publication restrictions were applied. We sought unpublished data from investigators of published and unpublished trials.</p>
+      <p>To meet inclusion criteria, studies had to investigate allocation to an LCD (&lt;26% calories from carbohydrates or &lt;130 g/day) for a defined period (12 weeks or longer), with or without exercise (for example, walking, jogging, strength training) or lifestyle and behavioral recommendations (for example, cognitive therapy, group support). Primary outcomes of interest, based on our a priori protocol,<sup>16</sup> were remission of type 2 diabetes (dichotomously defined as HbA<sub>1c</sub> &lt;6.5% or fasting glucose &lt;7.0 mmol/L), with or without the use of diabetes medication. Additional primary outcomes were weight loss, HbA<sub>1c</sub>, fasting glucose, and adverse events (total and serious adverse events). Secondary outcomes were health related quality of life, reduction of medication, and biochemical laboratory data including total cholesterol, low density lipoprotein cholesterol, high density lipoprotein cholesterol, triglycerides, homeostasis model assessment of insulin resistance (HOMA-IR), and inflammatory markers (C reactive protein).</p>
+      <p>We searched the following databases from inception to 25 August 2020: Cochrane Central Register of Controlled Trials (CENTRAL), Medline via PubMed, Embase, the Cumulative Index to Nursing and Allied Health Literature (CINAHL), and Commonwealth Agricultural Bureaux (CAB) abstracts. With the assistance of an expert clinical librarian, search strategies were customized, including the use of a Cochrane recommended filter for the identification of randomized controlled trials in PubMed.<sup>19</sup> On the basis of our study protocol, we also searched three trial registries (e.g., clinicaltrials.gov) and four additional grey literature sources (e.g., BIOSIS Citation Index, ProQuest Dissertations &amp; Theses Global).<sup>16</sup></p>
+      <p>Two authors, independently and in duplicate, screened titles and abstracts and subsequently full text articles. Disagreements were resolved by consensus.</p>
+
+      <h3>Data Analysis</h3>
+      <p>Data extraction was done independently and in duplicate using a pilot tested extraction form. Domains for extraction included study design factors, population, intervention, comparator, and surrogate and health outcomes. All outcomes were extracted and reported at six months (±3 months) and 12 months (±3 months). We used version 2.0 of the Cochrane Risk-of-Bias (RoB) instrument for randomized trials.<sup>20</sup></p>
+      <p>We used Revman software (version 5.3) and the "meta" package in R (version 3.6.1) to do meta-analyses. For dichotomous outcomes, we calculated the pooled risk difference, risk ratio, and number needed to treat for an additional beneficial outcome (NNT) with 95% confidence intervals. For continuous outcomes, we combined endpoint or change data. We calculated the pooled mean difference and/or standardized mean difference with corresponding 95% confidence intervals.</p>
+      <p>We rated the overall certainty (quality) of evidence for each of our outcomes by using the GRADE (Grading of Recommendations Assessment, Development and Evaluation) approach, wherein randomized trials began as high certainty evidence but could be rated down by one or more levels on the basis of five categories of limitations: risk of bias, inconsistency, indirectness, imprecision, and publication bias.<sup>25,26</sup></p>
+      <p>We assessed and reported heterogeneity quantitatively using the I² statistic and did a χ² test for homogeneity according to guidelines from the Cochrane Handbook (for example, 50% to 90% may represent substantial heterogeneity; 75% to 100% may represent considerable heterogeneity).<sup>30</sup></p>
+      <p>We investigated heterogeneity and the possibility of effect modification for our primary outcomes on the basis of risk of bias and seven a priori subgroups:<sup>16</sup> very low carbohydrate diets (VLCD) (&lt;10% calories from carbohydrates) versus diets with between 10% and 26% of calories from carbohydrates; trials that provided behavioral support versus those that did not; LCDs versus comparator diets; trials in which caloric intake did not significantly differ between groups (iso-caloric) versus those in which it did; LCD trials that used caloric restriction versus those that did not; trials that included patients who used insulin versus those that did not; and trials in which the intervention group showed adequate adherence versus those that did not.</p>
+
+      <h3>Patient and Public Involvement</h3>
+      <p>Given the nature of secondary data capture and analysis, patients and the public were not involved in the design or interpretation of this study.</p>
+    </div>
+
+    <!-- ── RESULTS ── -->
+    <div class="section">
+      <h2>Results</h2>
+      <p>Our search yielded 14,759 records, of which 23 studies (1,357 participants) met the inclusion criteria. Table 1 shows characteristics of the clinical trials. In short, trials primarily included overweight and obese patients with type 2 diabetes, with 14/23 (61%) studies including participants using insulin. Trial size ranged from 12 to 144 participants with a mean age range of 47 to 67 years. Studies used various carbohydrate restriction thresholds with 12/23 (52%) meeting our criteria for very low carbohydrate diets (&lt;10% daily calories from carbohydrates or &lt;50 g/d). Trials primarily used low fat diets as control comparators (18/23; 78%). Duration of treatment ranged from three months to two years. Dropouts were common in the included studies. Eighteen (78%) of 23 studies reported missing participant outcome data, with 10 reporting more than 20% of data being missing. Overall, 59.4% of outcomes were rated as having some concern or high risk of bias, and 40.6% of outcomes were rated as having low risk of bias.</p>
+
+      <!-- PRISMA FLOW -->
+      <div class="figure-block">
+        <div class="fig-title">Fig 1 | PRISMA Study Flow</div>
+        <div class="prisma-flow">
+          <div style="display:flex; gap:20px; align-items:flex-start;">
+            <div style="flex:1;">
+              <div class="prisma-box"><span class="prisma-num">18,543</span><br>Records identified through database searching</div>
+              <div class="prisma-arrow">↓</div>
+              <div class="prisma-box"><span class="prisma-num">14,759</span><br>Records screened after duplicates removed</div>
+              <div class="prisma-arrow">↓</div>
+              <div class="prisma-box"><span class="prisma-num">173</span><br>Full text articles assessed for eligibility</div>
+              <div class="prisma-arrow">↓</div>
+              <div class="prisma-box"><span class="prisma-num">23</span><br>Studies included in qualitative synthesis</div>
+              <div class="prisma-arrow">↓</div>
+              <div class="prisma-box"><span class="prisma-num">23</span><br>Studies included in quantitative synthesis (meta-analysis)</div>
+            </div>
+            <div style="padding-top:60px;">
+              <div class="prisma-box side-box"><strong>835</strong> Additional records from other sources</div>
+              <div style="margin-top: 30px;"></div>
+              <div class="prisma-box side-box"><strong>14,586</strong> Records excluded</div>
+              <div style="margin-top: 30px;"></div>
+              <div class="prisma-box side-box"><strong>113</strong> Full text articles excluded<br>· Wrong population: 32<br>· Wrong intervention: 61<br>· Wrong comparator: 2<br>· Wrong outcome: 1<br>· Wrong study design: 12<br>· No completed trial data: 5</div>
+            </div>
+          </div>
+        </div>
+        <p class="fig-caption">PRISMA flow diagram showing study selection process from 14,759 initial citations to 23 included trials.</p>
+      </div>
+
+      <!-- Risk of bias figure -->
+      <div class="figure-block">
+        <div class="fig-title">Fig 2 | Risk of Bias by Outcome (Percentage)</div>
+        <div style="font-size:13px; margin-bottom:10px;">Percentage across five bias domains (intention to treat basis):</div>
+        <div style="font-size:13px; margin-bottom:6px;"><strong>Overall bias:</strong></div>
+        <div class="rob-bar">
+          <div class="rob-low" style="width:40.6%">Low 40.6%</div>
+          <div class="rob-some" style="width:42%">Some Concerns 42%</div>
+          <div class="rob-high" style="width:17.4%">High 17.4%</div>
+        </div>
+        <div style="font-size:13px; margin:8px 0 4px;"><strong>Randomization process</strong> (poorest reporting domain — ~40% "some concerns"):</div>
+        <div class="rob-bar">
+          <div class="rob-low" style="width:32%">Low 32%</div>
+          <div class="rob-some" style="width:42%">Some Concerns ~42%</div>
+          <div class="rob-high" style="width:26%">High ~26%</div>
+        </div>
+        <p class="fig-caption">Risk of bias assessed using Cochrane RoB 2.0 instrument. The randomization process domain had the poorest reporting.</p>
+      </div>
+
+      <p>Eight studies reported on remission of diabetes at six months.<sup>34–41</sup> Pooled analysis showed that when remission was defined by an HbA<sub>1c</sub> level below 6.5% independent of medication use, LCDs increased remissions by an additional <span class="stat-highlight">32 per 100 patients followed (risk difference 0.32, 95% CI 0.17 to 0.47; 8 studies, n=264; GRADE=moderate)</span>. When remission was defined by an HbA<sub>1c</sub> level below 6.5% and the absence of diabetes medication, LCDs increased remissions at a lower rate <span class="stat-highlight">(risk difference 0.05, –0.05 to 0.14; 5 studies, n=199; GRADE=low)</span>. Three studies reported on remission at 12 months.<sup>35,39,41</sup> When remission was defined independently of medication use, LCDs increased remission <span class="stat-highlight">(risk difference 0.10, –0.02 to 0.21; 3 studies, n=171; GRADE=moderate)</span>, but they lowered the remission rate when the definition of remission included absence of diabetes medication <span class="stat-highlight">(risk difference –0.04, –0.16 to 0.09; 2 studies, n=126; GRADE=low)</span>.</p>
+
+      <!-- Forest plot Fig 3 -->
+      <div class="figure-block">
+        <div class="fig-title">Fig 3 | Remission (HbA<sub>1c</sub> &lt;6.5%) at Six Months</div>
+        <div class="forest-plot">
+          <div class="forest-header">
+            <span>Study / Subgroup</span>
+            <span>Exp (n/N)</span>
+            <span>Ctrl (n/N)</span>
+            <span style="text-align:center;">← Control &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Experimental →</span>
+            <span>Wt (%)</span>
+            <span>RD, IV, random (95% CI)</span>
+          </div>
+          <div class="forest-row"><span>Dyson 2010</span><span>3/6</span><span>1/6</span><span></span><span>6.5</span><span>0.33 (–0.17, 0.83)</span></div>
+          <div class="forest-row"><span>Jönsson 2009</span><span>6/6</span><span>3/6</span><span></span><span>8.3</span><span>0.50 (0.08, 0.92)</span></div>
+          <div class="forest-row"><span>Morris 2019</span><span>11/21</span><span>0/12</span><span></span><span>15.0</span><span>0.52 (0.29, 0.76)</span></div>
+          <div class="forest-row"><span>Saslow 2014</span><span>8/9</span><span>5/13</span><span></span><span>10.8</span><span>0.50 (0.17, 0.84)</span></div>
+          <div class="forest-row"><span>Saslow 2017</span><span>6/11</span><span>0/8</span><span></span><span>11.4</span><span>0.55 (0.23, 0.86)</span></div>
+          <div class="forest-row"><span>Sato 2017</span><span>4/22</span><span>0/27</span><span></span><span>18.2</span><span>0.18 (0.01, 0.35)</span></div>
+          <div class="forest-row"><span>Tay 2014</span><span>36/46</span><span>30/47</span><span></span><span>17.5</span><span>0.14 (–0.04, 0.33)</span></div>
+          <div class="forest-row"><span>Yamada 2014</span><span>2/12</span><span>2/12</span><span></span><span>12.2</span><span>0.00 (–0.30, 0.30)</span></div>
+          <div class="forest-row total"><span>Total (95% CI)</span><span>76/133</span><span>41/131</span><span style="text-align:center;font-size:14px;color:var(--bmj-red);">◆</span><span>100.0</span><span style="font-weight:700;color:var(--bmj-red);">0.32 (0.17, 0.47)</span></div>
+          <div style="font-size:11px; margin-top:6px; color:var(--text-muted);">Test for heterogeneity: τ²=0.02; χ²=16.50, df=7, P=0.02; I²=58%<br>Test for overall effect: Z=4.15, P&lt;0.001</div>
+        </div>
+        <p class="fig-caption">Forest plot showing remission (HbA<sub>1c</sub> &lt;6.5%) at 6 months. LCDs achieved significantly higher remission rates compared with control diets (57% vs 31%).</p>
+      </div>
+
+      <p>Eighteen studies reported on weight loss at six months.<sup>34–50,56</sup> Pooled analysis showed that patients on LCDs achieved greater weight loss compared with control <span class="stat-highlight">(mean difference –3.46, 95% CI –5.25 to –1.67; n=882; GRADE=moderate)</span>. In studies at low risk of bias, LCDs achieved <span class="stat-highlight">7.41 kg</span> greater weight loss compared with controls (mean difference –7.41, –9.75 to –5.08; 6 studies, n=171; test for subgroup differences P&lt;0.001). Seven studies reported on weight loss at 12 months, with pooled analysis showing that any benefit over control diets was trivial and non-significant <span class="stat-highlight">(mean difference 0.29 (–1.02 to 1.60) kg; n=499; GRADE=moderate)</span>.</p>
+      <p>Seventeen studies reported on HbA<sub>1c</sub> levels at six months. LCDs achieved greater reductions in HbA<sub>1c</sub> than did control diets <span class="stat-highlight">(mean difference –0.47%, –0.60 to –0.34; n=747; GRADE=high)</span>. At 12 months, eight studies reported on HbA<sub>1c</sub> levels, showing that the effect size had decreased by around half <span class="stat-highlight">(mean difference –0.23%, –0.46% to 0.00%; n=489; GRADE=moderate)</span>.</p>
+      <p>Fourteen studies reported on fasting glucose at six months. Pooled analysis showed that LCDs achieved an average <span class="stat-highlight">0.73 mmol/L</span> greater reduction in glucose concentrations compared with control diets <span class="stat-highlight">(mean difference –0.73, –1.19 to –0.27; n=611; GRADE=moderate)</span>. Six studies reported on fasting glucose at 12 months, with little or no difference observed between the comparator diets <span class="stat-highlight">(mean difference 0.06, –0.37 to 0.48; n=365; GRADE=moderate)</span>.</p>
+      <p>Eleven studies reported total adverse events or serious adverse events at six months. Pooled analysis suggested a trivial and non-significant increase in total adverse events among patients on LCDs <span class="stat-highlight">(risk difference 0.04, –0.01 to 0.08; 9 studies, n=423; GRADE=very low)</span> and similarly little or no effect on serious adverse events <span class="stat-highlight">(risk difference 0.00, –0.03 to 0.02; 8 studies, n=448; GRADE=low)</span>.</p>
+    </div>
+
+    <!-- ── TABLE 1 ── -->
+    <div class="section">
+      <div class="table-wrap">
+        <div class="table-caption">Table 1 | Characteristics of Included Trials</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Trial</th>
+              <th>BMI; HbA<sub>1c</sub> Range; Insulin?</th>
+              <th>Mean Age (yrs); % Female</th>
+              <th>Carbohydrate Intake; Caloric Restriction; Behavioral Support</th>
+              <th>Comparator</th>
+              <th>Adherence</th>
+              <th>Missing Data</th>
+              <th>Duration (months)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dyson et al (2010)</td><td>BMI &gt;25; no insulin (n=12)</td><td>54</td><td>&lt;40 g/d; calorically restricted; intense behavioral support</td><td>Low fat</td><td>Adequate</td><td>17%</td><td>3</td></tr>
+            <tr><td>Morris et al (2019)</td><td>BMI &gt;30; no insulin (n=33)</td><td>69/64; 55% female</td><td>&lt;26% carbohydrate/d; calorically restricted</td><td>Low fat</td><td>Adequate</td><td>0%</td><td>3</td></tr>
+            <tr><td>Saslow et al (2014)*</td><td>BMI ≥25; no insulin (n=34)</td><td>65/55; 74% female</td><td>Very low carbohydrate, high fat, non calorie-restricted diet; intense behavioral support</td><td>Low fat; iso-caloric</td><td>Adequate</td><td>11%</td><td>12</td></tr>
+            <tr><td>Saslow et al (2017)</td><td>BMI ≥25; no insulin (n=25)</td><td>53/58; 56% female</td><td>20–50 g/d</td><td>Low fat; iso-caloric</td><td>Adequate</td><td>24%</td><td>8</td></tr>
+            <tr><td>Yamada et al (2014)</td><td>Includes insulin (n=24)</td><td>63/63; 50% female</td><td>70–130 g/d</td><td>Low fat; iso-caloric</td><td>Adequate</td><td>0%</td><td>6</td></tr>
+            <tr><td>Tay et al (2014)</td><td>BMI 26–45; HbA<sub>1c</sub> ≥7.0%; includes insulin (n=131)</td><td>58/58; 37% female</td><td>50–70 g/d target; calorically restricted; intense behavioral support</td><td>Low glycemic index; iso-caloric</td><td>Adequate</td><td>29%</td><td>24</td></tr>
+            <tr><td>Jönsson et al (2009)</td><td>HbA<sub>1c</sub> &gt;5.5%; no insulin (n=17)</td><td>66/63; 24% female</td><td>&lt;130 g/d</td><td>Low fat</td><td>Adequate</td><td>18%</td><td>6 (crossover)</td></tr>
+            <tr><td>Sato et al (2017)</td><td>BMI &gt;23; HbA<sub>1c</sub> &gt;7.5%; includes insulin (n=66)</td><td>61/58; 23% female</td><td>130 g/d target</td><td>Low fat</td><td>Adequate</td><td>6%</td><td>6</td></tr>
+            <tr><td>Goldstein et al (2011)</td><td>BMI 30–40; HbA<sub>1c</sub> &gt;7%; no insulin (n=52)</td><td>57/55; 48% female</td><td>25–40 g/d; intense behavioral support</td><td>Low fat (ADA 2000); iso-caloric</td><td>VLCD adherent</td><td>42%</td><td>12</td></tr>
+            <tr><td>Guldbrand et al (2012)</td><td>Includes insulin (n=61)</td><td>61/62; 56% female</td><td>20%; calorically restricted</td><td>Low fat; iso-caloric</td><td>Adequate</td><td>0%</td><td>24</td></tr>
+            <tr><td>Iqbal et al (2010)</td><td>BMI ≥30; includes insulin (n=144)</td><td>60/60; 11% female</td><td>&lt;30 g/d; intense behavioral support</td><td>Low fat</td><td>Not adequate</td><td>47%</td><td>24</td></tr>
+            <tr><td>Nishimori et al (2018)</td><td>NAFLD; includes insulin (n=28)</td><td>49/50; 36% female</td><td>70–130 g/d</td><td>Low fat; iso-caloric</td><td>Adequate</td><td>0%</td><td>3</td></tr>
+            <tr><td>Vlachos et al (2011)</td><td>BMI &gt;30; includes insulin (n=79)</td><td>NA</td><td>Low-carbohydrate and protein sparing modified fast; calorically restricted</td><td>Low glycemic</td><td>NA</td><td>22%</td><td>6</td></tr>
+            <tr><td>Westman et al (2008)</td><td>BMI 27–50; includes insulin (n=97)</td><td>52/52; 78% female</td><td>&lt;20 g/d; intense behavioral support</td><td>Low glycemic; iso-caloric</td><td>Adequate</td><td>48%</td><td>6</td></tr>
+            <tr><td>Zadeh et al (2018)</td><td>BMI 30–38; includes insulin (n=42)</td><td>46.5</td><td>20%; intense behavioral support; calorically restricted</td><td>Low fat; high fat; moderate fat; probably iso-caloric</td><td>NA</td><td>7%</td><td>6</td></tr>
+            <tr><td>Daly et al (2006)</td><td>Obese, poorly controlled T2D; includes insulin (n=102)</td><td>58/59; 52% female</td><td>&lt;70 g/d</td><td>Low fat; iso-caloric</td><td>Adequate</td><td>23%</td><td>3</td></tr>
+            <tr><td>Davis et al (2009)</td><td>BMI &gt;25; A1C 6–11%; includes insulin (n=105)</td><td>54/53; 50% female</td><td>20–25 g/d × 2 weeks + 5 g/wk; calorically restricted</td><td>Low fat; iso-caloric</td><td>VLCD adherent</td><td>20%</td><td>12</td></tr>
+            <tr><td>Yancy et al (2010)</td><td>BMI 27–30+; includes insulin (n=46)</td><td>57/55; 13% female</td><td>≤20 g/d; intense behavioral support</td><td>Low fat + orlistat</td><td>Adequate</td><td>11%</td><td>12</td></tr>
+            <tr><td>Samaha et al (2003)</td><td>BMI &gt;35; includes insulin (n=52)</td><td>NA</td><td>&lt;30 g/d; intense behavioral support</td><td>Low fat</td><td>NA</td><td>42%</td><td>12</td></tr>
+            <tr><td>Shai et al (2008)</td><td>BMI ≥27 or coronary heart disease; includes insulin (n=46)</td><td>NA</td><td>20 g/d × 2 months with gradual increase to maximum 120 g/d</td><td>Low fat; Mediterranean</td><td>NA</td><td>22%</td><td>24</td></tr>
+            <tr><td>Lee et al (2013)</td><td>BMI 30–65 (n=105)</td><td>NA</td><td>&lt;70 g/d</td><td>Low fat</td><td>NA</td><td>25%</td><td>6</td></tr>
+            <tr><td>Breukelman et al (2019)</td><td>BMI 38.9 (mean) (n=39)</td><td>55/58; 60% female</td><td>&lt;50 g/d</td><td>No treatment control</td><td>NA</td><td>10%</td><td>4</td></tr>
+            <tr><td>Perna et al (2019)</td><td>BMI 24.9–34.9; A<sub>1c</sub> ≤7.5% taking metformin; no insulin (n=17)</td><td>59.5/67.8; 65% female</td><td>&lt;125 g/d; calorically restricted</td><td>"Standard" calorically restricted + metformin</td><td>NA</td><td>0%</td><td>3</td></tr>
+          </tbody>
+        </table>
+        <p class="table-footnote">ADA=American Diabetes Association; BMI=body mass index; HbA<sub>1c</sub>=glycated hemoglobin; NA=not available; NAFLD=non-alcoholic fatty liver disease; T2D=type 2 diabetes; VLCD=very low calorie diet.<br>
+        *Saslow 2014 met inclusion criteria but included 4/34 randomized participants who had pre-diabetes, not type 2 diabetes (&gt;88% diabetic population). Contact with authors for diabetes specific data was unsuccessful.</p>
+      </div>
+    </div>
+
+    <!-- ── TABLE 2 ── -->
+    <div class="section">
+      <div class="table-wrap">
+        <div class="table-caption">Table 2 | Summary of Findings for Primary Outcomes</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Outcomes</th>
+              <th>Risk with Control</th>
+              <th>Risk with LCD (95% CI)</th>
+              <th>Relative Effect (95% CI)</th>
+              <th>No. Participants (Studies)</th>
+              <th>Certainty (GRADE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Remission (HbA<sub>1c</sub> &lt;6.5%) at 6 months</td><td>31 per 100</td><td>59 (37 to 93) per 100</td><td>RR 1.87 (1.18 to 2.97)</td><td>264 (8 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>Remission (HbA<sub>1c</sub> &lt;6.5% + no diabetes medication) at 6 months</td><td>13 per 100</td><td>16 (9 to 32) per 100</td><td>RR 1.24 (0.65 to 2.38)</td><td>199 (5 RCTs)</td><td>Low</td></tr>
+            <tr><td>Remission (HbA<sub>1c</sub> &lt;6.5%) at 12 months</td><td>38 per 100</td><td>49 (38 to 63) per 100</td><td>RR 1.27 (0.99 to 1.64)</td><td>171 (3 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>Remission (HbA<sub>1c</sub> &lt;6.5% + no diabetes medication) at 12 months</td><td>16 per 100</td><td>13 (6 to 27) per 100</td><td>RR 0.79 (0.36 to 1.73)</td><td>126 (2 RCTs)</td><td>Low</td></tr>
+            <tr><td>Weight loss at 6 months</td><td>—</td><td>MD 3.46 kg lower (5.25 lower to 1.67 lower)</td><td>—</td><td>882 (18 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>Weight loss at 12 months</td><td>—</td><td>MD 0.29 kg higher (1.02 lower to 1.6 higher)</td><td>—</td><td>499 (7 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>HbA<sub>1c</sub> at 6 months</td><td>—</td><td>MD 0.47% lower (0.60 lower to 0.34 lower)</td><td>—</td><td>747 (17 RCTs)</td><td><strong>High</strong></td></tr>
+            <tr><td>HbA<sub>1c</sub> at 12 months</td><td>—</td><td>MD 0.23% lower (0.46 lower to 0)</td><td>—</td><td>489 (8 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>Fasting glucose at 6 months</td><td>—</td><td>MD 0.73 mmol/L lower (1.19 lower to 0.27 lower)</td><td>—</td><td>611 (14 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>Fasting glucose at 12 months</td><td>—</td><td>MD 0.06 mmol/L higher (0.37 lower to 0.48 higher)</td><td>—</td><td>365 (6 RCTs)</td><td>Moderate</td></tr>
+            <tr><td>Adverse events at 6 months</td><td>5 per 100</td><td>8 (4 to 15) per 100</td><td>RR 1.55 (0.76 to 3.15)</td><td>423 (9 RCTs)</td><td>Very Low</td></tr>
+            <tr><td>Serious adverse events at 6 months</td><td>2 per 100</td><td>1 (0 to 8) per 100</td><td>RR 0.79 (0.14 to 4.47)</td><td>448 (8 RCTs)</td><td>Low</td></tr>
+            <tr><td>Adverse events at 12 months</td><td>24 per 100</td><td>18 (10 to 32) per 100</td><td>RR 0.72 (0.39 to 1.33)</td><td>156 (2 RCTs)</td><td>Very Low</td></tr>
+            <tr><td>Serious adverse events at 12 months</td><td>4 per 100</td><td>3 (0 to 22) per 100</td><td>RR 0.78 (0.10 to 6.13)</td><td>217 (3 RCTs)</td><td>Very Low</td></tr>
+          </tbody>
+        </table>
+        <p class="table-footnote">HbA<sub>1c</sub>=glycated hemoglobin; MD=mean difference; RCT=randomized controlled trial; RD=risk difference; RR=risk ratio.<br>
+        See full manuscript for GRADE footnotes (a–l) detailing reasons for rating down certainty of evidence.</p>
+      </div>
+    </div>
+
+    <!-- ── TABLE 3 ── -->
+    <div class="section">
+      <div class="table-wrap">
+        <div class="table-caption">Table 3 | Secondary Outcomes</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Outcome</th>
+              <th>Endpoint</th>
+              <th>Participants (Studies)</th>
+              <th>Effect Estimate (95% CI)</th>
+              <th>Clinically Important? (≥MCID)</th>
+              <th>GRADE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Quality of life — diabetes specific (DDS and PAID)</td><td>6 months</td><td>169 (4 studies)</td><td>SMD –0.63 (–1.41 to 0.16)</td><td>NA</td><td>Low</td></tr>
+            <tr><td>Quality of life — diabetes specific (PAID, converted)</td><td>6 months</td><td>169 (4 studies)</td><td>MD –0.97 (–2.68 to 0.73)</td><td>No (MCID=1)</td><td>Low</td></tr>
+            <tr><td>Quality of life — diabetes specific (PAID, converted)</td><td>12 months</td><td>116 (1 study)</td><td>MD 3.10 (–2.03 to 8.23)</td><td><strong>Yes (harm)</strong></td><td>Low</td></tr>
+            <tr><td>Medication reduction (participants who reduced diabetes medication)</td><td>6 months</td><td>240 (7 studies)</td><td>RD 0.24 (0.12 to 0.35)</td><td>NA</td><td>Moderate</td></tr>
+            <tr><td>Medication reduction</td><td>12 months</td><td>148 (3 studies)</td><td>RD 0.33 (–0.00 to 0.66)</td><td>NA</td><td>Low</td></tr>
+            <tr><td>Total cholesterol (mmol/L)</td><td>6 months</td><td>576 (12 studies)</td><td>MD –0.10 (–0.41 to 0.20)</td><td>No (MCID=0.26)</td><td>Moderate</td></tr>
+            <tr><td>Total cholesterol (mmol/L)</td><td>12 months</td><td>430 (6 studies)</td><td>MD 0.11 (–0.05 to 0.27)</td><td>No (MCID=0.26)</td><td>Moderate</td></tr>
+            <tr><td>LDL cholesterol (mmol/L)</td><td>6 months</td><td>672 (15 studies)</td><td>MD 0.02 (–0.09 to 0.12)</td><td>No (MCID=0.10)</td><td>High</td></tr>
+            <tr><td>LDL cholesterol (mmol/L)</td><td>12 months</td><td>429 (6 studies)</td><td>MD 0.14 (–0.00 to 0.28)</td><td><strong>Yes (harm)</strong></td><td>Moderate</td></tr>
+            <tr><td>HDL cholesterol (mmol/L)</td><td>6 months</td><td>647 (16 studies)</td><td>MD 0.06 (0.01 to 0.10)</td><td>No (MCID=0.10)</td><td>High</td></tr>
+            <tr><td>HDL cholesterol (mmol/L)</td><td>12 months</td><td>458 (7 studies)</td><td>MD 0.04 (–0.00 to 0.08)</td><td>No (MCID=0.10)</td><td>High</td></tr>
+            <tr><td>Triglycerides (mmol/L)</td><td>6 months</td><td>860 (19 studies)</td><td>MD –0.30 (–0.43 to –0.17)</td><td><strong>Yes (benefit)</strong></td><td>High</td></tr>
+            <tr><td>Triglycerides (mmol/L)</td><td>12 months</td><td>459 (7 studies)</td><td>MD –0.32 (–0.51, –0.12)</td><td><strong>Yes (benefit)</strong></td><td>High</td></tr>
+            <tr><td>Insulin resistance (HOMA-IR)</td><td>6 months</td><td>241 (6 studies)</td><td>MD –0.14 (–0.51 to 0.23)</td><td><strong>Yes (benefit)</strong> (MCID=0.05)</td><td>Very Low</td></tr>
+            <tr><td>Insulin resistance (HOMA-IR)</td><td>12 months</td><td>135 (2 studies)</td><td>MD –0.13 (–0.39 to 0.13)</td><td><strong>Yes (benefit)</strong> (MCID=0.05)</td><td>Very Low</td></tr>
+            <tr><td>Inflammation (C reactive protein, mg/L)</td><td>6 months</td><td>359 (7 studies)</td><td>MD 0.16 (–0.27 to 0.59)</td><td>No (MCID=0.5)</td><td>Moderate</td></tr>
+            <tr><td>Inflammation (C reactive protein, mg/L)</td><td>12 months</td><td>141 (2 studies)</td><td>MD 0.37 (–0.44 to 1.18)</td><td>No (MCID=0.5)</td><td>Very Low</td></tr>
+          </tbody>
+        </table>
+        <p class="table-footnote">DDS=diabetes distress scale; HDL=high density lipoprotein; HOMA-IR=homeostasis model assessment of insulin resistance; LDL=low density lipoprotein; MCID=minimal clinically important difference; MD=mean difference; NA=not available; PAID=problem areas in diabetes; RD=risk difference; SMD=standardized mean difference.</p>
+      </div>
+    </div>
+
+    <!-- ── DISCUSSION ── -->
+    <div class="section">
+      <h2>Discussion</h2>
+      <p>Among 23 studies comparing LCDs with mostly low fat control diets in patients with type 2 diabetes, on the basis of moderate to low certainty evidence, patients on LCDs achieved higher diabetes remission rates at six months (HbA<sub>1c</sub> &lt;6.5%: NNT=3; HbA<sub>1c</sub> &lt;6.5% and no diabetes medication: NNT=20). On the basis of very low to high certainty evidence, no statistically significant and clinically important detrimental effects on cardiovascular risk factors (for example, lipids, C reactive protein) or adverse events were detected with LCDs. However, we observed a trend for clinically important increases in low density lipoprotein cholesterol at 12 months. Additionally, LCDs increased weight loss, reduced medication use, and improved triglyceride concentrations at six months. In general, most benefits diminished at 12 months, a finding consistent with previous reviews.<sup>15,57</sup></p>
+
+      <h3>Sensitivity and Subgroup Analyses</h3>
+      <p>We did sensitivity analyses based on risk of bias for all outcomes, but only one outcome, weight loss, showed a credible subgroup effect between studies with higher and lower risk of bias. Studies with lower risk of bias showed more dramatic increases in weight loss, findings that were both statistically and clinically significant.</p>
+      <p>Subgroup analyses, based on credibility testing,<sup>16,27</sup> suggested that patients not using insulin, compared with those that did, had increased diabetes remission rates at six months. For patients not using insulin, the NNT was 2 for remission defined as HbA<sub>1c</sub> below 6.5% and 5 for remission defined as HbA<sub>1c</sub> below 6.5 without diabetes medication. Furthermore, on the basis of our subgroup testing, VLCDs underperformed compared with less restrictive LCDs for weight loss at six months. However, this difference was negated when we considered patients highly adherent to VLCDs.</p>
+
+      <h3>Strengths of Study</h3>
+      <p>Our systematic review has several important strengths. Firstly, we did a thorough literature search and contacted authors of all studies for any unpublished data on remission of diabetes. Although only three included studies previously published HbA<sub>1c</sub> threshold criteria and medication use to determine diabetes remission, our successful contact with authors yielded trial data from five additional studies to determine remission rates, increasing the precision and overall certainty of the effect estimates.</p>
+      <p>Secondly, on the basis of a publicly available protocol,<sup>16</sup> we used robust evidence synthesis methods including the use of Cochrane's Risk of Bias instrument 2.0,<sup>20</sup> missing participant outcome data sensitivity analyses,<sup>24</sup> and subgroup credibility assessments based on a priori stated effect modifiers.<sup>31</sup></p>
+      <p>Thirdly, our use of GRADE for rating the certainty of evidence was confirmed through a sensitivity analysis comparing GRADE ratings with NutriGRADE ratings. NutriGRADE analysis resulted in 16/30 (53%) outcomes with the same rating as GRADE; 10 (33%) of outcomes were upgraded and 4 (13%) were downgraded. Overall, the certainty of evidence using NutriGRADE indicates, on average, a higher degree of confidence in the efficacy and safety of LCDs across outcomes.</p>
+      <p>Fourthly, our interpretations of estimates for continuous outcomes were based on a priori estimates of the minimal clinically important differences. To our knowledge, no previous review on this topic has attempted to present effect estimates while considering MCID thresholds.</p>
+
+      <h3>Limitations of Study</h3>
+      <p>Our study is not without limitations. Firstly, the definition of remission of diabetes is the subject of considerable debate, specifically with regards to threshold levels of HbA<sub>1c</sub>/fasting glucose, use of diabetes medication, and the length of follow-up time meeting these criteria.<sup>60</sup></p>
+      <p>Secondly, safety concerns have been raised with LCDs.<sup>68</sup> Although no significant or clinically important increase in total or serious adverse events was identified, these outcomes were poorly reported among trials and the certainty of evidence for safety ranges from low to very low. One exception was low density lipoprotein cholesterol concentrations at 12 months' follow-up, which seemed to worsen, surpassing the MCID.</p>
+      <p>Thirdly, 18/23 (78%) studies used low fat diets as a comparator, limiting the applicability of our results to other dietary regimens such as a Mediterranean-style diet.</p>
+      <p>Fourthly, an important concern with LCDs is the potential confounding factor of caloric restriction. Restricting carbohydrates, which tends to reduce hunger,<sup>69</sup> would mean that whether any purported benefit was due to carbohydrate restriction or caloric restriction was unclear. On the basis of 18 studies providing adequate data, we identified no evidence of credible effect modification based on caloric matching or lack thereof.</p>
+      <p>Fifthly, we made a pragmatic a priori decision to assess our endpoints at six and 12 months (±3 months). Evidence suggested larger treatment effects for LCDs in shorter term trials (3 to &lt;6 months), suggesting that shorter term trials may be an effect modifier.</p>
+      <p>Sixthly, our protocol driven results are limited to short term markers of remission of diabetes, adverse events, and related cardiometabolic outcomes. Future long term, well designed, calorie controlled randomized trials are needed to determine the effects of LCD on sustained weight loss and remission of diabetes, as well as cardiovascular mortality and major morbidity.</p>
+      <p>Finally, the limited number of trials allowing patients to reduce their medication use impeded our ability to assess remission of diabetes when defined as HbA<sub>1c</sub> below 6.5% without diabetes medication. Only 7/23 (30%) of eligible trials permitted reduction of medication and reported usable medication data. Future trials should allow for, and adequately report on, reduction of medication while closely monitoring blood glucose concentrations.<sup>58</sup></p>
+    </div>
+
+    <!-- ── CONCLUSIONS ── -->
+    <div class="section">
+      <h2>Conclusions</h2>
+      <p>Moderate to low certainty evidence suggests that patients adhering to LCDs for six months may experience greater rates of remission of diabetes without adverse consequences compared with other diets commonly recommended for management of type 2 diabetes (for example, low fat diets). These benefits diminished at 12 months, and, although LCDs seem to improve triglycerides in a clinically meaningful way, some evidence shows clinical worsening of quality of life and low density lipoprotein cholesterol. Considering this and a recent systematic review of cohort studies suggesting that long term LCDs are associated with increased mortality,<sup>73</sup> clinicians might consider short term LCDs for management of type 2 diabetes, while actively monitoring and adjusting diabetes medication as needed.</p>
+    </div>
+
+    <!-- ── AUTHOR AFFILIATIONS ── -->
+    <div class="author-info-box">
+      <h3>Author Affiliations</h3>
+      <ol class="affil-list">
+        <li><span>1</span>Department of Nutrition, Texas A&amp;M University, College Station, TX, USA</li>
+        <li><span>2</span>Helfgott Research Institute, National University of Natural Medicine, Portland, OR, USA</li>
+        <li><span>3</span>Day Family Medicine, Poulsbo, WA, USA</li>
+        <li><span>4</span>Commonwealth Scientific and Industrial Research Organisation (CSIRO) — Health and Biosecurity, Sydney, NSW, Australia</li>
+        <li><span>5</span>Department of Metabolism and Endocrinology, Juntendo University Graduate School of Medicine, Tokyo, Japan</li>
+        <li><span>6</span>Diabetes Center, Kitasato Institute Hospital, Kitasato University, Tokyo, Japan</li>
+        <li><span>7</span>Center for Primary Health Care Research, Lund University/Region Skåne, Skåne University Hospital, Malmö, Sweden</li>
+        <li><span>8</span>Independent research librarian, Seattle, WA, USA</li>
+        <li><span>9</span>School of Public Health, University of Alberta, Edmonton, AB, Canada</li>
+        <li><span>10</span>Department of Health Research Methods, Evidence, and Impact, McMaster University, Hamilton, ON, Canada</li>
+        <li><span>11</span>Biostatistics Unit, St Joseph's Healthcare, Hamilton, ON, Canada</li>
+      </ol>
+      <br>
+      <p><strong>Funding:</strong> This study was funded in part by Texas A&amp;M University. The university had no role in study design, data collection, data analysis, data interpretation, or writing of the report.</p>
+      <br>
+      <p><strong>Ethical approval:</strong> Not needed. All the work was developed using aggregate level data.</p>
+      <br>
+      <p><strong>License:</strong> This is an Open Access article distributed in accordance with the Creative Commons Attribution Non Commercial (CC BY-NC 4.0) license. See: <a href="http://creativecommons.org/licenses/by-nc/4.0/">http://creativecommons.org/licenses/by-nc/4.0/</a>.</p>
+    </div>
+
+    <!-- ── REFERENCES ── -->
+    <div class="section" style="margin-top:36px;">
+      <h2>References</h2>
+      <ol class="references-list">
+        <li>Zheng Y, Ley SH, Hu FB. Global aetiology and epidemiology of type 2 diabetes mellitus and its complications. <em>Nat Rev Endocrinol</em> 2018;14:88–98.</li>
+        <li>DeFronzo RA, Ferrannini E, Groop L, et al. Type 2 diabetes mellitus. <em>Nat Rev Dis Primers</em> 2015;1:15019.</li>
+        <li>American Diabetes Association. Classification and Diagnosis of Diabetes: Standards of Medical Care in Diabetes-2020. <em>Diabetes Care</em> 2020;43(Suppl 1):S14–31.</li>
+        <li>Evert AB, Dennison M, Gardner CD, et al. Nutrition therapy for adults with diabetes or prediabetes: A consensus report. <em>Diabetes Care</em> 2019;42:731–54.</li>
+        <li>Westman EC, Vernon MC. Has carbohydrate-restriction been forgotten as a treatment for diabetes mellitus? <em>Nutr Metab (Lond)</em> 2008;5:10.</li>
+        <li>Volek JS, Fernandez ML, Feinman RD, Phinney SD. Dietary carbohydrate restriction induces a unique metabolic state positively affecting atherogenic dyslipidemia, fatty acid partitioning, and metabolic syndrome. <em>Prog Lipid Res</em> 2008;47:307–18.</li>
+        <li>Feinman RD, Pogozelski WK, Astrup A, et al. Dietary carbohydrate restriction as the first approach in diabetes management: critical review and evidence base. <em>Nutrition</em> 2015;31:1–13.</li>
+        <li>Centers for Disease Control and Prevention (CDC). Trends in intake of energy and macronutrients — United States, 1971–2000. <em>MMWR Morb Mortal Wkly Rep</em> 2004;53:80–2.</li>
+        <li>International Diabetes Federation. Diabetes Atlas. 9th edition. 2019.</li>
+        <li>Evert AB, Boucher JL, Cypress M, et al. Nutrition therapy recommendations for the management of adults with diabetes. <em>Diabetes Care</em> 2014;37(Suppl 1):S120–43.</li>
+        <li>Mozaffarian D. Dietary and Policy Priorities for Cardiovascular Disease, Diabetes, and Obesity. <em>Circulation</em> 2016;133:187–225.</li>
+        <li>Ajala O, English P, Pinkney J. Systematic review and meta-analysis of different dietary approaches to the management of type 2 diabetes. <em>Am J Clin Nutr</em> 2013;97:505–16.</li>
+        <li>Snorgaard O, Poulsen GM, Andersen HK, Astrup A. Systematic review and meta-analysis of dietary carbohydrate restriction in patients with type 2 diabetes. <em>BMJ Open Diabetes Res Care</em> 2017;5:e000354.</li>
+        <li>Naude CE, Schoonees A, Senekal M, et al. Low carbohydrate versus isoenergetic balanced diets for reducing weight and cardiovascular risk. <em>PLoS One</em> 2014;9:e100652.</li>
+        <li>Sainsbury E, Kizirian NV, Partridge SR, et al. Effect of dietary carbohydrate restriction on glycemic control in adults with diabetes. <em>Diabetes Res Clin Pract</em> 2018;139:239–52.</li>
+        <li>Goldenberg JZ, Day A, Beardsley J, Thabane L, Johnston BC. Very low carbohydrate diets for type 2 diabetes. PROSPERO 2020 CRD42020161795.</li>
+        <li>Guyatt GH, Juniper EF, Walter SD, et al. Interpreting treatment effects in randomised trials. <em>BMJ</em> 1998;316:690–3.</li>
+        <li>Johnston BC, Alonso-Coello P, Friedrich JO, et al. Do clinicians understand the size of treatment effects? <em>CMAJ</em> 2016;188:25–32.</li>
+        <li>Higgins JPT, Green S, eds. Cochrane Handbook for Systematic Reviews of Interventions. Version 5.1.0. Cochrane Collaboration, 2011.</li>
+        <li>Sterne JAC, Savović J, Page MJ, et al. RoB 2: a revised tool for assessing risk of bias in randomised trials. <em>BMJ</em> 2019;366:l4898.</li>
+        <li>da Costa BR, Nüesch E, Rutjes AW, et al. Combining follow-up and change data is valid in meta-analyses of continuous outcomes. <em>J Clin Epidemiol</em> 2013;66:847–55.</li>
+        <li>Thorlund K, Walter SD, Johnston BC, et al. Pooling health-related quality of life outcomes in meta-analysis. <em>Res Synth Methods</em> 2011;2:188–203.</li>
+        <li>Guyatt GH, Thorlund K, Oxman AD, et al. GRADE guidelines: 13. Preparing summary of findings tables — continuous outcomes. <em>J Clin Epidemiol</em> 2013;66:173–83.</li>
+        <li>Guyatt GH, Ebrahim S, Alonso-Coello P, et al. GRADE guidelines 17: assessing the risk of bias associated with missing participant outcome data. <em>J Clin Epidemiol</em> 2017;87:14–22.</li>
+        <li>Guyatt GH, Oxman AD, Vist GE, et al. GRADE: an emerging consensus on rating quality of evidence and strength of recommendations. <em>BMJ</em> 2008;336:924–6.</li>
+        <li>Schünemann H, Brożek J, Guyatt G, Oxman A. Handbook for Grading the Quality of Evidence And the Strength of Recommendation Using the GRADE Approach. 2013.</li>
+        <li>Schwingshackl L, Knüppel S, Schwedhelm C, et al. NutriGrade: A scoring system to assess and judge the meta-evidence of randomized controlled trials and cohort studies in nutrition research. <em>Adv Nutr</em> 2016;7:994–1004.</li>
+        <li>Ebrahim S, Akl EA, Mustafa RA, et al. Addressing continuous data for participants excluded from trial analysis. <em>J Clin Epidemiol</em> 2013;66:1014–1021.</li>
+        <li>Akl EA, Kahale LA, Agoritsas T, et al. Handling trial participants with missing outcome data when conducting a meta-analysis. <em>Syst Rev</em> 2015;4:98.</li>
+        <li>Higgins JPT, Thomas J, Chandler J, et al, eds. Cochrane Handbook for Systematic Reviews of Interventions. 2nd ed. Wiley Blackwell, 2019.</li>
+        <li>Sun X, Ioannidis JPA, Agoritsas T, et al. How to use a subgroup analysis. <em>JAMA</em> 2014;311:405–11.</li>
+        <li>Harbord RM, Egger M, Sterne JAC. A modified test for small-study effects in meta-analyses of controlled trials with binary endpoints. <em>Stat Med</em> 2006;25:3443–57.</li>
+        <li>Sterne JAC, Sutton AJ, Ioannidis JPA, et al. Recommendations for examining and interpreting funnel plot asymmetry in meta-analyses of randomised controlled trials. <em>BMJ</em> 2011;343:d4002.</li>
+        <li>Dyson PA. Dietary advice for people with diabetes: the role of carbohydrate in dietary treatment and an assessment of video education. 2010.</li>
+        <li>Morris E, Aveyard P, Dyson P, et al. A food-based, low-energy, low-carbohydrate diet for people with type 2 diabetes in primary care. <em>Diabetes Obes Metab</em> 2020;22:512–20.</li>
+        <li>Saslow LR, Kim S, Daubenmier JJ, et al. A randomized pilot trial of a moderate carbohydrate diet compared to a very low carbohydrate diet in overweight or obese individuals with type 2 diabetes. <em>PLoS One</em> 2014;9:e91027.</li>
+        <li>Saslow LR, Mason AE, Kim S, et al. An online intervention comparing a very low-carbohydrate ketogenic diet and lifestyle recommendations versus a plate method diet in overweight individuals with type 2 diabetes. <em>J Med Internet Res</em> 2017;19:e36.</li>
+        <li>Yamada Y, Uchida J, Izumi H, et al. A non-calorie-restricted low-carbohydrate diet is effective as an alternative therapy for patients with type 2 diabetes. <em>Intern Med</em> 2014;53:13–9.</li>
+        <li>Tay J, Luscombe-Marsh ND, Thompson CH, et al. A very low-carbohydrate, low-saturated fat diet for type 2 diabetes management. <em>Diabetes Care</em> 2014;37:2909–18.</li>
+        <li>Jönsson T, Granfeldt Y, Ahrén B, et al. Beneficial effects of a Paleolithic diet on cardiovascular risk factors in type 2 diabetes. <em>Cardiovasc Diabetol</em> 2009;8:35.</li>
+        <li>Sato J, Kanazawa A, Makita S, et al. A randomized controlled trial of 130 g/day low-carbohydrate diet in type 2 diabetes with poor glycemic control. <em>Clin Nutr</em> 2017;36:992–1000.</li>
+        <li>Goldstein T, Kark JD, Berry EM, et al. The effect of a low carbohydrate energy-unrestricted diet on weight loss in obese type 2 diabetes patients. <em>e-SPEN</em> 2011;6:e178–86.</li>
+        <li>Guldbrand H, Dizdar B, Bunjaku B, et al. In type 2 diabetes, randomisation to advice to follow a low-carbohydrate diet transiently improves glycaemic control. <em>Diabetologia</em> 2012;55:2118–27.</li>
+        <li>Iqbal N, Vetter ML, Moore RH, et al. Effects of a low-intensity intervention that prescribed a low-carbohydrate vs. a low-fat diet in obese, diabetic participants. <em>Obesity (Silver Spring)</em> 2010;18:1733–8.</li>
+        <li>Nishimori E, Tetsu O, Takasugi K, et al. Carbohydrate-restricted diet is a non-alcoholic fatty liver disease associated with type 2 diabetes. <em>Diabetes</em> 2018;61:297–306.</li>
+        <li>Vlachos D, Ganotopoulou A, Stathi C, et al. A low-carbohydrate protein sparing modified fast diet compared with a low glycaemic index reduced calorie diet in obese type 2 diabetic patients. <em>Diabetologia</em> 2011;54(Suppl 1):S355.</li>
+        <li>Westman EC, Yancy WS Jr, Mavropoulos JC, et al. The effect of a low-carbohydrate, ketogenic diet versus a low-glycemic index diet on glycemic control in type 2 diabetes mellitus. <em>Nutr Metab (Lond)</em> 2008;5:36.</li>
+        <li>Zadeh MA, Kargarfard M, Marandi SM, Habibi A. Diets along with interval training regimes improves inflammatory &amp; anti-inflammatory condition in obesity with type 2 diabetes subjects. <em>J Diabetes Metab Disord</em> 2018;17:253–67.</li>
+        <li>Daly ME, Paisey R, Paisey R, et al. Short-term effects of severe dietary carbohydrate-restriction advice in Type 2 diabetes. <em>Diabet Med</em> 2006;23:15–20.</li>
+        <li>Davis NJ, Tomuta N, Schechter C, et al. Comparative study of the effects of a 1-year dietary intervention of a low-carbohydrate diet versus a low-fat diet on weight and glycemic control in type 2 diabetes. <em>Diabetes Care</em> 2009;32:1147–52.</li>
+        <li>Yancy WS Jr, Westman EC, McDuffie JR, et al. A randomized trial of a low-carbohydrate diet vs orlistat plus a low-fat diet for weight loss. <em>Arch Intern Med</em> 2010;170:136–45.</li>
+        <li>Samaha FF, Iqbal N, Seshadri P, et al. A low-carbohydrate as compared with a low-fat diet in severe obesity. <em>N Engl J Med</em> 2003;348:2074–81.</li>
+        <li>Shai I, Schwarzfuchs D, Henkin Y, et al. Weight loss with a low-carbohydrate, Mediterranean, or low-fat diet. <em>N Engl J Med</em> 2008;359:229–41.</li>
+        <li>Lee P, Paisey R, Waterson M, et al. Reduction in High Sensitivity C-reactive Protein levels in type 2 diabetes after low carbohydrate but not energy deficit diet. <em>Diabet Med</em> 2013;30(Suppl 1):47.</li>
+        <li>Breukelman GJ, Basson AK, Djarova TG, et al. Combination low carbohydrate, high fat diet and physical activity intervention on lipoprotein-lipids in type 2 diabetics. <em>Asian J Sports Med</em> 2019;10:e86905.</li>
+        <li>Perna S, Alalwan TA, Gozzer C, et al. Effectiveness of a hypocaloric and low-carbohydrate diet on visceral adipose tissue and glycemic control in overweight and obese patients with type 2 diabetes. <em>Bahrain Med Bull</em> 2019;41:159–64.</li>
+        <li>Korsmo-Haugen HK, Brurberg KG, Mann J, Aas AM. Carbohydrate quantity in the dietary management of type 2 diabetes. <em>Diabetes Obes Metab</em> 2019;21:15–27.</li>
+        <li>Sato J, Kanazawa A, Hatae C, et al. One year follow-up after a randomized controlled trial of a 130 g/day low-carbohydrate diet in patients with type 2 diabetes mellitus. <em>PLoS One</em> 2017;12:e0188892.</li>
+        <li>van Zuuren EJ, Fedorowicz Z, Kuijpers T, Pijl H. Effects of low-carbohydrate- compared with low-fat-diet interventions on metabolic control in people with type 2 diabetes. <em>Am J Clin Nutr</em> 2018;108:300–31.</li>
+        <li>Buse JB, Caprio S, Cefalu WT, et al. How do we define cure of diabetes? <em>Diabetes Care</em> 2009;32:2133–5.</li>
+        <li>Johnston BC, Guyatt GH. Best (but oft-forgotten) practices: intention-to-treat, treatment adherence, and missing participant outcome data in the nutrition literature. <em>Am J Clin Nutr</em> 2016;104:1197–201.</li>
+        <li>Batterham MJ, Tapsell LC, Charlton KE. Analyzing weight loss intervention studies with missing data. <em>Nutrition</em> 2013;29:1024–9.</li>
+        <li>Tay J, de Bock MI, Mayer-Davis EJ. Low-carbohydrate diets in type 2 diabetes. <em>Lancet Diabetes Endocrinol</em> 2019;7:331–3.</li>
+        <li>Meerpohl JJ, Naude CE, Garner P, et al. Comment on NutriGrade. <em>Adv Nutr</em> 2017;8:789–90.</li>
+        <li>Giovannucci E, Rimm E. Red and processed meat consumption and risk for all-cause mortality and cardiometabolic outcomes. <em>Ann Intern Med</em> 2020;172:510–1.</li>
+        <li>Schwingshackl L, Knüppel S, Schwedhelm C, et al. Reply to JJ Meerpohl et al. <em>Adv Nutr</em> 2017;8:790–1.</li>
+        <li>Giovannucci E, Rimm E. Red and processed meat consumption and risk for all-cause mortality (duplicate citation).</li>
+        <li>Crowe TC. Safety of low-carbohydrate diets. <em>Obes Rev</em> 2005;6:235–45.</li>
+        <li>Gibson AA, Seimon RV, Lee CMY, et al. Do ketogenic diets really suppress appetite? <em>Obes Rev</em> 2015;16:64–76.</li>
+        <li>Archer E, Marlow ML, Lavie CJ. The fatal flaws of food frequency questionnaires and other memory-based dietary assessment methods. <em>J Clin Epidemiol</em> 2018;104:113–24.</li>
+        <li>Brakenhoff TB, van Smeden M, Visseren FLJ, Groenwold RHH. Random measurement error: Why worry? <em>PLoS One</em> 2018;13:e0192298.</li>
+        <li>Prentice RL. Dietary assessment and opportunities to enhance nutritional epidemiology evidence. <em>Ann Intern Med</em> 2020;172:354–5.</li>
+        <li>Seidelmann SB, Claggett B, Cheng S, et al. Dietary carbohydrate intake and mortality: a prospective cohort study and meta-analysis. <em>Lancet Public Health</em> 2018;3:e419–28.</li>
+      </ol>
+    </div>
+
+  </main><!-- /main-content -->
+
+</div><!-- /two-col -->
+</div><!-- /page-wrap -->
+
+<footer>
+  <p>BMJ 2021;372:m4743 &nbsp;|&nbsp; doi: 10.1136/bmj.m4743 &nbsp;|&nbsp; © 2021 BMJ Publishing Group Ltd.</p>
+  <p style="margin-top:6px;">Open Access: CC BY-NC 4.0 &nbsp;|&nbsp; No commercial reuse: See rights and reprints http://www.bmj.com/permissions</p>
+</footer>
+
+</body>
+</html>
