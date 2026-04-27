@@ -1,1 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effects of Intermittent Fasting on Health, Aging, and Disease</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: 'Georgia', serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #1a1a1a;
+      background: #f6f4f0;
+    }
+
+    .page-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 44px 24px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 3px solid #7b2d2d;
+      padding-bottom: 22px;
+      margin-bottom: 32px;
+    }
+
+    .journal-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7b2d2d;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      line-height: 1.25;
+      color: #111;
+      margin-bottom: 14px;
+    }
+
+    .authors {
+      font-size: 0.92rem;
+      color: #555;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    .affiliations {
+      font-size: 0.8rem;
+      color: #888;
+      font-family: Arial, sans-serif;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .citation {
+      font-size: 0.8rem;
+      color: #aaa;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ── Lead summary box ── */
+    .summary-banner {
+      background: #7b2d2d;
+      color: #fff;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 34px;
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .summary-banner strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 40px; }
+
+    h2.section-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #7b2d2d;
+      border-bottom: 1px solid #d4b5b5;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    h3.sub {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #333;
+      margin: 22px 0 8px;
+    }
+
+    p { margin-bottom: 14px; text-align: justify; }
+
+    /* ── Regimen cards ── */
+    .regimen-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .regimen-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 16px 14px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+      border-top: 3px solid #7b2d2d;
+      font-family: Arial, sans-serif;
+      font-size: 0.83rem;
+    }
+
+    .regimen-card .name {
+      font-weight: bold;
+      color: #7b2d2d;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .regimen-card p { text-align: left; margin-bottom: 0; color: #444; }
+
+    /* ── Ketone timeline ── */
+    .ketone-bar {
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 18px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      font-family: Arial, sans-serif;
+      font-size: 0.83rem;
+    }
+
+    .ketone-bar .bar-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #7b2d2d;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .kbar-track { position: relative; height: 28px; background: #f0ebe8; border-radius: 14px; overflow: hidden; }
+    .kbar-fill  { height: 100%; background: linear-gradient(90deg, #e8c4b8 0%, #c0614a 60%, #7b2d2d 100%); border-radius: 14px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: #fff; font-weight: bold; font-size: 0.78rem; }
+
+    .kbar-labels { display: flex; justify-content: space-between; margin-top: 6px; color: #888; font-size: 0.75rem; }
+
+    /* ── Mechanism phases ── */
+    .phases {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .phase-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      font-family: Arial, sans-serif;
+      font-size: 0.82rem;
+    }
+
+    .phase-card .phase-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .phase-card ul { padding-left: 14px; }
+    .phase-card li { margin-bottom: 4px; color: #444; line-height: 1.4; }
+
+    .phase-fasting .phase-label { color: #7b2d2d; }
+    .phase-recovery .phase-label { color: #2e6b3e; }
+    .phase-longterm .phase-label { color: #1a4f7a; }
+
+    /* ── Clinical outcomes table ── */
+    .outcomes-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      font-size: 0.83rem;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      margin: 18px 0;
+    }
+
+    .outcomes-table thead { background: #7b2d2d; color: #fff; }
+    .outcomes-table th { padding: 10px 12px; text-align: left; border: 1px solid #6a2424; font-weight: 600; }
+    .outcomes-table tbody tr:nth-child(even) { background: #faf4f2; }
+    .outcomes-table tbody tr:hover { background: #f5e8e5; }
+    .outcomes-table td { padding: 8px 12px; border: 1px solid #e5d5d0; color: #333; vertical-align: top; }
+
+    .tag {
+      display: inline-block;
+      background: #f5e8e5;
+      color: #7b2d2d;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.72rem;
+      font-family: Arial, sans-serif;
+      margin-right: 3px;
+    }
+
+    /* ── Prescription table ── */
+    .rx-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .rx-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+
+    .rx-card .rx-title {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      font-weight: bold;
+      color: #7b2d2d;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #e5d5d0;
+      padding-bottom: 6px;
+    }
+
+    .rx-card table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 0.8rem; }
+    .rx-card th { background: #f5e8e5; color: #7b2d2d; padding: 5px 8px; text-align: left; }
+    .rx-card td { padding: 5px 8px; border-bottom: 1px solid #f0e8e5; color: #444; }
+
+    /* ── Bullet list ── */
+    .bullet-list { padding-left: 20px; margin-bottom: 14px; }
+    .bullet-list li { margin-bottom: 7px; }
+
+    /* ── Callout ── */
+    .callout {
+      background: #faf4f2;
+      border-left: 4px solid #7b2d2d;
+      padding: 14px 18px;
+      margin: 18px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.92rem;
+    }
+
+    /* ── References ── */
+    .references {
+      font-size: 0.78rem;
+      font-family: Arial, sans-serif;
+      color: #666;
+      column-count: 2;
+      column-gap: 28px;
+    }
+
+    .references p { margin-bottom: 7px; text-align: left; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 1.4rem; }
+      .regimen-grid, .phases, .rx-grid { grid-template-columns: 1fr; }
+      .references { column-count: 1; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header>
+    <div class="journal-label">The New England Journal of Medicine · Review Article · Vol. 381, No. 26 · December 26, 2019 · doi: 10.1056/NEJMra1905136</div>
+    <h1>Effects of Intermittent Fasting on Health, Aging, and Disease</h1>
+    <p class="authors">Rafael de Cabo, Ph.D., and Mark P. Mattson, Ph.D.</p>
+    <p class="affiliations">
+      Translational Gerontology Branch, Intramural Research Program, National Institute on Aging, NIH, Baltimore &nbsp;|&nbsp;
+      Laboratory of Neurosciences, NIA, NIH, Baltimore &nbsp;|&nbsp;
+      Department of Neuroscience, Johns Hopkins University School of Medicine, Baltimore
+    </p>
+    <p class="citation">© 2019 Massachusetts Medical Society &nbsp;|&nbsp; Last updated February 12, 2020, at NEJM.org</p>
+  </header>
+
+  <!-- Summary -->
+  <div class="summary-banner">
+    <strong>Article Overview</strong>
+    This review synthesizes preclinical and clinical evidence on how intermittent fasting (IF) affects metabolism, cellular stress resistance, aging, and chronic disease. The authors describe the three main IF regimens, the biology of metabolic switching, and clinical outcomes across obesity, diabetes, cardiovascular disease, cancer, and neurological disorders. Practical prescribing guidance is provided.
+  </div>
+
+  <!-- Background -->
+  <section>
+    <h2 class="section-title">Background</h2>
+    <p>
+      Caloric restriction has long been known to extend life span in animals. What was less recognized historically is that rodents on caloric restriction typically consume their entire daily food allotment within a few hours, creating a daily fasting window of up to 20 hours during which ketogenesis occurs. Since the late 1990s, hundreds of animal studies and scores of clinical trials have examined controlled intermittent fasting regimens, in which <strong>metabolic switching</strong> — from liver-derived glucose to adipose cell–derived ketones — occurs daily or several days per week.
+    </p>
+    <p>
+      Many health benefits of intermittent fasting are not simply the result of reduced free-radical production or weight loss. Instead, intermittent fasting elicits evolutionarily conserved, adaptive cellular responses that improve glucose regulation, increase stress resistance, and suppress inflammation. Most people today consume three meals a day plus snacks; as a result, intermittent fasting does not naturally occur.
+    </p>
+  </section>
+
+  <!-- Three Regimens -->
+  <section>
+    <h2 class="section-title">The Three Main Intermittent-Fasting Regimens</h2>
+    <div class="regimen-grid">
+      <div class="regimen-card">
+        <div class="name">Alternate-Day Fasting</div>
+        <p>Alternating 24-hour periods of eating and fasting (or severe restriction to 500–700 kcal). Studied extensively for weight loss, cardiometabolic outcomes, and longevity in animals and humans.</p>
+      </div>
+      <div class="regimen-card">
+        <div class="name">5:2 Intermittent Fasting</div>
+        <p>Eat normally 5 days per week; restrict to 500–700 kcal on 2 non-consecutive days. Produces similar weight loss to daily caloric restriction but with greater gains in insulin sensitivity.</p>
+      </div>
+      <div class="regimen-card">
+        <div class="name">Time-Restricted Feeding</div>
+        <p>Limit all food intake to a 6–8 hour window daily, creating a 16–18 hour fasting period. A practical entry point for patients; can be adopted gradually over several months.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metabolic Switching -->
+  <section>
+    <h2 class="section-title">Intermittent Fasting and Metabolic Switching</h2>
+    <p>
+      After meals, glucose is used for energy and fat is stored as triglycerides. During fasting, triglycerides are broken down to fatty acids and glycerol. The liver converts fatty acids to <strong>ketone bodies</strong> (acetoacetate and β-hydroxybutyrate, β-HB), which provide a major energy source for many tissues — especially the brain.
+    </p>
+
+    <div class="ketone-bar">
+      <div class="bar-title">Ketone Body Rise in Humans After Onset of Fasting</div>
+      <div style="margin-bottom:10px;">
+        <div style="font-size:0.78rem;color:#666;margin-bottom:4px;">Fasting duration → ketone level</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <div style="width:80px;font-size:0.75rem;color:#888;text-align:right;">8–12 h</div>
+          <div style="flex:1;background:#f0ebe8;border-radius:6px;height:18px;position:relative;">
+            <div style="width:20%;height:100%;background:#e8c4b8;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:0.72rem;color:#7b2d2d;font-weight:bold;">0.2–0.5 mM</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <div style="width:80px;font-size:0.75rem;color:#888;text-align:right;">24 h</div>
+          <div style="flex:1;background:#f0ebe8;border-radius:6px;height:18px;position:relative;">
+            <div style="width:45%;height:100%;background:#c0614a;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:0.72rem;color:#fff;font-weight:bold;">0.2–0.5 mM</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:80px;font-size:0.75rem;color:#888;text-align:right;">48 h</div>
+          <div style="flex:1;background:#f0ebe8;border-radius:6px;height:18px;position:relative;">
+            <div style="width:80%;height:100%;background:#7b2d2d;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:0.72rem;color:#fff;font-weight:bold;">1–2 mM</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:0.75rem;color:#888;">In rodents, ketone elevation begins within 4–8 h and reaches millimolar levels within 24 h.</div>
+    </div>
+
+    <p>
+      Ketone bodies are not merely fuel — they are <strong>potent signaling molecules</strong> that regulate PGC-1α, FGF21, NAD⁺, sirtuins, PARP1, and CD38, profoundly affecting systemic metabolism. β-HB also stimulates expression of brain-derived neurotrophic factor (BDNF), with implications for brain health and neurodegenerative disorders.
+    </p>
+    <p>
+      Several benefits of intermittent fasting are dissociated from weight loss itself, including improvements in glucose regulation, blood pressure, heart rate, endurance training efficacy, and abdominal fat loss.
+    </p>
+  </section>
+
+  <!-- Cellular Mechanisms -->
+  <section>
+    <h2 class="section-title">Cellular and Molecular Mechanisms</h2>
+    <p>
+      Intermittent fasting triggers a coordinated three-phase biological response. During fasting, cells enter a stress-resistance and repair mode. During recovery (eating and sleeping), cells shift to growth and plasticity. Over the long term, these alternating cycles produce durable adaptations that improve health and disease resistance.
+    </p>
+
+    <div class="phases">
+      <div class="phase-card phase-fasting">
+        <div class="phase-label">During Fasting</div>
+        <ul>
+          <li>↑ Ketones (β-HB, acetoacetate)</li>
+          <li>↑ Mitochondrial stress resistance</li>
+          <li>↑ Antioxidant defenses</li>
+          <li>↑ Autophagy &amp; mitophagy</li>
+          <li>↑ DNA repair</li>
+          <li>↓ Insulin &amp; mTOR signaling</li>
+          <li>↓ Protein synthesis</li>
+        </ul>
+      </div>
+      <div class="phase-card phase-recovery">
+        <div class="phase-label">During Recovery (Feeding)</div>
+        <ul>
+          <li>↑ Glucose &amp; insulin</li>
+          <li>↑ mTOR activation</li>
+          <li>↑ Protein synthesis</li>
+          <li>↑ Mitochondrial biogenesis</li>
+          <li>↓ Ketones</li>
+          <li>↓ Autophagy</li>
+          <li>Cell growth &amp; plasticity</li>
+        </ul>
+      </div>
+      <div class="phase-card phase-longterm">
+        <div class="phase-label">Long-Term Adaptations</div>
+        <ul>
+          <li>↑ Insulin sensitivity</li>
+          <li>↑ Heart rate variability</li>
+          <li>Improved lipid metabolism</li>
+          <li>Healthy gut microbiota</li>
+          <li>↓ Abdominal fat</li>
+          <li>↓ Inflammation</li>
+          <li>↓ Blood pressure</li>
+          <li>Disease resistance</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>
+      Intermittent fasting stimulates autophagy and mitophagy while inhibiting the mTOR protein-synthesis pathway — enabling cells to remove oxidatively damaged proteins and mitochondria and recycle molecular constituents. These pathways are suppressed in persons who overeat and are sedentary.
+    </p>
+  </section>
+
+  <!-- Stress Resistance -->
+  <section>
+    <h2 class="section-title">Intermittent Fasting and Stress Resistance</h2>
+    <p>
+      Unlike modern humans, our ancestors did not consume three regularly spaced large meals plus snacks every day, nor did they live sedentary lives. <em>Homo sapiens</em> evolved in ecologic niches where food sources were sparsely distributed, which drove adaptations including creativity, language, and physical endurance.
+    </p>
+    <p>
+      Most if not all organ systems respond to intermittent fasting in ways that enable the organism to tolerate challenges and restore homeostasis. Repeated fasting results in lasting adaptive responses — increased expression of antioxidant defenses, DNA repair enzymes, protein quality-control machinery, mitochondrial biogenesis, autophagy, and down-regulation of inflammation. These adaptive responses to fasting and feeding are conserved across species.
+    </p>
+  </section>
+
+  <!-- Health and Aging -->
+  <section>
+    <h2 class="section-title">Effects on Health and Aging</h2>
+    <p>
+      A meta-analysis of data from 1934–2012 showed that caloric restriction increases median life span by 14–45% in rats, but only 4–27% in mice, with wide variation by strain, sex, age, and diet. In a landmark study, alternate-day feeding increased the average life span of rats by up to <strong>80%</strong> when started in young adulthood.
+    </p>
+    <p>
+      Two major monkey studies produced discrepant results: the University of Wisconsin study showed positive effects of caloric restriction on both health and survival, while the NIA study showed no significant reduction in mortality despite clear health improvements. Differences in diet composition, onset, caloric intake, sex, and genetic background likely explain the discrepancy.
+    </p>
+    <p>
+      In humans, intermittent-fasting interventions ameliorate obesity, insulin resistance, dyslipidemia, hypertension, and inflammation — to a greater extent than attributable to caloric reduction alone.
+    </p>
+  </section>
+
+  <!-- Clinical Evidence -->
+  <section>
+    <h2 class="section-title">Clinical Evidence by Disease Area</h2>
+
+    <table class="outcomes-table">
+      <thead>
+        <tr>
+          <th>Condition</th>
+          <th>Key Clinical Findings</th>
+          <th>Evidence Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Obesity &amp; Diabetes</strong></td>
+          <td>Alternate-day fasting (22 days): −2.5% body weight, −4% fat mass, 57% decrease in fasting insulin. 5:2 IF vs. 25% daily caloric restriction: equal weight loss but greater insulin sensitivity and waist circumference reduction with 5:2. Recent studies: daily caloric restriction or 4:3 IF reversed insulin resistance in prediabetes/T2D. <span class="tag">Caveat</span> One 12-month ADF trial showed no improvement in insulin sensitivity vs. control.</td>
+          <td>Multiple RCTs; 6 short-term trials; growing long-term data</td>
+        </tr>
+        <tr>
+          <td><strong>Cardiovascular Disease</strong></td>
+          <td>IF improves blood pressure, resting heart rate, HDL/LDL cholesterol, triglycerides, glucose, insulin resistance, and heart rate variability. Reduces systemic inflammation and oxidative stress markers linked to atherosclerosis. CALERIE study: 12% daily calorie reduction for 2 years improved many cardiovascular risk factors in non-obese persons. Benefits typically emerge within 2–4 weeks of alternate-day fasting.</td>
+          <td>Animal + human studies; CALERIE RCT; Varady et al. RCT</td>
+        </tr>
+        <tr>
+          <td><strong>Cancer</strong></td>
+          <td>Animal models: caloric restriction/ADF reduces spontaneous tumor occurrence and suppresses induced tumor growth while enhancing sensitivity to chemotherapy and radiation. Mechanisms: reduced insulin/growth hormone signaling; FOXO and NRF2 activation. Clinical trials underway for breast, ovarian, prostate, endometrial, colorectal, and glioblastoma. Prostate cancer trial: 95% adherence, no adverse events. No human data yet on cancer recurrence.</td>
+          <td>Strong preclinical; early-phase clinical trials only</td>
+        </tr>
+        <tr>
+          <td><strong>Neurodegenerative Disorders</strong></td>
+          <td>Excessive midlife energy intake increases risks of stroke, Alzheimer's, and Parkinson's disease. Strong preclinical evidence that ADF delays onset/progression of Alzheimer's and Parkinson's in animal models. IF increases neuronal stress resistance via mitochondrial function, autophagy, BDNF, and antioxidant defenses. Controlled clinical trials in humans with neurodegeneration are lacking.</td>
+          <td>Strong preclinical; no controlled human trials yet</td>
+        </tr>
+        <tr>
+          <td><strong>Asthma / Autoimmune</strong></td>
+          <td>ADF over 2 months: elevated ketone levels, weight loss, mitigation of asthma symptoms and airway resistance, reduced inflammation/oxidative stress markers. Multiple sclerosis: ADF and 3-day periodic energy restriction reduce demyelination in mouse models; two pilot studies in MS patients showed reduced symptoms within 2 months. Rheumatoid arthritis: evidence supports benefit, likely via anti-inflammatory effects.</td>
+          <td>Pilot studies; animal models</td>
+        </tr>
+        <tr>
+          <td><strong>Surgical / Ischemic Injury</strong></td>
+          <td>Preoperative fasting reduces tissue damage and inflammation. 3-day fasting before vascular surgery reduced ischemia–reperfusion injury in liver and kidneys. 2-week preoperative energy restriction improved gastric-bypass outcomes (multicenter RCT). IF after traumatic brain/spinal cord injury reduces damage and improves functional outcomes in animal models.</td>
+          <td>Animal models; one multicenter RCT (surgery)</td>
+        </tr>
+        <tr>
+          <td><strong>Physical &amp; Cognitive Performance</strong></td>
+          <td>ADF mice: better running endurance than ad libitum-fed mice at similar body weight. Human men fasting 16 h/day × 8 weeks: maintained muscle mass while losing fat during resistance training. Older adults: short-term caloric restriction improved verbal memory. 12 months of caloric restriction in adults with mild cognitive impairment: improved verbal memory, executive function, and global cognition. Large multicenter RCT: 2 years of daily caloric restriction improved working memory.</td>
+          <td>Animal + human RCTs</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Practical Prescriptions -->
+  <section>
+    <h2 class="section-title">Practical Prescriptions for Clinicians</h2>
+    <p>
+      Despite strong evidence, three main barriers limit adoption: (1) culturally ingrained 3-meal-plus-snacks eating patterns; (2) initial side effects (hunger, irritability, reduced concentration) that typically resolve within 1 month; and (3) most physicians are not trained to prescribe IF regimens.
+    </p>
+
+    <div class="rx-grid">
+      <div class="rx-card">
+        <div class="rx-title">Option A: Time-Restricted Feeding</div>
+        <table>
+          <tr><th>Month</th><th>Feeding Window</th><th>Frequency</th></tr>
+          <tr><td>Month 1</td><td>10-hour window</td><td>5 days/week</td></tr>
+          <tr><td>Month 2</td><td>8-hour window</td><td>5 days/week</td></tr>
+          <tr><td>Month 3</td><td>6-hour window</td><td>5 days/week</td></tr>
+          <tr><td>Month 4 (goal)</td><td>6-hour window</td><td>7 days/week</td></tr>
+        </table>
+      </div>
+      <div class="rx-card">
+        <div class="rx-title">Option B: 5:2 Intermittent Fasting</div>
+        <table>
+          <tr><th>Month</th><th>Restriction Days</th><th>Calories</th></tr>
+          <tr><td>Month 1</td><td>1 day/week</td><td>1000 kcal</td></tr>
+          <tr><td>Month 2</td><td>2 days/week</td><td>1000 kcal</td></tr>
+          <tr><td>Month 3</td><td>2 days/week</td><td>750 kcal</td></tr>
+          <tr><td>Month 4 (goal)</td><td>2 days/week</td><td>500 kcal</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <p>
+      Monitoring should include regular tracking of body weight, fasting glucose, and ketone levels. A dietitian or nutritionist should be consulted to ensure nutritional needs are met. Physicians should provide ongoing communication, support, and positive reinforcement throughout the transition period.
+    </p>
+
+    <div class="callout">
+      <strong>Key clinical indications for IF prescription:</strong> obesity, type 2 diabetes, cardiovascular disease, metabolic syndrome, cancers, and conditions associated with overeating and a sedentary lifestyle.
+    </div>
+  </section>
+
+  <!-- Conclusions -->
+  <section>
+    <h2 class="section-title">Conclusions and Future Directions</h2>
+    <p>
+      Preclinical studies and clinical trials show that intermittent fasting has broad-spectrum benefits for obesity, diabetes, cardiovascular disease, cancers, and neurological disorders. Animal models show that IF improves health throughout the life span; clinical studies have mainly involved shorter-term interventions in overweight young and middle-aged adults.
+    </p>
+    <p>
+      Key unanswered questions: Can people maintain IF for years and accrue the benefits seen in animals? Do these findings generalize to older adults, children, and lean individuals?
+    </p>
+    <p>
+      The beneficial effects of intermittent fasting involve metabolic switching and cellular stress resistance. For people who cannot adhere to IF, further understanding of these pathways may enable development of targeted pharmacologic therapies that mimic IF's effects. Candidate agents include metabolic challengers (metformin, 2-deoxyglucose), mitochondrial bioenergetic boosters (ketone esters, nicotinamide riboside), and mTOR inhibitors (sirolimus) — though available animal data suggest pharmacologic approaches are likely inferior to intermittent fasting itself.
+    </p>
+  </section>
+
+  <!-- References -->
+  <section>
+    <h2 class="section-title">Selected References</h2>
+    <div class="references">
+      <p>1. Weindruch R, Sohal RS. Caloric intake and aging. <em>N Engl J Med</em> 1997;337:986–94.</p>
+      <p>2. Panda S. Circadian physiology of metabolism. <em>Science</em> 2016;354:1008–15.</p>
+      <p>3. Di Francesco A, et al. A time to fast. <em>Science</em> 2018;362:770–5.</p>
+      <p>4. Longo VD, Mattson MP. Fasting: molecular mechanisms and clinical applications. <em>Cell Metab</em> 2014;19:181–92.</p>
+      <p>5. Mattson MP, et al. Intermittent metabolic switching, neuroplasticity and brain health. <em>Nat Rev Neurosci</em> 2018;19:63–80.</p>
+      <p>7. Mattison JA, et al. Caloric restriction improves health and survival of rhesus monkeys. <em>Nat Commun</em> 2017;8:14063.</p>
+      <p>11. Anton SD, et al. Flipping the metabolic switch: understanding and applying the health benefits of fasting. <em>Obesity</em> 2018;26:254–68.</p>
+      <p>17. Johnson JB, et al. Alternate day calorie restriction improves clinical findings and reduces markers of oxidative stress and inflammation in overweight adults with moderate asthma. <em>Free Radic Biol Med</em> 2007;42:665–74.</p>
+      <p>20. Harvie MN, et al. The effects of intermittent or continuous energy restriction on weight loss and metabolic disease risk markers. <em>Int J Obes</em> 2011;35:714–27.</p>
+      <p>21. Newman JC, Verdin E. β-Hydroxybutyrate: a signaling metabolite. <em>Annu Rev Nutr</em> 2017;37:51–76.</p>
+      <p>27. Harvie M, et al. The effect of intermittent energy and carbohydrate restriction vs. daily energy restriction on weight loss. <em>Br J Nutr</em> 2013;110:1534–47.</p>
+      <p>28. Swindell WR. Dietary restriction in rats and mice: a meta-analysis of genotype-dependent effects on lifespan. <em>Ageing Res Rev</em> 2012;11:254–70.</p>
+      <p>31. Colman RJ, et al. Caloric restriction delays disease onset and mortality in rhesus monkeys. <em>Science</em> 2009;325:201–4.</p>
+      <p>32. Mattison JA, et al. Impact of caloric restriction on health and survival in rhesus monkeys from the NIA study. <em>Nature</em> 2012;489:318–21.</p>
+      <p>34. Heilbronn LK, et al. Alternate-day fasting in nonobese subjects: effects on body weight, body composition, and energy metabolism. <em>Am J Clin Nutr</em> 2005;81:69–73.</p>
+      <p>36. Moro T, et al. Effects of eight weeks of time-restricted feeding (16/8) on basal metabolism, maximal strength, body composition, inflammation, and cardiovascular risk factors in resistance-trained males. <em>J Transl Med</em> 2016;14:290.</p>
+      <p>40. Leclerc E, et al. The effect of caloric restriction on working memory in healthy non-obese adults. <em>CNS Spectr</em> 2019.</p>
+      <p>46–50. CALERIE study series. <em>J Gerontol</em>, <em>JAMA Intern Med</em>, <em>JAMA</em>, <em>Am J Physiol</em>, 2011–2018.</p>
+      <p>51. Harvie M, Howell A. Potential benefits and harms of intermittent energy restriction. <em>Behav Sci</em> 2017;7(1):E4.</p>
+      <p>53. Sutton EF, et al. Early time-restricted feeding improves insulin sensitivity, blood pressure, and oxidative stress even without weight loss in men with prediabetes. <em>Cell Metab</em> 2018;27:1212–1221.</p>
+      <p>54. Trepanowski JF, et al. Effect of alternate-day fasting on weight loss, weight maintenance, and cardioprotection among metabolically healthy obese adults. <em>JAMA Intern Med</em> 2017;177:930–8.</p>
+      <p>59. Varady KA, et al. Alternate day fasting for weight loss in normal weight and overweight subjects: a randomized controlled trial. <em>Nutr J</em> 2013;12:146.</p>
+      <p>73–74. Choi IY, et al.; Cignarella F, et al. Intermittent fasting, gut microbiota, and CNS autoimmunity. <em>Cell Rep</em> 2016; <em>Cell Metab</em> 2018.</p>
+      <p>79. Van Nieuwenhove Y, et al. Preoperative very low-calorie diet and operative outcome after laparoscopic gastric bypass. <em>Arch Surg</em> 2011;146:1300–5.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
