@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你的運動，可能正在訓練你的基因</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --blue:#2c5aa0;
+    --blue-dark:#1c3d72;
+    --blue-light:#eef4ff;
+    --accent:#4f8ef7;
+    --text:#2d2d2d;
+    --muted:#666;
+  }
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",Arial,sans-serif;
+    background:#f0f4fb;
+    color:var(--text);
+    line-height:1.85;
+  }
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,#1c3d72 0%,#2c5aa0 50%,#4f8ef7 100%);
+    color:white;
+    padding:72px 24px 80px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-tag{
+    display:inline-block;
+    background:rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:20px;
+    padding:5px 16px;
+    font-size:13px;
+    letter-spacing:1px;
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(24px,5vw,40px);
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:16px;
+    text-shadow:0 2px 12px rgba(0,0,0,0.2);
+  }
+  .hero p{
+    font-size:16px;
+    opacity:0.85;
+    max-width:520px;
+    margin:0 auto;
+  }
+  .hero-dna{
+    font-size:64px;
+    margin-bottom:20px;
+    animation:float 3s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  /* ARTICLE */
+  .article{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 20px 60px;
+  }
+
+  /* SECTION */
+  .section{
+    background:white;
+    border-radius:16px;
+    padding:36px;
+    margin-top:28px;
+    box-shadow:0 4px 20px rgba(44,90,160,0.07);
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity 0.6s ease,transform 0.6s ease;
+  }
+  .section.visible{opacity:1;transform:translateY(0)}
+  .section h2{
+    color:var(--blue-dark);
+    font-size:20px;
+    margin-bottom:16px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .section h2 span.icon{font-size:22px}
+  .section p{margin-bottom:14px;font-size:15.5px}
+
+  /* HIGHLIGHT BOX */
+  .highlight{
+    background:var(--blue-light);
+    border-left:5px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:18px 20px;
+    margin:20px 0;
+    font-size:15px;
+  }
+  .highlight strong{color:var(--blue-dark)}
+
+  /* QUOTE CARD */
+  .quote-card{
+    background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+    color:white;
+    border-radius:14px;
+    padding:30px 28px;
+    margin:24px 0;
+    text-align:center;
+    font-size:18px;
+    font-weight:700;
+    line-height:1.6;
+    box-shadow:0 8px 24px rgba(28,61,114,0.25);
+    position:relative;
+  }
+  .quote-card::before{
+    content:'"';
+    font-size:72px;
+    color:rgba(255,255,255,0.12);
+    position:absolute;top:-10px;left:16px;
+    font-family:Georgia,serif;
+    line-height:1;
+  }
+
+  /* LIST */
+  .styled-list{
+    list-style:none;
+    padding:0;
+    margin:16px 0;
+  }
+  .styled-list li{
+    padding:10px 14px 10px 44px;
+    margin-bottom:8px;
+    background:#f7f9ff;
+    border-radius:8px;
+    position:relative;
+    font-size:15px;
+  }
+  .styled-list li::before{
+    content:attr(data-icon);
+    position:absolute;left:12px;top:10px;
+    font-size:16px;
+  }
+
+  /* STAT CARDS */
+  .stats-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:14px;
+    margin:20px 0;
+  }
+  .stat-card{
+    background:linear-gradient(135deg,#eef4ff,#dce9ff);
+    border-radius:12px;
+    padding:18px 14px;
+    text-align:center;
+  }
+  .stat-card .num{
+    font-size:28px;
+    font-weight:800;
+    color:var(--blue);
+    line-height:1;
+  }
+  .stat-card .label{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+
+  /* CLOSING */
+  .closing{
+    background:linear-gradient(135deg,#1c3d72,#2c5aa0);
+    color:white;
+    border-radius:16px;
+    padding:36px;
+    margin-top:28px;
+    text-align:center;
+    opacity:0;transform:translateY(30px);
+    transition:opacity 0.6s ease,transform 0.6s ease;
+  }
+  .closing.visible{opacity:1;transform:translateY(0)}
+  .closing p{font-size:16px;line-height:1.8;opacity:0.9;margin-bottom:14px}
+  .closing .big{font-size:19px;font-weight:700;opacity:1}
+
+  /* SHARE */
+  .share-bar{
+    background:white;
+    border-radius:16px;
+    padding:28px;
+    margin-top:28px;
+    box-shadow:0 4px 20px rgba(44,90,160,0.07);
+    text-align:center;
+  }
+  .share-bar h3{color:var(--blue-dark);margin-bottom:18px;font-size:16px}
+  .share-buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+    transition:transform 0.15s,box-shadow 0.15s;
+    text-decoration:none;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.15)}
+  .btn:active{transform:translateY(0)}
+  .btn-fb{background:#1877f2;color:white}
+  .btn-line{background:#06c755;color:white}
+  .btn-copy{background:#f0f4fb;color:var(--blue-dark);border:1px solid #d0ddf5}
+  .btn-copy.copied{background:#e6ffef;color:#1a7f3c;border-color:#a8e6bc}
+
+  /* FOOTER */
+  footer{
+    text-align:center;
+    padding:24px;
+    font-size:13px;
+    color:var(--muted);
+  }
+
+  /* PROGRESS BAR */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--blue));
+    width:0%;transition:width 0.1s;
+    z-index:999;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-dna">🧬</div>
+  <div class="hero-tag">運動醫學 × 表觀遺傳</div>
+  <h1>你的運動<br>可能正在「訓練你的基因」</h1>
+  <p>每一次規律運動，都在悄悄重新調整你的身體設定</p>
+</div>
+
+<div class="article">
+
+  <!-- SECTION 1: Story -->
+  <div class="section">
+    <h2><span class="icon">🏔️</span>一個來自戰爭的啟示</h2>
+    <p>1944 年冬天，二戰末期的歐洲發生了一段震撼歷史的事件——<strong>Dutch Hunger Winter（荷蘭飢荒）</strong>。</p>
+    <p>當時食物極度短缺，許多孕婦每天只能攝取極少熱量。多年後，科學家追蹤那些在飢荒期間出生的孩子，發現一個令人震驚的現象：</p>
+    <div class="highlight">
+      這些人在成年後，更容易出現<br>
+      <strong>肥胖、糖尿病與心血管疾病</strong>——<br>
+      但他們的基因序列，並沒有改變。
+    </div>
+    <p>真正改變的是：<strong>基因如何被啟動與表現。</strong></p>
+  </div>
+
+  <!-- SECTION 2: Epigenetics -->
+  <div class="section">
+    <h2><span class="icon">📖</span>表觀遺傳：基因不只是「有或沒有」</h2>
+    <p>現代醫學把這種現象稱為 <strong>Epigenetics（表觀遺傳）</strong>。</p>
+    <div class="quote-card">
+      基因就像一本書<br>
+      <span style="font-size:14px;font-weight:400;opacity:0.85">生活方式，決定哪些頁被翻開。</span>
+    </div>
+    <p>你天生的 DNA 不會輕易改變，但你每天的選擇，卻默默決定著哪些基因「開啟」、哪些「沉默」。</p>
+  </div>
+
+  <!-- SECTION 3: Exercise -->
+  <div class="section">
+    <h2><span class="icon">🏃</span>運動如何影響你的基因表現？</h2>
+    <p>近年的運動醫學研究發現，規律運動帶來的影響，不只是肌肉增加或體能提升。</p>
+    <p>運動會影響身體內許多<strong>基因的表達模式</strong>，包括：</p>
+    <ul class="styled-list">
+      <li data-icon="⚡">提升能量代謝相關基因的表現</li>
+      <li data-icon="🩸">改善胰島素敏感性，降低糖尿病風險</li>
+      <li data-icon="🔥">降低慢性發炎反應基因的活性</li>
+      <li data-icon="💪">增強肌肉適應與修復能力</li>
+    </ul>
+    <div class="stats-row">
+      <div class="stat-card"><div class="num">↓30%</div><div class="label">規律運動者慢性發炎指標</div></div>
+      <div class="stat-card"><div class="num">↑40%</div><div class="label">粒線體生成效率</div></div>
+      <div class="stat-card"><div class="num">數週</div><div class="label">可見基因表現變化</div></div>
+    </div>
+    <div class="quote-card">
+      運動不只是改變體型<br>
+      <span style="font-size:14px;font-weight:400;opacity:0.85">而是在慢慢調整你的生理設定</span>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Lifestyle -->
+  <div class="section">
+    <h2><span class="icon">🌱</span>從運動醫學的角度來看</h2>
+    <p>健康從來不是一兩次努力的結果，而是<strong>長期生活方式的累積影響</strong>。</p>
+    <p>你每天的選擇都在發揮作用：</p>
+    <ul class="styled-list">
+      <li data-icon="🏋️">是否規律運動</li>
+      <li data-icon="🥗">吃什麼食物</li>
+      <li data-icon="😴">睡眠是否充足</li>
+      <li data-icon="🧘">壓力是否過高</li>
+    </ul>
+    <div class="highlight">
+      這些都可能透過表觀遺傳機制，慢慢調整你的身體，甚至影響下一代。
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing" id="closing">
+    <div style="font-size:48px;margin-bottom:16px">✍️</div>
+    <p class="big">基因給我們「可能性」<br>生活方式決定「方向」</p>
+    <p>別低估每一次運動、每一次健康的選擇。<br>你不只是為了今天的健康而努力。</p>
+    <div style="background:rgba(255,255,255,0.15);border-radius:12px;padding:20px;margin-top:10px">
+      <p style="font-size:17px;font-weight:700">你正在為未來的自己<br>重新寫下一段身體的使用說明書。</p>
+    </div>
+  </div>
+
+  <!-- SHARE -->
+  <div class="share-bar">
+    <h3>📢 覺得有幫助？分享給朋友吧！</h3>
+    <div class="share-buttons">
+      <button class="btn btn-fb" onclick="shareFB()">
+        <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.27h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+        Facebook 分享
+      </button>
+      <button class="btn btn-line" onclick="shareLINE()">
+        <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINE 分享
+      </button>
+      <button class="btn btn-copy" id="copyBtn" onclick="copyLink()">
+        🔗 複製連結
+      </button>
+    </div>
+  </div>
+
+  <footer>醫學與運動保健衛教文章｜健康知識分享</footer>
+</div>
+
+<script>
+  // Scroll progress
+  window.addEventListener('scroll',()=>{
+    const el=document.getElementById('progress');
+    const h=document.documentElement;
+    const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+    el.style.width=pct+'%';
+  });
+
+  // Intersection observer for fade-in
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:0.12});
+  document.querySelectorAll('.section,.closing').forEach(el=>obs.observe(el));
+
+  // Share functions
+  const pageUrl=encodeURIComponent(window.location.href);
+  const pageTitle=encodeURIComponent('你的運動，可能正在訓練你的基因 — 表觀遺傳與運動醫學');
+
+  function shareFB(){
+    window.open('https://www.facebook.com/sharer/sharer.php?u='+pageUrl,'_blank');
+  }
+  function shareLINE(){
+    window.open('https://social-plugins.line.me/lineit/share?url='+pageUrl,'_blank');
+  }
+  function copyLink(){
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      const btn=document.getElementById('copyBtn');
+      btn.textContent='✅ 已複製！';
+      btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent='🔗 複製連結';btn.classList.remove('copied')},2000);
+    });
+  }
+</script>
+</body>
+</html>
