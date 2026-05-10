@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>荷蘭飢荒研究課程回饋</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    background: #f0f4f8;
+    color: #2d3748;
+    min-height: 100vh;
+    padding: 30px 16px 60px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: linear-gradient(135deg, #2b6cb0, #2c5282);
+    color: white;
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(43,108,176,0.25);
+  }
+
+  header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+  header p { font-size: 0.9rem; opacity: 0.88; line-height: 1.6; }
+
+  /* Progress */
+  .progress-wrap {
+    background: white;
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3182ce, #63b3ed);
+    border-radius: 99px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  .progress-label { font-size: 0.82rem; color: #718096; white-space: nowrap; }
+
+  /* Question card */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-left: 4px solid #e2e8f0;
+    transition: border-color 0.2s;
+  }
+  .card.answered { border-left-color: #3182ce; }
+  .card.error { border-left-color: #e53e3e; background: #fff5f5; }
+
+  .q-header {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .q-num {
+    background: #ebf4ff;
+    color: #2b6cb0;
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 3px 9px;
+    border-radius: 99px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .q-text { font-size: 0.97rem; line-height: 1.6; font-weight: 500; }
+
+  /* Likert options */
+  .likert {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .likert-btn {
+    flex: 1;
+    min-width: 70px;
+    padding: 9px 6px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f7fafc;
+    color: #4a5568;
+    font-size: 0.78rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.4;
+    user-select: none;
+  }
+  .likert-btn:hover { border-color: #90cdf4; background: #ebf8ff; color: #2b6cb0; }
+  .likert-btn.selected {
+    border-color: #3182ce;
+    background: #3182ce;
+    color: white;
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(49,130,206,0.35);
+  }
+
+  /* Open comment */
+  .comment-wrap { margin-top: 6px; }
+  textarea {
+    width: 100%;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 90px;
+    background: #f7fafc;
+    color: #2d3748;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  textarea:focus { outline: none; border-color: #3182ce; background: white; }
+
+  /* Error msg */
+  .err-msg { color: #e53e3e; font-size: 0.8rem; margin-top: 8px; display: none; }
+  .card.error .err-msg { display: block; }
+
+  /* Submit */
+  .submit-wrap { text-align: center; margin-top: 28px; }
+  .submit-btn {
+    background: linear-gradient(135deg, #2b6cb0, #2c5282);
+    color: white;
+    border: none;
+    padding: 14px 48px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(43,108,176,0.3);
+    transition: all 0.2s;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(43,108,176,0.4); }
+  .submit-btn:active { transform: translateY(0); }
+
+  .global-err {
+    color: #e53e3e;
+    font-size: 0.88rem;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* Thank you */
+  #thankyou {
+    display: none;
+    text-align: center;
+    background: white;
+    border-radius: 14px;
+    padding: 56px 32px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .check-icon {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #38a169, #276749);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+  }
+  #thankyou h2 { font-size: 1.5rem; margin-bottom: 10px; color: #2d3748; }
+  #thankyou p { color: #718096; line-height: 1.7; }
+
+  @media (max-width: 480px) {
+    .likert { gap: 5px; }
+    .likert-btn { min-width: 56px; font-size: 0.72rem; padding: 8px 4px; }
+    header h1 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🌷 荷蘭飢荒研究課程回饋問卷</h1>
+    <p>請根據你的學習經驗，選擇最符合你真實想法的選項。本問卷共 10 題，約需 3 分鐘完成。</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 10 已完成</div>
+  </div>
+
+  <div id="surveyForm">
+
+    <!-- Q1 -->
+    <div class="card" id="card-q1">
+      <div class="q-header">
+        <span class="q-num">Q1</span>
+        <span class="q-text">在閱讀這篇研究之前，我低估了「胎兒期環境」對成人疾病的影響。</span>
+      </div>
+      <div class="likert" id="q1">
+        <div class="likert-btn" onclick="select('q1',1,this)">強烈不同意</div>
+        <div class="likert-btn" onclick="select('q1',2,this)">不同意</div>
+        <div class="likert-btn" onclick="select('q1',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q1',4,this)">同意</div>
+        <div class="likert-btn" onclick="select('q1',5,this)">強烈同意</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card" id="card-q2">
+      <div class="q-header">
+        <span class="q-num">Q2</span>
+        <span class="q-text">這篇研究讓我重新思考「慢性病只與成年生活方式相關」的想法。</span>
+      </div>
+      <div class="likert" id="q2">
+        <div class="likert-btn" onclick="select('q2',1,this)">強烈不同意</div>
+        <div class="likert-btn" onclick="select('q2',2,this)">不同意</div>
+        <div class="likert-btn" onclick="select('q2',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q2',4,this)">同意</div>
+        <div class="likert-btn" onclick="select('q2',5,this)">強烈同意</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="card" id="card-q3">
+      <div class="q-header">
+        <span class="q-num">Q3</span>
+        <span class="q-text">在理解這篇研究設計（自然實驗、歷史隊列）時，我曾感到困惑。</span>
+      </div>
+      <div class="likert" id="q3">
+        <div class="likert-btn" onclick="select('q3',1,this)">完全沒有困惑</div>
+        <div class="likert-btn" onclick="select('q3',2,this)">稍微困惑</div>
+        <div class="likert-btn" onclick="select('q3',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q3',4,this)">有些困惑</div>
+        <div class="likert-btn" onclick="select('q3',5,this)">非常困惑</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="card" id="card-q4">
+      <div class="q-header">
+        <span class="q-num">Q4</span>
+        <span class="q-text">我認為這篇研究的證據足以支持「胎兒期營養影響成人疾病風險」的觀點。</span>
+      </div>
+      <div class="likert" id="q4">
+        <div class="likert-btn" onclick="select('q4',1,this)">強烈不同意</div>
+        <div class="likert-btn" onclick="select('q4',2,this)">不同意</div>
+        <div class="likert-btn" onclick="select('q4',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q4',4,this)">同意</div>
+        <div class="likert-btn" onclick="select('q4',5,this)">強烈同意</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="card" id="card-q5">
+      <div class="q-header">
+        <span class="q-num">Q5</span>
+        <span class="q-text">在閱讀這篇研究時，我開始思考研究中的潛在混雜因子（confounding）。</span>
+      </div>
+      <div class="likert" id="q5">
+        <div class="likert-btn" onclick="select('q5',1,this)">完全沒有</div>
+        <div class="likert-btn" onclick="select('q5',2,this)">很少</div>
+        <div class="likert-btn" onclick="select('q5',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q5',4,this)">有</div>
+        <div class="likert-btn" onclick="select('q5',5,this)">很多</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="card" id="card-q6">
+      <div class="q-header">
+        <span class="q-num">Q6</span>
+        <span class="q-text">這篇研究改變了我對「疾病預防應該從何時開始」的看法。</span>
+      </div>
+      <div class="likert" id="q6">
+        <div class="likert-btn" onclick="select('q6',1,this)">完全沒有改變</div>
+        <div class="likert-btn" onclick="select('q6',2,this)">有一點改變</div>
+        <div class="likert-btn" onclick="select('q6',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q6',4,this)">明顯改變</div>
+        <div class="likert-btn" onclick="select('q6',5,this)">非常大改變</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="card" id="card-q7">
+      <div class="q-header">
+        <span class="q-num">Q7</span>
+        <span class="q-text">我現在有信心向別人解釋這篇研究的核心發現。</span>
+      </div>
+      <div class="likert" id="q7">
+        <div class="likert-btn" onclick="select('q7',1,this)">完全沒有信心</div>
+        <div class="likert-btn" onclick="select('q7',2,this)">不太有信心</div>
+        <div class="likert-btn" onclick="select('q7',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q7',4,this)">有信心</div>
+        <div class="likert-btn" onclick="select('q7',5,this)">非常有信心</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="card" id="card-q8">
+      <div class="q-header">
+        <span class="q-num">Q8</span>
+        <span class="q-text">即使讀完這篇研究，我仍對某些機制（例如表觀遺傳）感到不確定。</span>
+      </div>
+      <div class="likert" id="q8">
+        <div class="likert-btn" onclick="select('q8',1,this)">完全不同意</div>
+        <div class="likert-btn" onclick="select('q8',2,this)">不同意</div>
+        <div class="likert-btn" onclick="select('q8',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q8',4,this)">同意</div>
+        <div class="likert-btn" onclick="select('q8',5,this)">強烈同意</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="card" id="card-q9">
+      <div class="q-header">
+        <span class="q-num">Q9</span>
+        <span class="q-text">這篇研究讓我更重視早期生命階段的健康介入。</span>
+      </div>
+      <div class="likert" id="q9">
+        <div class="likert-btn" onclick="select('q9',1,this)">強烈不同意</div>
+        <div class="likert-btn" onclick="select('q9',2,this)">不同意</div>
+        <div class="likert-btn" onclick="select('q9',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q9',4,this)">同意</div>
+        <div class="likert-btn" onclick="select('q9',5,this)">強烈同意</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="card" id="card-q10">
+      <div class="q-header">
+        <span class="q-num">Q10</span>
+        <span class="q-text">這篇研究讓我重新思考運動與慢性疾病預防的時間點。</span>
+      </div>
+      <div class="likert" id="q10">
+        <div class="likert-btn" onclick="select('q10',1,this)">強烈不同意</div>
+        <div class="likert-btn" onclick="select('q10',2,this)">不同意</div>
+        <div class="likert-btn" onclick="select('q10',3,this)">普通</div>
+        <div class="likert-btn" onclick="select('q10',4,this)">同意</div>
+        <div class="likert-btn" onclick="select('q10',5,this)">強烈同意</div>
+      </div>
+      <div class="err-msg">⚠ 請選擇一個選項</div>
+    </div>
+
+    <!-- Open comment -->
+    <div class="card answered" id="card-comment">
+      <div class="q-header">
+        <span class="q-num" style="background:#f0fff4;color:#276749;">選填</span>
+        <span class="q-text">還有什麼想補充的想法或建議嗎？（開放式回答）</span>
+      </div>
+      <div class="comment-wrap">
+        <textarea id="comment" placeholder="請在此輸入你的想法……"></textarea>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+      <button class="submit-btn" onclick="submitSurvey()">📩 提交問卷</button>
+      <div class="global-err" id="globalErr">⚠ 請完成所有題目後再提交。</div>
+    </div>
+  </div>
+
+  <!-- Thank you screen -->
+  <div id="thankyou">
+    <div class="check-icon">✓</div>
+    <h2>感謝你的回饋！</h2>
+    <p>你的答案已成功提交。<br>你的意見將有助於改進課程內容與教學設計。<br><br>
+    <span style="color:#a0aec0;font-size:0.85rem;">荷蘭飢荒研究課程團隊</span></p>
+  </div>
+</div>
+
+<script>
+  const answers = {};
+
+  function select(qid, val, el) {
+    answers[qid] = val;
+    const btns = document.querySelectorAll(`#${qid} .likert-btn`);
+    btns.forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    const card = document.getElementById(`card-${qid}`);
+    card.classList.add('answered');
+    card.classList.remove('error');
+    updateProgress();
+
+    // Auto-scroll to next unanswered question
+    const num = parseInt(qid.replace('q', ''));
+    let nextCard = null;
+    for (let i = num + 1; i <= 10; i++) {
+      if (!answers[`q${i}`]) {
+        nextCard = document.getElementById(`card-q${i}`);
+        break;
+      }
+    }
+    if (nextCard) {
+      setTimeout(() => nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+    } else {
+      // All answered — scroll to comment / submit
+      setTimeout(() => document.getElementById('card-comment').scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
+    }
+  }
+
+  function updateProgress() {
+    const total = 10;
+    const done = Object.keys(answers).length;
+    const pct = (done / total) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${done} / ${total} 已完成`;
+  }
+
+  function submitSurvey() {
+    let valid = true;
+    for (let i = 1; i <= 10; i++) {
+      const card = document.getElementById(`card-q${i}`);
+      if (!answers[`q${i}`]) {
+        card.classList.add('error');
+        card.classList.remove('answered');
+        valid = false;
+      }
+    }
+    const ge = document.getElementById('globalErr');
+    if (!valid) {
+      ge.style.display = 'block';
+      // scroll to first error
+      const firstErr = document.querySelector('.card.error');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    ge.style.display = 'none';
+    document.getElementById('surveyForm').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
+    document.getElementById('thankyou').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

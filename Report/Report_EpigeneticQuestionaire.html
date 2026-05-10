@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>運動醫學與基因悖論</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#0d1b2a;color:#e0e8f0;min-height:100vh;padding:20px}
+  .container{max-width:760px;margin:0 auto}
+
+  /* Header */
+  .header{text-align:center;padding:36px 0 24px}
+  .header h1{font-size:1.8em;color:#f0c040;letter-spacing:1px;text-shadow:0 0 20px rgba(240,192,64,.4)}
+  .header p{color:#8ab4cc;margin-top:8px;font-size:.95em}
+  .dna-icon{font-size:2.8em;display:block;margin-bottom:10px}
+
+  /* Progress */
+  .progress-wrap{background:#1a2e42;border-radius:20px;height:8px;margin-bottom:28px;overflow:hidden}
+  .progress-bar{height:100%;background:linear-gradient(90deg,#f0c040,#f07040);border-radius:20px;transition:width .4s ease}
+  .progress-label{text-align:right;font-size:.8em;color:#8ab4cc;margin-bottom:6px}
+
+  /* Question card */
+  .q-card{background:#152233;border:1px solid #1e3550;border-radius:14px;padding:28px;margin-bottom:20px;display:none;animation:fadeIn .35s ease}
+  .q-card.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .q-num{font-size:.78em;color:#f0c040;font-weight:700;letter-spacing:2px;margin-bottom:8px;text-transform:uppercase}
+  .q-text{font-size:1.12em;font-weight:600;color:#cde;line-height:1.55;margin-bottom:18px}
+
+  /* Options */
+  .options{display:flex;flex-direction:column;gap:10px}
+  .opt{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;border:1.5px solid #1e3550;cursor:pointer;transition:all .2s;background:#0d1b2a}
+  .opt:hover{border-color:#f0c040;background:#1a2e42}
+  .opt.selected{border-color:#f0c040;background:#1e3550}
+  .opt.correct{border-color:#4caf76;background:#0d2e1a;pointer-events:none}
+  .opt.wrong{border-color:#e05050;background:#2e0d0d;pointer-events:none}
+  .opt.reveal{border-color:#4caf76;background:#0d2e1a;pointer-events:none}
+  .opt-label{width:28px;height:28px;border-radius:50%;background:#1e3550;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85em;flex-shrink:0;color:#f0c040}
+  .opt-text{font-size:.95em;color:#cde}
+
+  /* Nav buttons */
+  .nav{display:flex;justify-content:flex-end;margin-top:20px;gap:10px}
+  .btn{padding:10px 26px;border:none;border-radius:8px;font-size:.95em;cursor:pointer;font-weight:600;transition:all .2s}
+  .btn-next{background:#f0c040;color:#0d1b2a}
+  .btn-next:hover{background:#f0a820}
+  .btn-next:disabled{opacity:.4;cursor:default}
+
+  /* Result */
+  #result{display:none;animation:fadeIn .5s ease}
+  .result-card{background:#152233;border:1px solid #1e3550;border-radius:14px;padding:36px;text-align:center}
+  .score-circle{width:130px;height:130px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 24px;border:4px solid #f0c040;background:#0d1b2a}
+  .score-num{font-size:2.4em;font-weight:800;color:#f0c040}
+  .score-sub{font-size:.8em;color:#8ab4cc}
+  .result-title{font-size:1.4em;font-weight:700;margin-bottom:10px;color:#f0c040}
+  .result-msg{color:#8ab4cc;line-height:1.7;margin-bottom:24px}
+  .breakdown{text-align:left;margin-top:20px}
+  .breakdown-title{font-size:.85em;color:#8ab4cc;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase}
+  .b-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #1e3550;font-size:.9em}
+  .b-row:last-child{border:none}
+  .b-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8em;font-weight:700}
+  .b-ok{background:#0d2e1a;color:#4caf76}
+  .b-no{background:#2e0d0d;color:#e05050}
+  .b-qtext{flex:1;color:#cde}
+  .b-ans{font-size:.82em;color:#8ab4cc}
+  .btn-retry{background:#f0c040;color:#0d1b2a;padding:12px 32px;border:none;border-radius:8px;font-size:1em;font-weight:700;cursor:pointer;margin-top:24px}
+  .btn-retry:hover{background:#f0a820}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <span class="dna-icon">🧬</span>
+    <h1>運動醫學與基因悖論</h1>
+    <p>測試你對 DNA 與運動命運的反直覺理解</p>
+  </div>
+
+  <div id="quizWrap">
+    <div class="progress-label"><span id="pLabel">第 1 題，共 10 題</span></div>
+    <div class="progress-wrap"><div class="progress-bar" id="pBar" style="width:10%"></div></div>
+    <div id="qContainer"></div>
+    <div class="nav">
+      <button class="btn btn-next" id="nextBtn" disabled onclick="next()">下一題 ▶</button>
+    </div>
+  </div>
+
+  <div id="result">
+    <div class="result-card">
+      <div class="score-circle">
+        <div class="score-num" id="rScore">0/10</div>
+        <div class="score-sub">答對題數</div>
+      </div>
+      <div class="result-title" id="rTitle"></div>
+      <div class="result-msg" id="rMsg"></div>
+      <div class="breakdown">
+        <div class="breakdown-title">📋 詳細解析</div>
+        <div id="breakdownList"></div>
+      </div>
+      <button class="btn-retry" onclick="restart()">🔄 再測一次</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const qs = [
+  {q:"你的運動天賦真的完全由DNA決定嗎？",opts:["是，基因決定一切命運。","否，只佔20-50%，生活習慣更關鍵。","DNA無關緊要，全靠努力。","只有天才有好基因。"],ans:1,exp:"基因僅佔運動天賦的 20–50%，後天訓練與生活習慣同樣至關重要。"},
+  {q:"為什麼雙胞胎運動表現可能天差地遠？",opts:["基因相同，絕不可能。","訓練與環境改變基因表現。","其中一個一定是基因突變。","運氣問題。"],ans:1,exp:"即使基因序列相同，不同的訓練環境與生活習慣可透過表觀遺傳改變基因的表現方式。"},
+  {q:"運動如何「改寫」你的DNA？",opts:["不可能，DNA固定不變。","透過表觀遺傳開關基因。","只改變DNA序列。","吃維生素就行。"],ans:1,exp:"運動透過表觀遺傳機制（如甲基化）打開或關閉特定基因，不改變序列但影響表現。"},
+  {q:"ACTN3基因讓你成為短跑王，為何不是絕對？",opts:["有它就一定贏。","需搭配訓練才發揮。","只適合馬拉松。","基因無效。"],ans:1,exp:"ACTN3 是爆發力相關基因，但沒有系統性訓練，基因潛力無法轉化為實際表現。"},
+  {q:"年輕不練肌肉，到老後難追回？還是反過來？",opts:["太晚了，基因鎖定。","早練存肌核，晚動更有效。","年紀越大越易練。","無關年齡。"],ans:1,exp:"年輕時累積的肌核（myonuclei）會長期保留，即使停練後重新訓練仍比從未練過者恢復更快。"},
+  {q:"基因檢測說你耐力差，該放棄長跑？",opts:["是，聽基因的。","否，訓練可提升VO₂max一半。","只測一次就準。","檢測無用。"],ans:1,exp:"科學研究顯示，後天有氧訓練可提升 VO₂max 達 40–50%，基因檢測結果不是放棄的理由。"},
+  {q:"久坐族基因好，也能變運動健將？",opts:["不可能，基因浪費。","能，習慣激活潛力。","基因決定坐姿。","只靠藥物。"],ans:1,exp:"好的基因提供潛力，但必須透過持續運動習慣才能激活，潛力不會自動變成能力。"},
+  {q:"表觀遺傳學在運動醫學有何反直覺應用？",opts:["預測傷害風險。","改變DNA序列。","只看家族史。","無醫療價值。"],ans:0,exp:"表觀遺傳標記可用於評估運動員的傷害風險與恢復能力，是運動醫學的新興應用方向。"},
+  {q:"蛋白質攝取如何與基因互動提升表現？",opts:["基因差就沒效。","基因型導引最佳量，提高19%。","多吃就贏。","無關基因。"],ans:1,exp:"依據個人基因型客製化蛋白質攝取量，研究顯示可比一般建議提升約 19% 的肌肉合成效率。"},
+  {q:"DNA是生命藍圖，但運動命運最終由誰定？",opts:["純粹基因。","你的生活選擇與環境。","教練決定。","隨機。"],ans:1,exp:"基因是底稿，但你的訓練、飲食、睡眠與心態才是最終決定運動表現的關鍵變數。"}
+];
+
+let cur=0, userAns=[], answered=false;
+
+function render(){
+  const q=qs[cur];
+  const labels=['A','B','C','D'];
+  document.getElementById('pLabel').textContent=`第 ${cur+1} 題，共 ${qs.length} 題`;
+  document.getElementById('pBar').style.width=`${((cur+1)/qs.length)*100}%`;
+  document.getElementById('nextBtn').textContent = cur===qs.length-1 ? '查看結果 ✓' : '下一題 ▶';
+  document.getElementById('nextBtn').disabled=true;
+  answered=false;
+
+  const html=`
+    <div class="q-card active">
+      <div class="q-num">第 ${cur+1} 題</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,i)=>`
+          <div class="opt" id="opt${i}" onclick="pick(${i})">
+            <div class="opt-label">${labels[i]}</div>
+            <div class="opt-text">${o}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  document.getElementById('qContainer').innerHTML=html;
+}
+
+function pick(i){
+  if(answered) return;
+  answered=true;
+  userAns[cur]=i;
+  const correct=qs[cur].ans;
+  for(let j=0;j<4;j++){
+    const el=document.getElementById('opt'+j);
+    if(j===correct) el.classList.add('correct');
+    else if(j===i && i!==correct) el.classList.add('wrong');
+    else el.style.opacity='.45';
+  }
+  document.getElementById('nextBtn').disabled=false;
+}
+
+function next(){
+  cur++;
+  if(cur<qs.length){render();}
+  else{showResult();}
+}
+
+function showResult(){
+  document.getElementById('quizWrap').style.display='none';
+  const res=document.getElementById('result');
+  res.style.display='block';
+  let score=0;
+  userAns.forEach((a,i)=>{if(a===qs[i].ans)score++;});
+  document.getElementById('rScore').textContent=`${score}/${qs.length}`;
+  const pct=score/qs.length;
+  let title,msg;
+  if(pct===1){title='🏆 基因悖論大師！';msg='完美！你對運動醫學與基因科學的理解已達專家水準，繼續鑽研這門迷人的學問吧。'}
+  else if(pct>=.8){title='🥇 優秀！';msg='你對基因與運動的互動有深刻理解，只差一步就完美了！'}
+  else if(pct>=.6){title='💪 良好！';msg='基礎扎實，但還有一些反直覺的概念值得再深入探索。'}
+  else if(pct>=.4){title='📚 繼續加油！';msg='基因科學充滿反直覺，多閱讀運動醫學相關資料，你一定能進步！'}
+  else{title='🧪 入門階段';msg='別氣餒，這些知識確實挑戰直覺。建議從表觀遺傳學與訓練適應開始學起！'}
+  document.getElementById('rTitle').textContent=title;
+  document.getElementById('rMsg').textContent=msg;
+
+  const labels=['A','B','C','D'];
+  let html='';
+  qs.forEach((q,i)=>{
+    const ok=userAns[i]===q.ans;
+    html+=`<div class="b-row">
+      <div class="b-icon ${ok?'b-ok':'b-no'}">${ok?'✓':'✗'}</div>
+      <div style="flex:1">
+        <div class="b-qtext">Q${i+1}. ${q.q}</div>
+        <div class="b-ans">✅ 正確：${labels[q.ans]}｜${q.exp}</div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('breakdownList').innerHTML=html;
+}
+
+function restart(){
+  cur=0;userAns=[];
+  document.getElementById('result').style.display='none';
+  document.getElementById('quizWrap').style.display='block';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
