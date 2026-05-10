@@ -1,1 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TRF 文獻反思問卷</title>
 
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: #f5f7fb;
+      color: #222;
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.2rem;
+      color: #1f3c88;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: #1f3c88;
+      border-left: 5px solid #1f3c88;
+      padding-left: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .meta {
+      background: #eef3ff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .meta p {
+      margin: 8px 0;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .question {
+      margin-top: 30px;
+      padding: 24px;
+      background: #fafbff;
+      border-radius: 16px;
+      border: 1px solid #dbe4ff;
+    }
+
+    .question-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .question-type {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .primary {
+      background: #1f3c88;
+      color: white;
+    }
+
+    .primary:hover {
+      background: #162d66;
+    }
+
+    .secondary {
+      background: #e5e7eb;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .progress {
+      margin-top: 10px;
+      color: #444;
+      font-weight: bold;
+    }
+
+    .citation {
+      font-size: 0.95rem;
+      color: #444;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>TRF 文獻反思問卷</h1>
+  <div class="subtitle">
+    Time-Restricted Feeding Study 文獻反思問卷
+  </div>
+
+  <div class="meta">
+    <p><strong>體育大學碩士班｜文獻閱讀反思</strong></p>
+
+    <p>
+      Hutchison et al. (2019) ｜ Obesity ｜ Randomized Crossover Trial
+    </p>
+
+    <p>
+      關鍵字：
+      時間限制進食（TRF）、
+      晝夜節律、
+      葡萄糖耐受性、
+      CGM、
+      代謝健康
+    </p>
+
+    <div class="citation">
+      Hutchison AT, Regmi P, Manoogian ENC, et al. (2019).
+      Time-Restricted Feeding Improves Glucose Tolerance in Men at Risk for Type 2 Diabetes:
+      A Randomized Crossover Trial.
+      Obesity, 27(5), 724–732.
+    </div>
+  </div>
+
+  <div class="field">
+    <label>姓名</label>
+    <input type="text" placeholder="例：王○明">
+  </div>
+
+  <div class="field">
+    <label>日期</label>
+    <input type="date">
+  </div>
+
+  <div class="field">
+    <label>課程／教授</label>
+    <input type="text" placeholder="例：運動營養學／王老師">
+  </div>
+
+  <div class="progress">
+    答題進度：0 / 4
+  </div>
+
+  <h2>研究設計</h2>
+
+  <div class="question">
+    <div class="question-title">
+      1. 本研究採用 randomized crossover trial 的最主要優勢為何？
+    </div>
+
+    <div class="question-type">單選</div>
+
+    <div class="options">
+      <label><input type="radio" name="q1"> A. 可大幅增加樣本數</label>
+      <label><input type="radio" name="q1"> B. 每位受試者可作為自己的控制組</label>
+      <label><input type="radio" name="q1"> C. 可避免 washout effect</label>
+      <label><input type="radio" name="q1"> D. 能完全消除 selection bias</label>
+    </div>
+  </div>
+
+  <h2>結果解讀</h2>
+
+  <div class="question">
+    <div class="question-title">
+      2. 下列哪些結果支持「TRF 可改善葡萄糖調控」的結論？
+    </div>
+
+    <div class="question-type">可複選</div>
+
+    <div class="options">
+      <label><input type="checkbox"> A. glucose iAUC 顯著下降約 36%</label>
+      <label><input type="checkbox"> B. fasting triglycerides 顯著下降</label>
+      <label><input type="checkbox"> C. CGM 顯示 24 小時平均血糖全面下降</label>
+      <label><input type="checkbox"> D. TRFe 組 fasting glucose 下降</label>
+      <label><input type="checkbox"> E. 胃排空速度顯著增加</label>
+    </div>
+  </div>
+
+  <h2>理論連結</h2>
+
+  <div class="question">
+    <div class="question-title">
+      3. 本研究發現「TRFe 與 TRFd 都能改善 glucose tolerance」，最符合下列哪個理論觀點？
+    </div>
+
+    <div class="question-type">單選</div>
+
+    <div class="options">
+      <label><input type="radio" name="q3"> A. 熱量赤字才是唯一關鍵</label>
+      <label><input type="radio" name="q3"> B. 晝夜節律完全不影響代謝</label>
+      <label><input type="radio" name="q3"> C. 延長禁食時間本身可能具有代謝效益</label>
+      <label><input type="radio" name="q3"> D. 胃排空速度主導所有血糖反應</label>
+    </div>
+  </div>
+
+  <h2>專業反思</h2>
+
+  <div class="question">
+    <div class="question-title">
+      4. 本研究最值得應用於臨床或健康促進的發現是？
+    </div>
+
+    <div class="question-type">
+      單選（主觀反思，無標準答案）
+    </div>
+
+    <div class="options">
+      <label><input type="radio" name="q4"> A. 不需改變食物種類，也可能改善代謝</label>
+      <label><input type="radio" name="q4"> B. 午後進食比早餐更重要</label>
+      <label><input type="radio" name="q4"> C. CGM 不適合用於飲食研究</label>
+      <label><input type="radio" name="q4"> D. 所有 TRF 都一定能減重</label>
+    </div>
+  </div>
+
+  <h2>生成反思摘要</h2>
+
+  <textarea placeholder="請輸入你的反思摘要..."></textarea>
+
+  <div class="buttons">
+    <button class="primary">生成反思摘要</button>
+    <button class="secondary" type="reset">清除</button>
+  </div>
+
+  <div class="footer">
+    資料僅存於本機，不上傳至任何伺服器
+  </div>
+
+</div>
+
+</body>
+</html>
