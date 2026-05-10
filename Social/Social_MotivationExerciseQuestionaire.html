@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文獻理解反直覺測驗</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f0e0d;
+      --paper: #faf8f4;
+      --card: #ffffff;
+      --muted: #7a7570;
+      --accent: #c0392b;
+      --accent-light: #fdf2f1;
+      --accent-mid: #f5c6c2;
+      --correct: #1a5c3a;
+      --correct-bg: #edf7f2;
+      --correct-border: #a3d9bc;
+      --wrong: #922b21;
+      --wrong-bg: #fdf2f1;
+      --wrong-border: #f5a49e;
+      --border: #e8e4de;
+      --number-bg: #0f0e0d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Decorative top bar */
+    .topbar {
+      height: 4px;
+      background: var(--accent);
+      width: 100%;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 52px;
+      padding-bottom: 40px;
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+
+    .hero-title {
+      font-family: "Noto Serif TC", serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      color: var(--ink);
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* Score banner */
+    .score-banner {
+      display: none;
+      align-items: center;
+      gap: 16px;
+      background: var(--ink);
+      color: white;
+      border-radius: 12px;
+      padding: 18px 24px;
+      margin-bottom: 28px;
+      animation: fadeSlide 0.4s ease;
+    }
+
+    .score-banner.show { display: flex; }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .score-num {
+      font-family: "Noto Serif TC", serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .score-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+
+    .score-label strong { color: white; font-size: 16px; display: block; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 22px;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover { background: #a93226; transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-secondary:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+    /* Question cards */
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--border);
+      transition: background 0.2s ease;
+    }
+
+    .question-card:focus-within::before {
+      background: var(--accent);
+    }
+
+    .q-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .q-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .q-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .q-title {
+      font-family: "Noto Serif TC", serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+
+    .q-prompt {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: #f7f5f1;
+      border-radius: 8px;
+      border-left: 3px solid var(--border);
+      line-height: 1.7;
+    }
+
+    /* Options */
+    .options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .option {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: white;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      position: relative;
+    }
+
+    .option:hover {
+      border-color: #c8b9b4;
+      background: #fdf9f8;
+      transform: translateX(2px);
+    }
+
+    .option input[type="radio"] {
+      display: none;
+    }
+
+    .opt-indicator {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.15s;
+      background: white;
+    }
+
+    .option:hover .opt-indicator {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .option input:checked ~ .opt-content .opt-indicator,
+    .option.selected .opt-indicator {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: white;
+    }
+
+    .opt-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink);
+      padding-top: 3px;
+    }
+
+    /* Graded states */
+    .option.correct {
+      background: var(--correct-bg);
+      border-color: var(--correct-border);
+    }
+
+    .option.correct .opt-indicator {
+      background: var(--correct);
+      border-color: var(--correct);
+      color: white;
+    }
+
+    .option.wrong {
+      background: var(--wrong-bg);
+      border-color: var(--wrong-border);
+    }
+
+    .option.wrong .opt-indicator {
+      background: var(--wrong);
+      border-color: var(--wrong);
+      color: white;
+    }
+
+    /* Feedback */
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+      animation: feedbackIn 0.25s ease;
+    }
+
+    @keyframes feedbackIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback.show { display: flex; gap: 12px; align-items: flex-start; }
+
+    .feedback-icon {
+      font-size: 16px;
+      line-height: 1.7;
+      flex-shrink: 0;
+    }
+
+    .feedback.correct {
+      background: var(--correct-bg);
+      color: var(--correct);
+      border: 1px solid var(--correct-border);
+    }
+
+    .feedback.wrong {
+      background: var(--wrong-bg);
+      color: var(--wrong);
+      border: 1px solid var(--wrong-border);
+    }
+
+    /* Footer */
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 32px 16px 60px; }
+      .question-card { padding: 20px; }
+      .q-title { font-size: 17px; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar"></div>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="tag-row">
+      <span class="tag">文獻理解</span>
+      <span class="tag">生活化選擇題</span>
+      <span class="tag">每題 5 選項</span>
+    </div>
+    <h1 class="hero-title">反直覺<span>文獻</span>測驗</h1>
+    <p class="hero-sub">主題：辦公室工作者的身體活動／久坐介入研究。題目改寫成生活化情境，幫助你用更直觀的方式理解研究發現。</p>
+
+    <div id="score-banner" class="score-banner">
+      <div class="score-num" id="score-num">—</div>
+      <div class="score-label">
+        <strong id="score-headline">完成測驗</strong>
+        <span id="score-sub">共 10 題</span>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="gradeQuiz()">提交答案</button>
+      <button class="btn btn-secondary" onclick="resetQuiz()">重新作答</button>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <span class="progress-text" id="progress-text">0 / 10</span>
+  </div>
+
+  <div id="quiz"></div>
+
+  <p class="footer-note">本頁面依據研究文獻整理製作，可直接用於課堂展示、自學測驗或討論。</p>
+</div>
+
+<script>
+  const questions = [
+    {
+      title: '你開始更有運動動機，但生活沒變？',
+      prompt: '你參加公司健康計畫後，覺得自己比較想運動了，但實際上還是每天久坐。最可能的原因是？',
+      answer: 1,
+      explanation: '研究顯示，動機與自我效能可以先提升，但不一定會立刻轉成可觀察到的行為改變。',
+      options: ['你其實沒有真的變得更有動機','心理改變不一定會立刻轉成行為改變','這個研究一定是錯的','久坐只是因為懶惰','你只差更多健身器材']
+    },
+    {
+      title: '為什麼「去運動」比「少坐」更有效？',
+      prompt: '公司有兩種方案：A 鼓勵你去運動；B 叫你少坐。哪個比較容易讓人產生動機？',
+      answer: 2,
+      explanation: '相較於「少做某件事」，「去做一件明確的事」通常更容易形成具體目標與投入感。',
+      options: ['少坐，因為比較輕鬆','兩者效果完全一樣','去運動，因為是做一件更明確的事','少坐，因為不用改變習慣','都沒差']
+    },
+    {
+      title: '為什麼上課越多效果越好？',
+      prompt: '有些同事參加了 5 次健康諮詢，有些只去 1 次。結果前者效果更好。這最可能代表什麼？',
+      answer: 2,
+      explanation: '不一定是課程本身單向造成效果，也可能是本來就比較有動機的人，更願意持續參與。',
+      options: ['課程一定非常有效','去越多次就一定會變健康','本來比較有動機的人，更可能參加更多次','健康改變其實是隨機的','只是主管盯比較緊']
+    },
+    {
+      title: '為什麼大家還是一直坐？',
+      prompt: '即使公司推動站立辦公，大家還是常坐著。最合理的原因是？',
+      answer: 2,
+      explanation: '研究提到久坐本身常常已經變成習慣，單靠提醒不一定足以改變。',
+      options: ['椅子太舒服','站著會被同事笑','久坐已經變成習慣','大家根本不知道有這件事','公司沒有明文規定']
+    },
+    {
+      title: '動機變高一定是好事嗎？',
+      prompt: '你變得更有動機運動，但同時也覺得「我應該要運動，不然不行」。這可能代表？',
+      answer: 2,
+      explanation: '這可能表示自主動機增加，同時控制動機也增加；有動力不代表完全沒有壓力。',
+      options: ['完全正面結果','完全負面結果','同時增加了內在動機與外在壓力','其實沒有任何影響','代表你不適合運動']
+    },
+    {
+      title: '心理改變 vs 行為改變',
+      prompt: '如果一個人變得更有信心運動，但還沒開始運動，這代表什麼？',
+      answer: 1,
+      explanation: '心理改變可能是行為改變的前期階段，不一定能在短時間內直接看到行為成果。',
+      options: ['這代表介入失敗','心理改變可能是行為改變的前期階段','他只是嘴巴說說','表示研究完全無效','表示運動其實不重要']
+    },
+    {
+      title: '公司該怎麼做才有效？',
+      prompt: '如果你是主管，看完研究後你覺得公司最應該怎麼做？',
+      answer: 2,
+      explanation: '研究採多層次介入，重點不是只靠一種方法，而是個人支持、環境設計與組織支持一起做。',
+      options: ['只提供心理諮詢','只買健身器材','同時改變環境、制度與個人支持','先什麼都不要做','強制所有員工運動']
+    },
+    {
+      title: '為什麼「減少障礙」沒成功？',
+      prompt: '研究想降低「站著不舒服」等障礙感，但結果沒有明顯成功。最可能原因是？',
+      answer: 1,
+      explanation: '介入可能不夠強、時間不夠長，或障礙本身比原本想像得更穩固。',
+      options: ['因為這些障礙根本不重要','介入時間太短，或方法不夠強','受試者都不認真','只是問卷設計出錯','研究根本沒做統計']
+    },
+    {
+      title: '這個研究真正測到的是什麼？',
+      prompt: '以下哪一項最精準描述這篇研究的主要發現？',
+      answer: 2,
+      explanation: '比起直接改變運動量，研究更明顯看到的是心理機制，如動機與自我效能的變化。',
+      options: ['直接改變了所有人的健康狀態','直接改變了運動量','主要改變了心理機制，例如動機與自我效能','主要改變了公司文化','主要改變了飲食習慣']
+    },
+    {
+      title: '最反直覺的一點是？',
+      prompt: '以下哪個發現最違反一般人的直覺？',
+      answer: 2,
+      explanation: '很多人會以為只要動機提升，行為就會同步改變，但研究並不一定支持這種線性想像。',
+      options: ['運動有益健康','久坐對身體不好','提升動機卻沒有明顯改變行為','員工需要支持','團隊合作很重要']
+    }
+  ];
+
+  const quizEl = document.getElementById('quiz');
+  let answered = new Set();
+
+  function updateProgress() {
+    const pct = (answered.size / questions.length) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = answered.size + ' / ' + questions.length;
+  }
+
+  function renderQuiz() {
+    answered.clear();
+    updateProgress();
+    quizEl.innerHTML = questions.map((q, i) => `
+      <section class="question-card" id="q-${i}">
+        <div class="q-meta">
+          <span class="q-number">第 ${i + 1} 題</span>
+          <span class="q-dot"></span>
+          <span class="q-number">${i + 1} / ${questions.length}</span>
+        </div>
+        <div class="q-title">${q.title}</div>
+        <div class="q-prompt">${q.prompt}</div>
+        <div class="options">
+          ${q.options.map((opt, idx) => `
+            <label class="option" id="opt-${i}-${idx}" onclick="markAnswered(${i})">
+              <input type="radio" name="q-${i}" value="${idx}" />
+              <div class="opt-indicator">${String.fromCharCode(65 + idx)}</div>
+              <span class="opt-text">${opt}</span>
+            </label>
+          `).join('')}
+        </div>
+        <div class="feedback" id="feedback-${i}"></div>
+      </section>
+    `).join('');
+  }
+
+  function markAnswered(i) {
+    answered.add(i);
+    updateProgress();
+    // Highlight selected option visually
+    const radios = document.querySelectorAll(`input[name="q-${i}"]`);
+    const opts = document.querySelectorAll(`#q-${i} .option`);
+    radios.forEach((r, idx) => {
+      if (r.checked) {
+        opts.forEach(o => o.classList.remove('selected'));
+        opts[idx].classList.add('selected');
+        opts[idx].querySelector('.opt-indicator').style.background = 'var(--ink)';
+        opts[idx].querySelector('.opt-indicator').style.borderColor = 'var(--ink)';
+        opts[idx].querySelector('.opt-indicator').style.color = 'white';
+      } else {
+        opts[idx].querySelector('.opt-indicator').style.background = '';
+        opts[idx].querySelector('.opt-indicator').style.borderColor = '';
+        opts[idx].querySelector('.opt-indicator').style.color = '';
+      }
+    });
+  }
+
+  function gradeQuiz() {
+    let score = 0;
+    questions.forEach((q, i) => {
+      const selected = document.querySelector(`input[name="q-${i}"]:checked`);
+      const feedback = document.getElementById(`feedback-${i}`);
+      const options = document.querySelectorAll(`#q-${i} .option`);
+
+      options.forEach(opt => {
+        opt.classList.remove('correct', 'wrong', 'selected');
+        const ind = opt.querySelector('.opt-indicator');
+        ind.style.background = '';
+        ind.style.borderColor = '';
+        ind.style.color = '';
+        opt.style.pointerEvents = 'none';
+      });
+
+      if (!selected) {
+        feedback.className = 'feedback show wrong';
+        feedback.innerHTML = '<span class="feedback-icon">✗</span><span>未作答。正確答案是 <strong>' + String.fromCharCode(65 + q.answer) + '</strong>。' + q.explanation + '</span>';
+        options[q.answer].classList.add('correct');
+        return;
+      }
+
+      const value = Number(selected.value);
+      if (value === q.answer) {
+        score++;
+        feedback.className = 'feedback show correct';
+        feedback.innerHTML = '<span class="feedback-icon">✓</span><span>答對了！' + q.explanation + '</span>';
+        options[value].classList.add('correct');
+      } else {
+        feedback.className = 'feedback show wrong';
+        feedback.innerHTML = '<span class="feedback-icon">✗</span><span>這題答錯。正確答案是 <strong>' + String.fromCharCode(65 + q.answer) + '</strong>。' + q.explanation + '</span>';
+        options[value].classList.add('wrong');
+        options[q.answer].classList.add('correct');
+      }
+    });
+
+    const banner = document.getElementById('score-banner');
+    banner.classList.add('show');
+    document.getElementById('score-num').textContent = score + ' / ' + questions.length;
+    const pct = Math.round((score / questions.length) * 100);
+    document.getElementById('score-headline').textContent = pct >= 80 ? '優秀！理解深入' : pct >= 60 ? '不錯，繼續加油' : '再複習一次吧';
+    document.getElementById('score-sub').textContent = '答對率 ' + pct + '%，共 ' + questions.length + ' 題';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetQuiz() {
+    document.getElementById('score-banner').classList.remove('show');
+    renderQuiz();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  renderQuiz();
+</script>
+</body>
+</html>

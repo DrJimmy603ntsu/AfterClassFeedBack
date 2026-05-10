@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你的生活正在改寫你的基因嗎？</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --deep: #0f0f23;
+    --jade: #00c896;
+    --jade-glow: rgba(0,200,150,0.15);
+    --amber: #f5a623;
+    --coral: #ff6b6b;
+    --paper: #f8f5f0;
+    --mist: rgba(255,255,255,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--deep);
+    color: #e8e4dc;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(0,200,150,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 80% 80%, rgba(245,166,35,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(26,26,46,0) 0%, var(--deep) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* DNA helix decoration */
+  .dna-strand {
+    position: fixed;
+    right: -40px;
+    top: 0;
+    width: 120px;
+    height: 100vh;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 60px 0 40px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--jade);
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 900;
+    line-height: 1.3;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--jade);
+    position: relative;
+  }
+
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--jade), transparent);
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(232,228,220,0.6);
+    line-height: 1.8;
+    max-width: 460px;
+    margin: 0 auto 8px;
+  }
+
+  .pill {
+    display: inline-block;
+    background: var(--jade-glow);
+    border: 1px solid rgba(0,200,150,0.25);
+    color: var(--jade);
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-top: 16px;
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    margin: 0 0 32px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(232,228,220,0.4);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .progress-bar {
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--jade), var(--amber));
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* Question cards */
+  .question-card {
+    background: var(--mist);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    animation: fadeUp 0.6s ease both;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .question-card.answered {
+    border-color: rgba(0,200,150,0.3);
+    box-shadow: 0 0 30px rgba(0,200,150,0.06);
+  }
+
+  .question-num {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--jade);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .question-num::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,200,150,0.2);
+  }
+
+  .question-text {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .option-label::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--jade-glow), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .option-label:hover {
+    border-color: rgba(0,200,150,0.3);
+    transform: translateX(4px);
+  }
+
+  .option-label:hover::before { opacity: 1; }
+
+  input[type=radio] { display: none; }
+
+  input[type=radio]:checked + .option-label {
+    border-color: var(--jade);
+    background: rgba(0,200,150,0.12);
+    color: #fff;
+  }
+
+  input[type=radio]:checked + .option-label::before { opacity: 1; }
+
+  .option-dot {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  input[type=radio]:checked + .option-label .option-dot {
+    border-color: var(--jade);
+    background: var(--jade);
+  }
+
+  input[type=radio]:checked + .option-label .option-dot::after {
+    content: '✓';
+    font-size: 10px;
+    color: var(--deep);
+    font-weight: 900;
+  }
+
+  .option-text {
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Submit */
+  .submit-wrap {
+    padding: 10px 0;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #00c896, #00a876);
+    color: var(--deep);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,200,150,0.35);
+  }
+
+  .submit-btn:hover::after { opacity: 1; }
+  .submit-btn:active { transform: translateY(0); }
+
+  .submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Result */
+  .result-card {
+    display: none;
+    background: var(--mist);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px;
+    padding: 40px;
+    margin-top: 32px;
+    backdrop-filter: blur(10px);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .result-card.show { display: block; }
+
+  .result-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .result-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--jade);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .result-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .score-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  .score-ring-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+  }
+
+  #scoreChart {
+    position: absolute;
+    inset: 0;
+  }
+
+  .score-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-number {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .score-unit {
+    font-size: 12px;
+    color: rgba(232,228,220,0.5);
+    margin-top: 4px;
+  }
+
+  .result-text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(232,228,220,0.85);
+  }
+
+  .result-type {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  /* Dimension bars */
+  .dimensions {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .dim-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(232,228,220,0.4);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .dim-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .dim-name {
+    font-size: 13px;
+    color: rgba(232,228,220,0.7);
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  .dim-bar-wrap {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .dim-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    width: 0;
+  }
+
+  .dim-val {
+    font-size: 12px;
+    color: rgba(232,228,220,0.5);
+    width: 30px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .retry-btn {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    background: transparent;
+    color: rgba(232,228,220,0.6);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .retry-btn:hover {
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stagger delays for cards */
+  .question-card:nth-child(1) { animation-delay: 0.1s; }
+  .question-card:nth-child(2) { animation-delay: 0.2s; }
+  .question-card:nth-child(3) { animation-delay: 0.3s; }
+  .question-card:nth-child(4) { animation-delay: 0.4s; }
+  .question-card:nth-child(5) { animation-delay: 0.5s; }
+
+  .warning-msg {
+    color: var(--coral);
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .warning-msg.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<svg class="dna-strand" viewBox="0 0 120 800" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20,0 Q100,50 20,100 Q-60,150 20,200 Q100,250 20,300 Q-60,350 20,400 Q100,450 20,500 Q-60,550 20,600 Q100,650 20,700 Q-60,750 20,800" stroke="white" stroke-width="1.5" fill="none"/>
+  <path d="M100,0 Q20,50 100,100 Q180,150 100,200 Q20,250 100,300 Q180,350 100,400 Q20,450 100,500 Q180,550 100,600 Q20,650 100,700 Q180,750 100,800" stroke="white" stroke-width="1.5" fill="none"/>
+  <line x1="20" y1="50" x2="100" y2="50" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="150" x2="100" y2="150" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="250" x2="100" y2="250" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="350" x2="100" y2="350" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="450" x2="100" y2="450" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="550" x2="100" y2="550" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="650" x2="100" y2="650" stroke="white" stroke-width="1" opacity="0.5"/>
+  <line x1="20" y1="750" x2="100" y2="750" stroke="white" stroke-width="1" opacity="0.5"/>
+</svg>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-eyebrow">表觀遺傳學 · Epigenetics</div>
+    <h1>你的生活<br>正在<em>改寫</em>你的基因嗎？</h1>
+    <p class="hero-sub">DNA 不會改變，但生活方式會改變基因的表達方式。<br>用 1 分鐘，找出你的習慣正在開啟還是關閉健康基因。</p>
+    <span class="pill">5 個問題 · 立即查看結果</span>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>進度</span>
+      <span id="progressText">0 / 5</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div id="questions">
+
+    <div class="question-card" id="card-1">
+      <div class="question-num">問題 01</div>
+      <div class="question-text">你的睡眠品質如何？</div>
+      <div class="options">
+        <input type="radio" name="q1" id="q1a" value="3">
+        <label class="option-label" for="q1a">
+          <span class="option-dot"></span>
+          <span class="option-text">睡得很好，每天精力充沛</span>
+        </label>
+        <input type="radio" name="q1" id="q1b" value="2">
+        <label class="option-label" for="q1b">
+          <span class="option-dot"></span>
+          <span class="option-text">普通，偶爾感到疲憊</span>
+        </label>
+        <input type="radio" name="q1" id="q1c" value="1">
+        <label class="option-label" for="q1c">
+          <span class="option-dot"></span>
+          <span class="option-text">容易醒，睡眠品質不穩定</span>
+        </label>
+        <input type="radio" name="q1" id="q1d" value="0">
+        <label class="option-label" for="q1d">
+          <span class="option-dot"></span>
+          <span class="option-text">長期睡眠不足或失眠</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" id="card-2">
+      <div class="question-num">問題 02</div>
+      <div class="question-text">你平常的飲食習慣？</div>
+      <div class="options">
+        <input type="radio" name="q2" id="q2a" value="3">
+        <label class="option-label" for="q2a">
+          <span class="option-dot"></span>
+          <span class="option-text">以天然蔬果、原型食物為主</span>
+        </label>
+        <input type="radio" name="q2" id="q2b" value="2">
+        <label class="option-label" for="q2b">
+          <span class="option-dot"></span>
+          <span class="option-text">飲食普通，葷素均衡</span>
+        </label>
+        <input type="radio" name="q2" id="q2c" value="1">
+        <label class="option-label" for="q2c">
+          <span class="option-dot"></span>
+          <span class="option-text">常常外食，較難控制</span>
+        </label>
+        <input type="radio" name="q2" id="q2d" value="0">
+        <label class="option-label" for="q2d">
+          <span class="option-dot"></span>
+          <span class="option-text">高糖、加工食品為主</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" id="card-3">
+      <div class="question-num">問題 03</div>
+      <div class="question-text">你目前的壓力狀況？</div>
+      <div class="options">
+        <input type="radio" name="q3" id="q3a" value="3">
+        <label class="option-label" for="q3a">
+          <span class="option-dot"></span>
+          <span class="option-text">很少感到壓力，心態平穩</span>
+        </label>
+        <input type="radio" name="q3" id="q3b" value="2">
+        <label class="option-label" for="q3b">
+          <span class="option-dot"></span>
+          <span class="option-text">偶爾有壓力，可以調節</span>
+        </label>
+        <input type="radio" name="q3" id="q3c" value="1">
+        <label class="option-label" for="q3c">
+          <span class="option-dot"></span>
+          <span class="option-text">經常感到有壓力</span>
+        </label>
+        <input type="radio" name="q3" id="q3d" value="0">
+        <label class="option-label" for="q3d">
+          <span class="option-dot"></span>
+          <span class="option-text">長期高壓，難以放鬆</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" id="card-4">
+      <div class="question-num">問題 04</div>
+      <div class="question-text">你的日常身體活動量？</div>
+      <div class="options">
+        <input type="radio" name="q4" id="q4a" value="3">
+        <label class="option-label" for="q4a">
+          <span class="option-dot"></span>
+          <span class="option-text">每天都有規律運動或活動</span>
+        </label>
+        <input type="radio" name="q4" id="q4b" value="2">
+        <label class="option-label" for="q4b">
+          <span class="option-dot"></span>
+          <span class="option-text">每週運動 2–3 次</span>
+        </label>
+        <input type="radio" name="q4" id="q4c" value="1">
+        <label class="option-label" for="q4c">
+          <span class="option-dot"></span>
+          <span class="option-text">偶爾活動，不夠規律</span>
+        </label>
+        <input type="radio" name="q4" id="q4d" value="0">
+        <label class="option-label" for="q4d">
+          <span class="option-dot"></span>
+          <span class="option-text">幾乎沒有運動習慣</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card" id="card-5">
+      <div class="question-num">問題 05</div>
+      <div class="question-text">過去半年你的整體健康趨勢？</div>
+      <div class="options">
+        <input type="radio" name="q5" id="q5a" value="3">
+        <label class="option-label" for="q5a">
+          <span class="option-dot"></span>
+          <span class="option-text">越來越好，狀態提升</span>
+        </label>
+        <input type="radio" name="q5" id="q5b" value="2">
+        <label class="option-label" for="q5b">
+          <span class="option-dot"></span>
+          <span class="option-text">大致維持，沒有明顯變化</span>
+        </label>
+        <input type="radio" name="q5" id="q5c" value="1">
+        <label class="option-label" for="q5c">
+          <span class="option-dot"></span>
+          <span class="option-text">有些下降，精力減退</span>
+        </label>
+        <input type="radio" name="q5" id="q5d" value="0">
+        <label class="option-label" for="q5d">
+          <span class="option-dot"></span>
+          <span class="option-text">明顯變差，常感不適</span>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="submit-wrap">
+    <button class="submit-btn" onclick="calculate()" id="submitBtn">查看我的基因健康指數 →</button>
+    <p class="warning-msg" id="warningMsg">請完成所有問題後再查看結果</p>
+  </div>
+
+  <div class="result-card" id="result">
+    <div class="result-header">
+      <div class="result-eyebrow">分析結果</div>
+      <div class="result-title" id="resultType"></div>
+    </div>
+
+    <div class="score-display">
+      <div class="score-ring-wrap">
+        <canvas id="scoreChart"></canvas>
+        <div class="score-center">
+          <div class="score-number" id="scoreNum">0</div>
+          <div class="score-unit">/ 100</div>
+        </div>
+      </div>
+      <div class="result-text" id="resultText"></div>
+    </div>
+
+    <div class="dimensions">
+      <div class="dim-label">各項指標</div>
+      <div class="dim-row">
+        <div class="dim-name">睡眠</div>
+        <div class="dim-bar-wrap"><div class="dim-bar-fill" id="d1" style="background: linear-gradient(90deg, #00c896, #00a876)"></div></div>
+        <div class="dim-val" id="dv1"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">飲食</div>
+        <div class="dim-bar-wrap"><div class="dim-bar-fill" id="d2" style="background: linear-gradient(90deg, #f5a623, #e09010)"></div></div>
+        <div class="dim-val" id="dv2"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">壓力</div>
+        <div class="dim-bar-wrap"><div class="dim-bar-fill" id="d3" style="background: linear-gradient(90deg, #a78bfa, #7c3aed)"></div></div>
+        <div class="dim-val" id="dv3"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">運動</div>
+        <div class="dim-bar-wrap"><div class="dim-bar-fill" id="d4" style="background: linear-gradient(90deg, #fb923c, #ea580c)"></div></div>
+        <div class="dim-val" id="dv4"></div>
+      </div>
+      <div class="dim-row">
+        <div class="dim-name">健康趨勢</div>
+        <div class="dim-bar-wrap"><div class="dim-bar-fill" id="d5" style="background: linear-gradient(90deg, #38bdf8, #0369a1)"></div></div>
+        <div class="dim-val" id="dv5"></div>
+      </div>
+    </div>
+
+    <button class="retry-btn" onclick="retry()">重新測試</button>
+  </div>
+
+</div>
+
+<script>
+  const questions = ['q1','q2','q3','q4','q5'];
+  let answered = 0;
+  let chartInstance = null;
+
+  // Track progress
+  questions.forEach((name, i) => {
+    document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+      input.addEventListener('change', () => {
+        const card = document.getElementById(`card-${i+1}`);
+        card.classList.add('answered');
+        updateProgress();
+
+        // Auto scroll
+        const next = card.nextElementSibling;
+        if (next && next.classList.contains('question-card')) {
+          setTimeout(() => next.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+        }
+      });
+    });
+  });
+
+  function updateProgress() {
+    let count = 0;
+    questions.forEach(name => {
+      if (document.querySelector(`input[name="${name}"]:checked`)) count++;
+    });
+    answered = count;
+    document.getElementById('progressFill').style.width = (count / 5 * 100) + '%';
+    document.getElementById('progressText').textContent = count + ' / 5';
+  }
+
+  function calculate() {
+    if (answered < 5) {
+      const msg = document.getElementById('warningMsg');
+      msg.classList.add('show');
+      setTimeout(() => msg.classList.remove('show'), 3000);
+      return;
+    }
+
+    const scores = questions.map(name => parseInt(document.querySelector(`input[name="${name}"]:checked`).value));
+    const total = scores.reduce((a,b) => a+b, 0);
+    const percent = Math.round(total / 15 * 100);
+
+    // Animate score number
+    let current = 0;
+    const target = percent;
+    const interval = setInterval(() => {
+      current = Math.min(current + 2, target);
+      document.getElementById('scoreNum').textContent = current;
+      if (current >= target) clearInterval(interval);
+    }, 20);
+
+    // Result text
+    let type, text, color;
+    if (percent >= 80) {
+      type = '🌱 基因優化型';
+      text = '你的生活方式正在積極幫助健康基因開啟表達。持續保持這樣的習慣，將有助於長期健康與細胞修復。';
+      color = '#00c896';
+    } else if (percent >= 60) {
+      type = '⚖️ 穩定平衡型';
+      text = '整體生活型態穩定，表觀遺傳影響處於中性。針對較弱的環節進行調整，即可顯著提升基因健康指數。';
+      color = '#f5a623';
+    } else if (percent >= 40) {
+      type = '⚠️ 壓力累積型';
+      text = '壓力與生活作息可能已開始影響基因表達方式。建議從睡眠與壓力管理入手，逐步調整。';
+      color = '#fb923c';
+    } else {
+      type = '🚨 高風險失衡型';
+      text = '目前的生活習慣可能正在關閉保護性基因的表達，並增加慢性疾病風險。建議尋求專業健康諮詢。';
+      color = '#ff6b6b';
+    }
+
+    document.getElementById('resultType').textContent = type;
+    document.getElementById('resultText').textContent = text;
+
+    // Dimension bars
+    scores.forEach((s, i) => {
+      const pct = Math.round(s / 3 * 100);
+      setTimeout(() => {
+        document.getElementById(`d${i+1}`).style.width = pct + '%';
+        document.getElementById(`dv${i+1}`).textContent = pct + '%';
+      }, 400 + i * 80);
+    });
+
+    // Chart
+    if (chartInstance) chartInstance.destroy();
+    chartInstance = new Chart(document.getElementById('scoreChart'), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [percent, 100 - percent],
+          backgroundColor: [color, 'rgba(255,255,255,0.06)'],
+          borderColor: 'transparent',
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: '78%',
+        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+        animation: { duration: 1200, easing: 'easeInOutCubic' }
+      }
+    });
+
+    const result = document.getElementById('result');
+    result.classList.add('show');
+    setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
+  function retry() {
+    questions.forEach(name => {
+      document.querySelectorAll(`input[name="${name}"]`).forEach(i => i.checked = false);
+    });
+    document.querySelectorAll('.question-card').forEach(c => c.classList.remove('answered'));
+    document.getElementById('result').classList.remove('show');
+    answered = 0;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
