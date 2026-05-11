@@ -1,7 +1,5 @@
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&display=swap');
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   .wrap {
@@ -20,9 +18,8 @@
   }
 
   .title {
-    font-family: 'Noto Serif TC', serif;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-text-primary);
     margin-bottom: 4px;
   }
@@ -33,9 +30,7 @@
     margin-bottom: 12px;
   }
 
-  .tag-row {
-    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
-  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
 
   .tag {
     font-size: 11px;
@@ -86,6 +81,8 @@
     margin: 1.5rem 0 0.75rem;
   }
 
+  .progress-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; }
+
   .progress-bar-track {
     height: 3px;
     background: var(--color-border-tertiary);
@@ -111,9 +108,7 @@
     transition: border-color 0.2s;
   }
 
-  .q-card.answered {
-    border-color: var(--color-border-success);
-  }
+  .q-card.answered { border-color: var(--color-border-success); }
 
   .q-num {
     font-size: 11px;
@@ -152,9 +147,7 @@
     transition: background 0.15s;
   }
 
-  .option-row:hover {
-    background: var(--color-background-secondary);
-  }
+  .option-row:hover { background: var(--color-background-secondary); }
 
   .option-row input {
     margin-top: 2px;
@@ -162,17 +155,9 @@
     accent-color: var(--color-text-info);
   }
 
-  .option-text {
-    font-size: 14px;
-    color: var(--color-text-primary);
-    line-height: 1.5;
-  }
+  .option-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.5; }
 
-  .summary-section {
-    margin-top: 1.5rem;
-  }
-
-  .summary-section textarea {
+  textarea {
     width: 100%;
     min-height: 120px;
     padding: 12px;
@@ -186,11 +171,7 @@
     line-height: 1.6;
   }
 
-  .btn-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-  }
+  .btn-row { display: flex; gap: 10px; margin-top: 12px; }
 
   .btn-primary {
     display: flex;
@@ -209,7 +190,6 @@
   }
 
   .btn-primary:hover { opacity: 0.85; }
-  .btn-primary:disabled { opacity: 0.4; cursor: default; }
 
   .btn-secondary {
     padding: 10px 18px;
@@ -225,7 +205,7 @@
 
   .btn-secondary:hover { background: var(--color-background-secondary); }
 
-  .ai-result {
+  .summary-output {
     margin-top: 1rem;
     padding: 1rem 1.25rem;
     background: var(--color-background-secondary);
@@ -238,34 +218,16 @@
     white-space: pre-wrap;
   }
 
-  .spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
   .footer-note {
     margin-top: 1.5rem;
     font-size: 12px;
     color: var(--color-text-tertiary);
     text-align: center;
   }
-
-  .progress-label {
-    font-size: 12px;
-    color: var(--color-text-secondary);
-    margin-bottom: 6px;
-  }
 </style>
 
 <div class="wrap">
-  <h2 class="sr-only">TRF 文獻反思問卷 — 互動式學習評量</h2>
+  <h2 class="sr-only">TRF 文獻反思問卷</h2>
 
   <div class="header-band">
     <div class="title">TRF 文獻反思問卷</div>
@@ -351,160 +313,100 @@
     <label class="option-row"><input type="radio" name="q4" value="D"><span class="option-text">D. 所有 TRF 都一定能減重</span></label>
   </div>
 
-  <div class="summary-section">
-    <div class="section-label">個人補充反思（選填）</div>
-    <textarea id="extra-notes" placeholder="你還有哪些想法、疑問，或對實際應用的思考？（選填，AI 生成摘要時會一併參考）"></textarea>
+  <div class="section-label">反思摘要</div>
 
-    <div class="btn-row">
-      <button class="btn-primary" id="gen-btn" onclick="generateSummary()">
-        <i class="ti ti-sparkles" aria-hidden="true"></i>
-        生成 AI 反思摘要
-      </button>
-      <button class="btn-secondary" onclick="resetAll()">清除重填</button>
-    </div>
+  <textarea id="reflection" placeholder="請在此輸入你的反思摘要…"></textarea>
 
-    <div class="ai-result" id="ai-result"></div>
+  <div class="btn-row">
+    <button class="btn-primary" onclick="generateSummary()">
+      <i class="ti ti-file-text" aria-hidden="true"></i>
+      生成反思摘要
+    </button>
+    <button class="btn-secondary" onclick="resetAll()">清除重填</button>
   </div>
+
+  <div class="summary-output" id="summary-output"></div>
 
   <div class="footer-note">資料僅存於本機，不上傳至任何伺服器</div>
 </div>
 
 <script>
-  const q2Checks = document.querySelectorAll('input[name="q2"]');
   const allInputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+
+  allInputs.forEach(el => el.addEventListener('change', updateProgress));
 
   function updateProgress() {
     let answered = 0;
-    const q1 = document.querySelector('input[name="q1"]:checked');
+    const cards = ['q1','q3','q4'];
+    cards.forEach(n => {
+      const checked = document.querySelector(`input[name="${n}"]:checked`);
+      const card = document.getElementById(`card-${n}`);
+      if (checked) { answered++; card.classList.add('answered'); }
+      else { card.classList.remove('answered'); }
+    });
     const q2 = document.querySelector('input[name="q2"]:checked');
-    const q3 = document.querySelector('input[name="q3"]:checked');
-    const q4 = document.querySelector('input[name="q4"]:checked');
-    if (q1) { answered++; document.getElementById('card-q1').classList.add('answered'); }
-    else { document.getElementById('card-q1').classList.remove('answered'); }
-    if (q2) { answered++; document.getElementById('card-q2').classList.add('answered'); }
-    else { document.getElementById('card-q2').classList.remove('answered'); }
-    if (q3) { answered++; document.getElementById('card-q3').classList.add('answered'); }
-    else { document.getElementById('card-q3').classList.remove('answered'); }
-    if (q4) { answered++; document.getElementById('card-q4').classList.add('answered'); }
-    else { document.getElementById('card-q4').classList.remove('answered'); }
+    const card2 = document.getElementById('card-q2');
+    if (q2) { answered++; card2.classList.add('answered'); }
+    else { card2.classList.remove('answered'); }
+
     document.getElementById('progress-label').textContent = `答題進度：${answered} / 4`;
     document.getElementById('progress-fill').style.width = `${answered * 25}%`;
   }
 
-  allInputs.forEach(el => el.addEventListener('change', updateProgress));
+  const q1Labels = { A:'可大幅增加樣本數', B:'每位受試者可作為自己的控制組', C:'可避免 washout effect', D:'能完全消除 selection bias' };
+  const q2Labels = { A:'glucose iAUC 顯著下降約 36%', B:'fasting triglycerides 顯著下降', C:'CGM 顯示 24 小時平均血糖全面下降', D:'TRFe 組 fasting glucose 下降', E:'胃排空速度顯著增加' };
+  const q3Labels = { A:'熱量赤字才是唯一關鍵', B:'晝夜節律完全不影響代謝', C:'延長禁食時間本身可能具有代謝效益', D:'胃排空速度主導所有血糖反應' };
+  const q4Labels = { A:'不需改變食物種類，也可能改善代謝', B:'午後進食比早餐更重要', C:'CGM 不適合用於飲食研究', D:'所有 TRF 都一定能減重' };
 
-  function getAnswers() {
-    const q1 = document.querySelector('input[name="q1"]:checked')?.value || '未作答';
-    const q2vals = [...document.querySelectorAll('input[name="q2"]:checked')].map(e => e.value);
-    const q2 = q2vals.length ? q2vals.join(', ') : '未作答';
-    const q3 = document.querySelector('input[name="q3"]:checked')?.value || '未作答';
-    const q4 = document.querySelector('input[name="q4"]:checked')?.value || '未作答';
-    const notes = document.getElementById('extra-notes').value.trim();
-    const name = document.getElementById('name').value.trim() || '同學';
-    return { q1, q2, q3, q4, notes, name };
-  }
+  function generateSummary() {
+    const name = document.getElementById('name').value.trim() || '（未填）';
+    const date = document.getElementById('date').value || '（未填）';
+    const course = document.getElementById('course').value.trim() || '（未填）';
+    const reflection = document.getElementById('reflection').value.trim();
 
-  const q1opts = {
-    A: 'A. 可大幅增加樣本數',
-    B: 'B. 每位受試者可作為自己的控制組',
-    C: 'C. 可避免 washout effect',
-    D: 'D. 能完全消除 selection bias'
-  };
-  const q2opts = {
-    A: 'A. glucose iAUC 顯著下降約 36%',
-    B: 'B. fasting triglycerides 顯著下降',
-    C: 'C. CGM 顯示 24 小時平均血糖全面下降',
-    D: 'D. TRFe 組 fasting glucose 下降',
-    E: 'E. 胃排空速度顯著增加'
-  };
-  const q3opts = {
-    A: 'A. 熱量赤字才是唯一關鍵',
-    B: 'B. 晝夜節律完全不影響代謝',
-    C: 'C. 延長禁食時間本身可能具有代謝效益',
-    D: 'D. 胃排空速度主導所有血糖反應'
-  };
-  const q4opts = {
-    A: 'A. 不需改變食物種類，也可能改善代謝',
-    B: 'B. 午後進食比早餐更重要',
-    C: 'C. CGM 不適合用於飲食研究',
-    D: 'D. 所有 TRF 都一定能減重'
-  };
+    const q1v = document.querySelector('input[name="q1"]:checked')?.value;
+    const q2vs = [...document.querySelectorAll('input[name="q2"]:checked')].map(e => e.value);
+    const q3v = document.querySelector('input[name="q3"]:checked')?.value;
+    const q4v = document.querySelector('input[name="q4"]:checked')?.value;
 
-  async function generateSummary() {
-    const { q1, q2, q3, q4, notes, name } = getAnswers();
-    const btn = document.getElementById('gen-btn');
-    const resultDiv = document.getElementById('ai-result');
+    const q1text = q1v ? `${q1v}. ${q1Labels[q1v]}` : '未作答';
+    const q2text = q2vs.length ? q2vs.map(v => `${v}. ${q2Labels[v]}`).join('、') : '未作答';
+    const q3text = q3v ? `${q3v}. ${q3Labels[q3v]}` : '未作答';
+    const q4text = q4v ? `${q4v}. ${q4Labels[q4v]}` : '未作答';
 
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> 生成中…';
-    resultDiv.style.display = 'none';
+    const lines = [
+      `姓名：${name}`,
+      `日期：${date}`,
+      `課程／教授：${course}`,
+      '',
+      '【文獻】Hutchison et al. (2019). Time-Restricted Feeding Improves Glucose Tolerance in Men at Risk for Type 2 Diabetes. Obesity, 27(5), 724–732.',
+      '',
+      '【作答紀錄】',
+      `Q1（研究設計）：${q1text}`,
+      `Q2（結果解讀）：${q2text}`,
+      `Q3（理論連結）：${q3text}`,
+      `Q4（專業反思）：${q4text}`,
+    ];
 
-    const q1label = q1 !== '未作答' ? q1opts[q1] : '未作答';
-    const q2labels = q2 !== '未作答' ? q2.split(', ').map(k => q2opts[k]).join('、') : '未作答';
-    const q3label = q3 !== '未作答' ? q3opts[q3] : '未作答';
-    const q4label = q4 !== '未作答' ? q4opts[q4] : '未作答';
-
-    const prompt = `你是一位運動科學碩士班的指導教授，正在為學生提供文獻閱讀反思的個別化回饋。
-
-學生姓名：${name}
-參考文獻：Hutchison et al. (2019). Time-Restricted Feeding Improves Glucose Tolerance in Men at Risk for Type 2 Diabetes. Obesity, 27(5), 724–732.
-
-學生的作答：
-Q1（randomized crossover trial 優勢，單選）：${q1label}
-Q2（支持 TRF 改善血糖之結果，可複選）：${q2labels}
-Q3（TRFe 與 TRFd 均改善 glucose tolerance，理論詮釋，單選）：${q3label}
-Q4（最值得應用的臨床發現，主觀反思）：${q4label}
-個人補充反思：${notes || '無'}
-
-請根據以上資訊，以繁體中文撰寫一份個別化反思摘要，格式如下：
-
-【答題回饋】
-針對 Q1–Q4 的選擇，分別簡短說明其正確性（或合理性），並點出需要加強理解的概念（約 3–5 句）。
-
-【核心學習亮點】
-指出學生在這份文獻中最值得保留的關鍵概念理解（約 2–3 句）。
-
-【延伸思考建議】
-提出 1–2 個值得學生進一步探討的問題或研究方向（約 2–3 句）。
-
-語氣請溫和專業，避免過度稱讚，重點放在知識深化。`;
-
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content: prompt }]
-        })
-      });
-
-      const data = await res.json();
-      const text = data?.content?.filter(b => b.type === 'text').map(b => b.text).join('') || '（無法取得回應，請稍後再試）';
-      resultDiv.textContent = text;
-      resultDiv.style.display = 'block';
-    } catch (err) {
-      resultDiv.textContent = '⚠ 生成失敗，請確認網路連線後再試。';
-      resultDiv.style.display = 'block';
+    if (reflection) {
+      lines.push('', '【個人反思摘要】', reflection);
     }
 
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ti ti-sparkles" aria-hidden="true"></i> 重新生成';
+    const out = document.getElementById('summary-output');
+    out.textContent = lines.join('\n');
+    out.style.display = 'block';
   }
 
   function resetAll() {
     document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
-    document.getElementById('extra-notes').value = '';
+    document.getElementById('reflection').value = '';
     document.getElementById('name').value = '';
-    document.getElementById('date').value = '';
+    document.getElementById('date').value = new Date().toISOString().split('T')[0];
     document.getElementById('course').value = '';
-    document.getElementById('ai-result').style.display = 'none';
-    document.getElementById('gen-btn').innerHTML = '<i class="ti ti-sparkles" aria-hidden="true"></i> 生成 AI 反思摘要';
+    document.getElementById('summary-output').style.display = 'none';
     document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered'));
     updateProgress();
   }
 
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('date').value = today;
+  document.getElementById('date').value = new Date().toISOString().split('T')[0];
 </script>
