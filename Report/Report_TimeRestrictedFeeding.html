@@ -1,302 +1,510 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TRF 文獻反思問卷</title>
 
-  <style>
-    body {
-      font-family: "Noto Sans TC", sans-serif;
-      background: #f5f7fb;
-      color: #222;
-      margin: 0;
-      padding: 40px 20px;
-      line-height: 1.8;
-    }
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&display=swap');
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.2rem;
-      color: #1f3c88;
-    }
+  .wrap {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--color-text-primary);
+    padding: 1.5rem 0;
+    max-width: 680px;
+  }
 
-    h2 {
-      font-size: 1.2rem;
-      margin-top: 2rem;
-      color: #1f3c88;
-      border-left: 5px solid #1f3c88;
-      padding-left: 10px;
-    }
+  .header-band {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 
-    .subtitle {
-      color: #666;
-      margin-bottom: 20px;
-    }
+  .title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+  }
 
-    .meta {
-      background: #eef3ff;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 30px;
-    }
+  .subtitle {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+  }
 
-    .meta p {
-      margin: 8px 0;
-    }
+  .tag-row {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+  }
 
-    .field {
-      margin-bottom: 16px;
-    }
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 99px;
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    font-weight: 500;
+  }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 6px;
-    }
+  .citation-text {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    line-height: 1.6;
+  }
 
-    input[type="text"],
-    input[type="date"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
+  .meta-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
 
-    .question {
-      margin-top: 30px;
-      padding: 24px;
-      background: #fafbff;
-      border-radius: 16px;
-      border: 1px solid #dbe4ff;
-    }
+  .field-label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
 
-    .question-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+  input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-family: inherit;
+  }
 
-    .question-type {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-    }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 1.5rem 0 0.75rem;
+  }
 
-    .options label {
-      display: block;
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-weight: normal;
-    }
+  .progress-bar-track {
+    height: 3px;
+    background: var(--color-border-tertiary);
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
 
-    textarea {
-      width: 100%;
-      min-height: 150px;
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      resize: vertical;
-    }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--color-text-info);
+    border-radius: 99px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
 
-    .buttons {
-      margin-top: 20px;
-      display: flex;
-      gap: 12px;
-    }
+  .q-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
 
-    button {
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.2s;
-    }
+  .q-card.answered {
+    border-color: var(--color-border-success);
+  }
 
-    .primary {
-      background: #1f3c88;
-      color: white;
-    }
+  .q-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
+  }
 
-    .primary:hover {
-      background: #162d66;
-    }
+  .q-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    line-height: 1.55;
+  }
 
-    .secondary {
-      background: #e5e7eb;
-    }
+  .q-type-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--color-background-secondary);
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+  }
 
-    .footer {
-      margin-top: 30px;
-      font-size: 0.9rem;
-      color: #666;
-      text-align: center;
-    }
+  .option-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    margin-bottom: 4px;
+    transition: background 0.15s;
+  }
 
-    .progress {
-      margin-top: 10px;
-      color: #444;
-      font-weight: bold;
-    }
+  .option-row:hover {
+    background: var(--color-background-secondary);
+  }
 
-    .citation {
-      font-size: 0.95rem;
-      color: #444;
-      margin-top: 12px;
-    }
-  </style>
-</head>
+  .option-row input {
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--color-text-info);
+  }
 
-<body>
+  .option-text {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+  }
 
-<div class="container">
+  .summary-section {
+    margin-top: 1.5rem;
+  }
 
-  <h1>TRF 文獻反思問卷</h1>
-  <div class="subtitle">
-    Time-Restricted Feeding Study 文獻反思問卷
-  </div>
+  .summary-section textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    line-height: 1.6;
+  }
 
-  <div class="meta">
-    <p><strong>體育大學碩士班｜文獻閱讀反思</strong></p>
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
 
-    <p>
-      Hutchison et al. (2019) ｜ Obesity ｜ Randomized Crossover Trial
-    </p>
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    background: var(--color-text-primary);
+    color: var(--color-background-primary);
+    border: none;
+    border-radius: var(--border-radius-md);
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
 
-    <p>
-      關鍵字：
-      時間限制進食（TRF）、
-      晝夜節律、
-      葡萄糖耐受性、
-      CGM、
-      代謝健康
-    </p>
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-primary:disabled { opacity: 0.4; cursor: default; }
 
-    <div class="citation">
-      Hutchison AT, Regmi P, Manoogian ENC, et al. (2019).
-      Time-Restricted Feeding Improves Glucose Tolerance in Men at Risk for Type 2 Diabetes:
-      A Randomized Crossover Trial.
-      Obesity, 27(5), 724–732.
+  .btn-secondary {
+    padding: 10px 18px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .btn-secondary:hover { background: var(--color-background-secondary); }
+
+  .ai-result {
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--color-text-primary);
+    display: none;
+    white-space: pre-wrap;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .footer-note {
+    margin-top: 1.5rem;
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    text-align: center;
+  }
+
+  .progress-label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">TRF 文獻反思問卷 — 互動式學習評量</h2>
+
+  <div class="header-band">
+    <div class="title">TRF 文獻反思問卷</div>
+    <div class="subtitle">Time-Restricted Feeding Study｜體育大學碩士班 · 文獻閱讀反思</div>
+    <div class="tag-row">
+      <span class="tag">時間限制進食（TRF）</span>
+      <span class="tag">晝夜節律</span>
+      <span class="tag">葡萄糖耐受性</span>
+      <span class="tag">CGM</span>
+      <span class="tag">代謝健康</span>
+    </div>
+    <div class="citation-text">
+      Hutchison AT, Regmi P, Manoogian ENC, et al. (2019). Time-Restricted Feeding Improves Glucose Tolerance in Men at Risk for Type 2 Diabetes: A Randomized Crossover Trial. <em>Obesity</em>, 27(5), 724–732.
     </div>
   </div>
 
-  <div class="field">
-    <label>姓名</label>
-    <input type="text" placeholder="例：王○明">
-  </div>
-
-  <div class="field">
-    <label>日期</label>
-    <input type="date">
-  </div>
-
-  <div class="field">
-    <label>課程／教授</label>
-    <input type="text" placeholder="例：運動營養學／王老師">
-  </div>
-
-  <div class="progress">
-    答題進度：0 / 4
-  </div>
-
-  <h2>研究設計</h2>
-
-  <div class="question">
-    <div class="question-title">
-      1. 本研究採用 randomized crossover trial 的最主要優勢為何？
+  <div class="meta-fields">
+    <div>
+      <div class="field-label">姓名</div>
+      <input type="text" id="name" placeholder="例：王○明">
     </div>
-
-    <div class="question-type">單選</div>
-
-    <div class="options">
-      <label><input type="radio" name="q1"> A. 可大幅增加樣本數</label>
-      <label><input type="radio" name="q1"> B. 每位受試者可作為自己的控制組</label>
-      <label><input type="radio" name="q1"> C. 可避免 washout effect</label>
-      <label><input type="radio" name="q1"> D. 能完全消除 selection bias</label>
+    <div>
+      <div class="field-label">日期</div>
+      <input type="date" id="date">
+    </div>
+    <div style="grid-column: 1 / -1;">
+      <div class="field-label">課程／教授</div>
+      <input type="text" id="course" placeholder="例：運動營養學／王老師">
     </div>
   </div>
 
-  <h2>結果解讀</h2>
-
-  <div class="question">
-    <div class="question-title">
-      2. 下列哪些結果支持「TRF 可改善葡萄糖調控」的結論？
-    </div>
-
-    <div class="question-type">可複選</div>
-
-    <div class="options">
-      <label><input type="checkbox"> A. glucose iAUC 顯著下降約 36%</label>
-      <label><input type="checkbox"> B. fasting triglycerides 顯著下降</label>
-      <label><input type="checkbox"> C. CGM 顯示 24 小時平均血糖全面下降</label>
-      <label><input type="checkbox"> D. TRFe 組 fasting glucose 下降</label>
-      <label><input type="checkbox"> E. 胃排空速度顯著增加</label>
-    </div>
+  <div class="progress-label" id="progress-label">答題進度：0 / 4</div>
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progress-fill"></div>
   </div>
 
-  <h2>理論連結</h2>
+  <div class="section-label">研究設計</div>
 
-  <div class="question">
-    <div class="question-title">
-      3. 本研究發現「TRFe 與 TRFd 都能改善 glucose tolerance」，最符合下列哪個理論觀點？
-    </div>
-
-    <div class="question-type">單選</div>
-
-    <div class="options">
-      <label><input type="radio" name="q3"> A. 熱量赤字才是唯一關鍵</label>
-      <label><input type="radio" name="q3"> B. 晝夜節律完全不影響代謝</label>
-      <label><input type="radio" name="q3"> C. 延長禁食時間本身可能具有代謝效益</label>
-      <label><input type="radio" name="q3"> D. 胃排空速度主導所有血糖反應</label>
-    </div>
+  <div class="q-card" id="card-q1">
+    <div class="q-num">第 1 題</div>
+    <div class="q-text">本研究採用 randomized crossover trial 的最主要優勢為何？</div>
+    <div class="q-type-badge">單選</div>
+    <label class="option-row"><input type="radio" name="q1" value="A"><span class="option-text">A. 可大幅增加樣本數</span></label>
+    <label class="option-row"><input type="radio" name="q1" value="B"><span class="option-text">B. 每位受試者可作為自己的控制組</span></label>
+    <label class="option-row"><input type="radio" name="q1" value="C"><span class="option-text">C. 可避免 washout effect</span></label>
+    <label class="option-row"><input type="radio" name="q1" value="D"><span class="option-text">D. 能完全消除 selection bias</span></label>
   </div>
 
-  <h2>專業反思</h2>
+  <div class="section-label">結果解讀</div>
 
-  <div class="question">
-    <div class="question-title">
-      4. 本研究最值得應用於臨床或健康促進的發現是？
-    </div>
-
-    <div class="question-type">
-      單選（主觀反思，無標準答案）
-    </div>
-
-    <div class="options">
-      <label><input type="radio" name="q4"> A. 不需改變食物種類，也可能改善代謝</label>
-      <label><input type="radio" name="q4"> B. 午後進食比早餐更重要</label>
-      <label><input type="radio" name="q4"> C. CGM 不適合用於飲食研究</label>
-      <label><input type="radio" name="q4"> D. 所有 TRF 都一定能減重</label>
-    </div>
+  <div class="q-card" id="card-q2">
+    <div class="q-num">第 2 題</div>
+    <div class="q-text">下列哪些結果支持「TRF 可改善葡萄糖調控」的結論？</div>
+    <div class="q-type-badge">可複選</div>
+    <label class="option-row"><input type="checkbox" name="q2" value="A"><span class="option-text">A. glucose iAUC 顯著下降約 36%</span></label>
+    <label class="option-row"><input type="checkbox" name="q2" value="B"><span class="option-text">B. fasting triglycerides 顯著下降</span></label>
+    <label class="option-row"><input type="checkbox" name="q2" value="C"><span class="option-text">C. CGM 顯示 24 小時平均血糖全面下降</span></label>
+    <label class="option-row"><input type="checkbox" name="q2" value="D"><span class="option-text">D. TRFe 組 fasting glucose 下降</span></label>
+    <label class="option-row"><input type="checkbox" name="q2" value="E"><span class="option-text">E. 胃排空速度顯著增加</span></label>
   </div>
 
-  <h2>生成反思摘要</h2>
+  <div class="section-label">理論連結</div>
 
-  <textarea placeholder="請輸入你的反思摘要..."></textarea>
-
-  <div class="buttons">
-    <button class="primary">生成反思摘要</button>
-    <button class="secondary" type="reset">清除</button>
+  <div class="q-card" id="card-q3">
+    <div class="q-num">第 3 題</div>
+    <div class="q-text">本研究發現「TRFe 與 TRFd 都能改善 glucose tolerance」，最符合下列哪個理論觀點？</div>
+    <div class="q-type-badge">單選</div>
+    <label class="option-row"><input type="radio" name="q3" value="A"><span class="option-text">A. 熱量赤字才是唯一關鍵</span></label>
+    <label class="option-row"><input type="radio" name="q3" value="B"><span class="option-text">B. 晝夜節律完全不影響代謝</span></label>
+    <label class="option-row"><input type="radio" name="q3" value="C"><span class="option-text">C. 延長禁食時間本身可能具有代謝效益</span></label>
+    <label class="option-row"><input type="radio" name="q3" value="D"><span class="option-text">D. 胃排空速度主導所有血糖反應</span></label>
   </div>
 
-  <div class="footer">
-    資料僅存於本機，不上傳至任何伺服器
+  <div class="section-label">專業反思</div>
+
+  <div class="q-card" id="card-q4">
+    <div class="q-num">第 4 題</div>
+    <div class="q-text">本研究最值得應用於臨床或健康促進的發現是？</div>
+    <div class="q-type-badge">單選（主觀反思，無標準答案）</div>
+    <label class="option-row"><input type="radio" name="q4" value="A"><span class="option-text">A. 不需改變食物種類，也可能改善代謝</span></label>
+    <label class="option-row"><input type="radio" name="q4" value="B"><span class="option-text">B. 午後進食比早餐更重要</span></label>
+    <label class="option-row"><input type="radio" name="q4" value="C"><span class="option-text">C. CGM 不適合用於飲食研究</span></label>
+    <label class="option-row"><input type="radio" name="q4" value="D"><span class="option-text">D. 所有 TRF 都一定能減重</span></label>
   </div>
 
+  <div class="summary-section">
+    <div class="section-label">個人補充反思（選填）</div>
+    <textarea id="extra-notes" placeholder="你還有哪些想法、疑問，或對實際應用的思考？（選填，AI 生成摘要時會一併參考）"></textarea>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="gen-btn" onclick="generateSummary()">
+        <i class="ti ti-sparkles" aria-hidden="true"></i>
+        生成 AI 反思摘要
+      </button>
+      <button class="btn-secondary" onclick="resetAll()">清除重填</button>
+    </div>
+
+    <div class="ai-result" id="ai-result"></div>
+  </div>
+
+  <div class="footer-note">資料僅存於本機，不上傳至任何伺服器</div>
 </div>
 
-</body>
-</html>
+<script>
+  const q2Checks = document.querySelectorAll('input[name="q2"]');
+  const allInputs = document.querySelectorAll('input[type="radio"], input[type="checkbox"]');
+
+  function updateProgress() {
+    let answered = 0;
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const q3 = document.querySelector('input[name="q3"]:checked');
+    const q4 = document.querySelector('input[name="q4"]:checked');
+    if (q1) { answered++; document.getElementById('card-q1').classList.add('answered'); }
+    else { document.getElementById('card-q1').classList.remove('answered'); }
+    if (q2) { answered++; document.getElementById('card-q2').classList.add('answered'); }
+    else { document.getElementById('card-q2').classList.remove('answered'); }
+    if (q3) { answered++; document.getElementById('card-q3').classList.add('answered'); }
+    else { document.getElementById('card-q3').classList.remove('answered'); }
+    if (q4) { answered++; document.getElementById('card-q4').classList.add('answered'); }
+    else { document.getElementById('card-q4').classList.remove('answered'); }
+    document.getElementById('progress-label').textContent = `答題進度：${answered} / 4`;
+    document.getElementById('progress-fill').style.width = `${answered * 25}%`;
+  }
+
+  allInputs.forEach(el => el.addEventListener('change', updateProgress));
+
+  function getAnswers() {
+    const q1 = document.querySelector('input[name="q1"]:checked')?.value || '未作答';
+    const q2vals = [...document.querySelectorAll('input[name="q2"]:checked')].map(e => e.value);
+    const q2 = q2vals.length ? q2vals.join(', ') : '未作答';
+    const q3 = document.querySelector('input[name="q3"]:checked')?.value || '未作答';
+    const q4 = document.querySelector('input[name="q4"]:checked')?.value || '未作答';
+    const notes = document.getElementById('extra-notes').value.trim();
+    const name = document.getElementById('name').value.trim() || '同學';
+    return { q1, q2, q3, q4, notes, name };
+  }
+
+  const q1opts = {
+    A: 'A. 可大幅增加樣本數',
+    B: 'B. 每位受試者可作為自己的控制組',
+    C: 'C. 可避免 washout effect',
+    D: 'D. 能完全消除 selection bias'
+  };
+  const q2opts = {
+    A: 'A. glucose iAUC 顯著下降約 36%',
+    B: 'B. fasting triglycerides 顯著下降',
+    C: 'C. CGM 顯示 24 小時平均血糖全面下降',
+    D: 'D. TRFe 組 fasting glucose 下降',
+    E: 'E. 胃排空速度顯著增加'
+  };
+  const q3opts = {
+    A: 'A. 熱量赤字才是唯一關鍵',
+    B: 'B. 晝夜節律完全不影響代謝',
+    C: 'C. 延長禁食時間本身可能具有代謝效益',
+    D: 'D. 胃排空速度主導所有血糖反應'
+  };
+  const q4opts = {
+    A: 'A. 不需改變食物種類，也可能改善代謝',
+    B: 'B. 午後進食比早餐更重要',
+    C: 'C. CGM 不適合用於飲食研究',
+    D: 'D. 所有 TRF 都一定能減重'
+  };
+
+  async function generateSummary() {
+    const { q1, q2, q3, q4, notes, name } = getAnswers();
+    const btn = document.getElementById('gen-btn');
+    const resultDiv = document.getElementById('ai-result');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> 生成中…';
+    resultDiv.style.display = 'none';
+
+    const q1label = q1 !== '未作答' ? q1opts[q1] : '未作答';
+    const q2labels = q2 !== '未作答' ? q2.split(', ').map(k => q2opts[k]).join('、') : '未作答';
+    const q3label = q3 !== '未作答' ? q3opts[q3] : '未作答';
+    const q4label = q4 !== '未作答' ? q4opts[q4] : '未作答';
+
+    const prompt = `你是一位運動科學碩士班的指導教授，正在為學生提供文獻閱讀反思的個別化回饋。
+
+學生姓名：${name}
+參考文獻：Hutchison et al. (2019). Time-Restricted Feeding Improves Glucose Tolerance in Men at Risk for Type 2 Diabetes. Obesity, 27(5), 724–732.
+
+學生的作答：
+Q1（randomized crossover trial 優勢，單選）：${q1label}
+Q2（支持 TRF 改善血糖之結果，可複選）：${q2labels}
+Q3（TRFe 與 TRFd 均改善 glucose tolerance，理論詮釋，單選）：${q3label}
+Q4（最值得應用的臨床發現，主觀反思）：${q4label}
+個人補充反思：${notes || '無'}
+
+請根據以上資訊，以繁體中文撰寫一份個別化反思摘要，格式如下：
+
+【答題回饋】
+針對 Q1–Q4 的選擇，分別簡短說明其正確性（或合理性），並點出需要加強理解的概念（約 3–5 句）。
+
+【核心學習亮點】
+指出學生在這份文獻中最值得保留的關鍵概念理解（約 2–3 句）。
+
+【延伸思考建議】
+提出 1–2 個值得學生進一步探討的問題或研究方向（約 2–3 句）。
+
+語氣請溫和專業，避免過度稱讚，重點放在知識深化。`;
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      const data = await res.json();
+      const text = data?.content?.filter(b => b.type === 'text').map(b => b.text).join('') || '（無法取得回應，請稍後再試）';
+      resultDiv.textContent = text;
+      resultDiv.style.display = 'block';
+    } catch (err) {
+      resultDiv.textContent = '⚠ 生成失敗，請確認網路連線後再試。';
+      resultDiv.style.display = 'block';
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-sparkles" aria-hidden="true"></i> 重新生成';
+  }
+
+  function resetAll() {
+    document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+    document.getElementById('extra-notes').value = '';
+    document.getElementById('name').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('course').value = '';
+    document.getElementById('ai-result').style.display = 'none';
+    document.getElementById('gen-btn').innerHTML = '<i class="ti ti-sparkles" aria-hidden="true"></i> 生成 AI 反思摘要';
+    document.querySelectorAll('.q-card').forEach(c => c.classList.remove('answered'));
+    updateProgress();
+  }
+
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('date').value = today;
+</script>
