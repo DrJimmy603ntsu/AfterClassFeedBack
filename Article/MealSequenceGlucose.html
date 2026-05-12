@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>PATTERN 研究摘要：進餐順序對代謝反應的影響</title>
+    <style>
+        body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; line-height: 1.8; color: #2c3e50; max-width: 900px; margin: 0 auto; padding: 30px; background-color: #f4f7f6; }
+        .container { background-color: #ffffff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #1a5276; border-bottom: 3px solid #3498db; padding-bottom: 15px; text-align: center; font-size: 24pt; }
+        h2 { color: #1e8449; border-left: 6px solid #27ae60; padding-left: 15px; margin-top: 35px; font-size: 18pt; }
+        .highlight-box { background-color: #e8f6f3; border-radius: 8px; padding: 20px; margin: 20px 0; border: 1px solid #d1f2eb; }
+        .result-card { display: flex; flex-wrap: wrap; gap: 20px; margin: 20px 0; }
+        .card { flex: 1; min-width: 250px; background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .card-title { font-weight: bold; color: #d35400; margin-bottom: 10px; display: block; border-bottom: 1px solid #eee; }
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 11pt; }
+        th { background-color: #34495e; color: white; padding: 12px; text-align: left; }
+        td { border: 1px solid #ecf0f1; padding: 12px; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .footer { margin-top: 50px; font-size: 0.9em; color: #7f8c8d; text-align: center; border-top: 1px solid #eee; padding-top: 20px; }
+        .badge { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
 
+<div class="container">
+    <h1>進餐順序對葡萄糖影響 (PATTERN 研究)</h1>
+    
+    <div class="highlight-box">
+        <strong>研究背景：</strong> 過去已知進餐順序會影響糖尿病患者，本研究 (PATTERN study) 旨在探討對於「健康受試者」，調整蔬菜、蛋白質與碳水化合物的順序，如何透過「胃排空」與「腸泌素」機制影響血糖。
+    </div>
+
+    <h2>1. 實驗設計 (五種進餐順序)</h2>
+    <p>研究對象為 16 名健康成年人，隨機接受以下五種等熱量、等成分的餐點順序：</p>
+    <table>
+        <tr>
+            <th>組別代號</th>
+            <th>攝取順序</th>
+            <th>說明</th>
+        </tr>
+        <tr>
+            <td>V-P-C</td>
+            <td>蔬菜 → 蛋白質 → 碳水化合物</td>
+            <td>先吃青菜，再吃雞肉，最後吃白飯。</td>
+        </tr>
+        <tr>
+            <td>P-V-C</td>
+            <td>蛋白質 → 蔬菜 → 碳水化合物</td>
+            <td>先吃雞肉，再吃青菜，最後吃白飯。</td>
+        </tr>
+        <tr>
+            <td>C-P-V</td>
+            <td>碳水化合物 → 蛋白質 → 蔬菜</td>
+            <td>先吃白飯，再吃肉與菜。</td>
+        </tr>
+        <tr>
+            <td>VP-C</td>
+            <td>(蔬菜+蛋白質) → 碳水化合物</td>
+            <td>菜肉混合吃完，最後吃白飯。</td>
+        </tr>
+        <tr>
+            <td>VPC</td>
+            <td>(蔬菜+蛋白質+碳水) 同時攝取</td>
+            <td>傳統混合式吃法。</td>
+        </tr>
+    </table>
+
+    <h2>2. 核心研究發現</h2>
+    <div class="result-card">
+        <div class="card">
+            <span class="card-title">血糖反應 (Glucose)</span>
+            與 VPC (混合吃) 相比，<span class="badge">V-P-C</span> 與 <span class="badge">P-V-C</span> 顯著降低了餐後血糖峰值與波動。最理想的順序是將碳水化合物放在最後。
+        </div>
+        <div class="card">
+            <span class="card-title">胰島素節省效應</span>
+            雖然血糖較低，但 <span class="badge">V-P-C</span> 順序下的胰島素分泌反而更有效率（較低），這顯示胰島素敏感性在這種順序下表現較佳。
+        </div>
+        <div class="card">
+            <span class="card-title">關鍵機制：腸泌素</span>
+            先吃蔬菜或蛋白質能顯著刺激 <strong>GLP-1</strong> 分泌，並延緩胃排空速率，讓後續進入的葡萄糖吸收更平緩。
+        </div>
+    </div>
+
+    <h2>3. 代謝數據對比 (相較於傳統混合吃)</h2>
+    <ul>
+        <li><strong>血糖峰值降低：</strong> 採用 V-P-C 順序，血糖峰值約降低 <strong>20-30%</strong>。</li>
+        <li><strong>iAUC (0-60 min)：</strong> 前 60 分鐘的血糖曲線下面積顯著減少。</li>
+        <li><strong>胃排空速率：</strong> 先攝取蛋白質與蔬菜的組別，其胃部排空速度明顯慢於先吃碳水化合物的組別。</li>
+    </ul>
+
+    <h2>4. 臨床建議與結論</h2>
+    <p>研究證明，不需要改變食物的總量或種類，僅需調整「順序」即可產生顯著的代謝益處：</p>
+    <ol>
+        <li><strong>蔬菜優先：</strong> 纖維質可先行佔據空間並預備腸道反應。</li>
+        <li><strong>肉類次之：</strong> 蛋白質與脂肪刺激 GLP-1，進一步延遲胃排空。</li>
+        <li><strong>澱粉最後：</strong> 當白飯/麵條進入時，由於胃排空已減速，血糖上升會非常平穩。</li>
+    </ol>
+    <p>這種「進餐順序策略」是預防第 2 型糖尿病與管理體重的低成本、高效益方法。</p>
+
+    <div class="footer">
+        <p>資料來源：Clinical Nutrition 39 (2020) 950-957 | PATTERN Study</p>
+        <p>© 2024 代謝健康研究導讀</p>
+    </div>
+</div>
+
+</body>
+</html>
