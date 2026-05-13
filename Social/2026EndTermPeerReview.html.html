@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究所學生學術能力同儕互評表</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .intro { background: #e8f4fd; padding: 15px; border-left: 5px solid #3498db; margin-bottom: 25px; }
+        .question-block { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .question-text { font-weight: bold; margin-bottom: 12px; color: #2980b9; }
+        .options { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .option-item { display: flex; align-items: center; cursor: pointer; padding: 8px; border: 1px solid #ddd; border-radius: 4px; transition: background 0.3s; }
+        .option-item:hover { background: #f0f0f0; }
+        input[type="checkbox"], input[type="radio"] { margin-right: 10px; transform: scale(1.2); }
+        .limit-info { font-size: 0.85em; color: #e74c3c; margin-top: 5px; }
+        .footer-input { margin-top: 20px; }
+        textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; }
+        button { display: block; width: 100%; padding: 12px; background: #3498db; color: white; border: none; border-radius: 4px; font-size: 1.1em; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>研究所學生學術能力同儕互評表</h1>
+        
+        <div class="intro">
+            請就各項學術能力，選出您認為班上表現最優異的<strong>前三名</strong>同學。<br>
+            您的作答將作為同儕互評參考。
+        </div>
+
+        <form id="peerReviewForm">
+            <!-- 個人資訊 -->
+            <div class="question-block">
+                <div class="question-text">您的姓名與學號</div>
+                <select name="user_identity" required style="width:100%; padding:8px;">
+                    <option value="">請選擇您的姓名...</option>
+                    <option value="李景瑜（1130603）">李景瑜（1130603）</option>
+<option value="莊子毅（1130604）">莊子毅（1130604）</option>
+<option value="簡君翰（1140603）">簡君翰（1140603）</option>
+<option value="陳思靜（1140604）">陳思靜（1140604）</option>
+<option value="高允睿（1140608）">高允睿（1140608）</option>
+<option value="張寬逸（1140614）">張寬逸（1140614）</option>
+                </select>
+            </div>
+
+            <!-- 能力評分 -->
+            
+            <div class="question-block">
+                <div class="question-text">1. 針對「我能快速掌握論文的研究目的與重要結果。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q1" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q1" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q1" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q1" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q1" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q1" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">2. 針對「我能整理論文重點並用自己的話說明內容。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q2" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q2" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q2" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q2" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q2" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q2" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">3. 針對「我能思考研究可能的限制、偏差或不足。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q3" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q3" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q3" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q3" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q3" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q3" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">4. 針對「我能在課堂中表達自己對論文的看法。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q4" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q4" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q4" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q4" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q4" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q4" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">5. 針對「我能清楚、有邏輯地說明自己的想法。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q5" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q5" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q5" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q5" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q5" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q5" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">6. 針對「我能依據研究資料提出合理推論。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q6" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q6" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q6" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q6" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q6" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q6" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">7. 針對「我能清楚說明研究內容與自己的觀點。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q7" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q7" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q7" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q7" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q7" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q7" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">8. 針對「我能適當回應老師或同學提出的問題。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q8" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q8" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q8" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q8" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q8" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q8" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">9. 針對「我能理解常見研究方法的差異與用途。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q9" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q9" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q9" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q9" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q9" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q9" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <div class="question-block">
+                <div class="question-text">10. 針對「我能理解研究問題、方法與結果之間的關聯。」此項能力，您認為班上前三名（表現優異者）是哪三位？</div>
+                <div class="limit-info">※ 請點選三位同學</div>
+                <div class="options">
+    
+                    <label class="option-item">
+                        <input type="checkbox" name="q10" value="李景瑜（1130603）" onchange="checkLimit(this, 3)">
+                        李景瑜（1130603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q10" value="莊子毅（1130604）" onchange="checkLimit(this, 3)">
+                        莊子毅（1130604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q10" value="簡君翰（1140603）" onchange="checkLimit(this, 3)">
+                        簡君翰（1140603）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q10" value="陳思靜（1140604）" onchange="checkLimit(this, 3)">
+                        陳思靜（1140604）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q10" value="高允睿（1140608）" onchange="checkLimit(this, 3)">
+                        高允睿（1140608）
+                    </label>
+        
+                    <label class="option-item">
+                        <input type="checkbox" name="q10" value="張寬逸（1140614）" onchange="checkLimit(this, 3)">
+                        張寬逸（1140614）
+                    </label>
+        
+                </div>
+            </div>
+    
+            <!-- 其他建議 -->
+            <div class="question-block">
+                <div class="question-text">對同儕學習表現的其他正面具體觀察或建議？</div>
+                <textarea name="comments" rows="4" placeholder="請輸入您的建議..."></textarea>
+            </div>
+
+            <button type="submit">提交評選</button>
+        </form>
+    </div>
+
+    <script>
+        function checkLimit(checkbox, limit) {
+            const checkboxes = document.getElementsByName(checkbox.name);
+            const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+            if (checkedCount > limit) {
+                alert("每題最多只能選擇 " + limit + " 位同學。");
+                checkbox.checked = false;
+            }
+        }
+
+        document.getElementById('peerReviewForm').onsubmit = function(e) {
+            e.preventDefault();
+            alert('感謝您的參與！您的互評資料已成功記錄（此為模擬視窗）。');
+        };
+    </script>
+</body>
+</html>
