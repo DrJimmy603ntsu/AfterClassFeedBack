@@ -25,6 +25,72 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
+
+  /* ── 近期上線課程 Banner ── */
+  .announcement-bar {
+    background: linear-gradient(90deg, var(--accent) 0%, #b85c2a 100%);
+    color: var(--white);
+    padding: 10px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .announcement-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.03) 20px,
+      rgba(255,255,255,0.03) 40px
+    );
+    pointer-events: none;
+  }
+  .announcement-bar-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .announcement-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 2px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .announcement-text {
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+  }
+  .announcement-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--white);
+    text-decoration: none;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 3px 12px;
+    transition: background 0.18s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .announcement-link:hover { background: rgba(255,255,255,0.3); }
+
   .hero {
     position: relative;
     padding: 80px 24px 64px;
@@ -188,6 +254,33 @@
     color: var(--accent-light);
     flex-shrink: 0;
   }
+
+  /* ── 線上課程 card special styling ── */
+  .card--course {
+    border-color: rgba(139,69,19,0.28);
+    background: linear-gradient(145deg, #fffcf8 0%, #fff8f0 100%);
+  }
+  .card--course::before {
+    content: '新';
+    position: absolute;
+    top: 14px; right: 14px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+  .card--course .card-sub-link {
+    border: 1px solid transparent;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+  .card--course .card-sub-link:hover {
+    background: rgba(139,69,19,0.05);
+    border-color: var(--card-border);
+  }
+
   footer {
     text-align: center;
     padding: 32px 24px;
@@ -202,6 +295,7 @@
   @media (max-width: 560px) {
     .grid { grid-template-columns: 1fr 1fr; }
     .hero { padding: 60px 20px 48px; }
+    .announcement-bar-inner { gap: 8px; }
   }
   @media (max-width: 380px) {
     .grid { grid-template-columns: 1fr; }
@@ -209,12 +303,27 @@
 </style>
 </head>
 <body>
+
+<!-- ── 近期上線課程 Banner ── -->
+<div class="announcement-bar">
+  <div class="announcement-bar-inner">
+    <span class="announcement-badge">近期上線課程</span>
+    <span class="announcement-text">睡眠的認知行為療法（CBT-I）── 用科學方法根治失眠</span>
+    <a class="announcement-link"
+       href="https://wayground.com/join/presentation/6a20e382161cb021c3da0675/start?studentShare=true"
+       target="_blank" rel="noopener">
+      立即加入 →
+    </a>
+  </div>
+</div>
+
 <section class="hero">
   <p class="hero-eyebrow">Medical · Psychology · Future</p>
   <h1>用醫學讀懂人生：<br>從<span>病理變化</span>到生命規劃</h1>
   <p>你今天的生活，正在寫你未來的診斷書。<br>這裡不是課程，是一條看見未來的路。</p>
   <div class="hero-divider"></div>
 </section>
+
 <main class="grid-section">
   <p class="section-label">選擇你的入口</p>
   <div class="grid">
@@ -388,8 +497,25 @@
       </div>
     </div>
 
+    <!-- 線上課程 -->
+    <div class="card card--expanded card--course">
+      <div class="card-icon">🎓</div>
+      <div class="card-title">線上課程</div>
+      <div class="card-sub">系統化學習，從知識到行動的完整旅程</div>
+      <div class="card-sub-links">
+        <a class="card-sub-link"
+           href="https://wayground.com/join/presentation/6a20e382161cb021c3da0675/start?studentShare=true"
+           target="_blank" rel="noopener">
+          <span class="card-sub-link-icon">😴</span>
+          <span class="card-sub-link-text">睡眠的認知行為療法（CBT-I）</span>
+          <span class="card-sub-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
   </div>
 </main>
+
 <footer>
   <p>你現在的選擇，正在形成未來的診斷</p>
 </footer>
