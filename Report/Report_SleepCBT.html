@@ -1,1 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>失眠認知行為治療與實證醫學之臨床反思問卷</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 12px;
+        }
 
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid #eaedf1;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .meta-info {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .user-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .progress-container {
+            margin-bottom: 30px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: var(--secondary-color);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .q-num {
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .q-type {
+            font-size: 0.75rem;
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            color: #4a5568;
+            font-weight: normal;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            margin-bottom: 10px;
+        }
+
+        .option-item label {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .option-item label:hover {
+            background: #f8fafc;
+        }
+
+        .option-item input {
+            margin-right: 12px;
+            transform: scale(1.1);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            font-size: 0.95rem;
+        }
+
+        .feedback.correct {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 5px solid #10b981;
+        }
+
+        .feedback.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 5px solid #ef4444;
+        }
+
+        .feedback.analysis {
+            background: #eff6ff;
+            color: #1e40af;
+            border-left: 5px solid #3b82f6;
+            margin-top: 8px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #2980b9;
+        }
+
+        .btn-clear {
+            background: #cbd5e1;
+            color: #475569;
+        }
+
+        .btn-clear:hover {
+            background: #94a3b8;
+        }
+
+        .summary-box {
+            margin-top: 40px;
+            background: #f0fdf4;
+            border: 2px dashed #22c55e;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            display: none;
+        }
+
+        .summary-box h3 {
+            color: #15803d;
+            margin-top: 0;
+        }
+
+        .summary-content {
+            background: #ffffff;
+            border: 1px solid #bbf7d0;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-line;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>失眠認知行為治療與實證醫學之臨床反思問卷</h1>
+        <div class="meta-info">
+            醫學與健康科學領域 ｜ 文獻閱讀與臨床轉化工作表
+        </div>
+        <div class="tags">
+            <span class="tag">Perlis et al. (2022)</span>
+            <span class="tag">The Lancet</span>
+            <span class="tag">CBT-I</span>
+            <span class="tag">睡眠醫學</span>
+            <span class="tag">刺激控制</span>
+            <span class="tag">睡眠限制</span>
+            <span class="tag">共病失眠</span>
+        </div>
+
+        <div class="user-info-grid">
+            <div class="form-group">
+                <label for="userName">姓名（請隱藏中間字，如：陳〇明）</label>
+                <input type="text" id="userName" placeholder="請輸入姓名">
+            </div>
+            <div class="form-group">
+                <label for="fillDate">填寫日期</label>
+                <input type="date" id="fillDate">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+                <label for="courseName">所屬課程／指導教授／臨床單位</label>
+                <input type="text" id="courseName" placeholder="如：臨床睡眠醫學專題 / PGY訓練 / OOO 教授">
+            </div>
+        </div>
+
+        <div style="text-align: left; font-size: 0.85rem; color: #64748b; margin-bottom: 5px;">
+            答題進度: <span id="progress-text">0 / 5</span>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </header>
+
+    <form id="quizForm">
+        <div class="question-card" id="q1-card">
+            <div class="question-title">
+                <span class="q-num">1</span> 
+                <span>根據 Lancet 綜述的醫學共識，針對成人失眠患者的第一線首選治療（First-line treatment）為何？</span>
+                <span class="q-type">單選</span>
+            </div>
+            <ul class="options-list">
+                <li class="option-item">
+                    <label><input type="radio" name="q1" value="A"> (A) 新型非苯二氮䓬類安眠藥（Z-drugs），因其急性期作用最快且無耐藥性。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q1" value="B"> (B) 失眠認知行為治療（CBT-I），且無論其潛在病因（共病）是否明確均適用。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q1" value="C"> (C) 單純的高強度睡眠衛生教育（Sleep Hygiene），因其無任何副作用且成本最低。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q1" value="D"> (D) 褪黑激素（Melatonin）搭配常規鎮靜劑，作為標準的合併起始療法。</label>
+                </li>
+            </ul>
+            <div class="feedback correct" id="q1-correct">恭喜答對！</div>
+            <div class="feedback wrong" id="q1-wrong">答案錯誤。正確答案是 (B)。</div>
+            <div class="feedback analysis" id="q1-analysis">
+                <strong>解析導讀：</strong>美國醫師協會（ACP）及各國指引一致推薦 <strong>CBT-I 為失眠的第一線首選治療</strong>。過往將失眠區分為原發性與繼發性，但最新觀念強調失眠具備獨立的病理機制，不論有無合併憂鬱症或慢性疼痛，皆應優先針對失眠本身進行 CBT-I 介入。
+            </div>
+        </div>
+
+        <div class="question-card" id="q2-card">
+            <div class="question-title">
+                <span class="q-num">2</span> 
+                <span>關於 CBT-I 與安眠藥物治療的長期持久性（Durability）對比，下列敘述何者正確？</span>
+                <span class="q-type">單選</span>
+            </div>
+            <ul class="options-list">
+                <li class="option-item">
+                    <label><input type="radio" name="q2" value="A"> (A) 兩者在停藥或停止介入後，療效皆會迅速消失，需長期維持干預。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q2" value="B"> (B) 藥物治療在隨訪期的總睡眠時間（TST）會自主拉長；CBT-I 則會面臨明顯反彈。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q2" value="C"> (C) 唯有 CBT-I 展現長期持久療效，且急性期過後患者的總睡眠時間（TST）在隨訪中常會自主增加。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q2" value="D"> (D) 「藥物 + CBT-I」的合併療法，其長期的持久效果顯著優於單純執行 CBT-I。</label>
+                </li>
+            </ul>
+            <div class="feedback correct" id="q2-correct">恭喜答對！</div>
+            <div class="feedback wrong" id="q2-wrong">答案錯誤。正確答案是 (C)。</div>
+            <div class="feedback analysis" id="q2-analysis">
+                <strong>解析導讀：</strong>實證數據顯示，CBT-I 的核心優勢在於<strong>療效的持久性（可達 2 年以上）</strong>。在急性治療期結束後，CBT-I 組患者的總睡眠時間在隨訪中反而會自主拉長（平均多出約 50 分鐘），這是因為睡眠效率提升後，患者在床時間逐步放寬所致。相反地，合併藥物雖然初期見效快，卻可能削弱 CBT-I 這種長期的自我調節機制。
+            </div>
+        </div>
+
+        <div class="question-card" id="q3-card">
+            <div class="question-title">
+                <span class="q-num">3</span> 
+                <span>文獻強調 CBT-I 包含多個核心行為要素，下列關於各要素在實證上的定位，哪些敘述正確？</span>
+                <span class="q-type">可複選</span>
+            </div>
+            <ul class="options-list">
+                <li class="option-item">
+                    <label><input type="checkbox" name="q3" value="A"> (A) <strong>刺激控制療法（Stimulus Control）</strong>旨在消除躺在床上卻清醒焦慮的條件反射，重塑床與睡眠的強烈連結。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="checkbox" name="q3" value="B"> (B) <strong>睡眠限制療法（Sleep Restriction）</strong>藉由縮短在床時間來刻意製造睡眠驅力，是提高睡眠效率的關鍵核心。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="checkbox" name="q3" value="C"> (C) <strong>睡眠衛生（Sleep Hygiene）</strong>在實證上療效極低，不可作為單一療法（Monotherapy）使用。</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="checkbox" name="q3" value="D"> (D) <strong>認知治療（Cognitive Therapy）</strong>核心在於修正對失眠的災難化思維，能有效提高患者對行為限制的依從性。</label>
+                </li>
+            </ul>
+            <div class="feedback correct" id="q3-feedback">
+                <strong>解析導讀：</strong>正確答案為 <strong>(A), (B), (C), (D) 全選</strong>。標準的 CBT-I 是由這些要素交織而成的系統工程。許多臨床衛教誤以為給予睡眠衛生單張（如睡前不喝咖啡）就足夠，但文獻明確指出睡眠衛生因缺乏行為制約與驅力調整，在臨床試驗中常被當作「對照組（無效對照）」，必須結合刺激控制與睡眠限制才能發揮真正的療效。
+            </div>
+        </div>
+
+        <div class="question-card" id="q4-card">
+            <div class="question-title">
+                <span class="q-num">4</span> 
+                <span>CBT-I 並非完全沒有副作用。在執行初期的前 1-3 週，最需要醫療團隊主動評估並落實安全防範的醫源性（Iatrogenic）風險為何？</span>
+                <span class="q-type">單選</span>
+            </div>
+            <ul class="options-list">
+                <li class="option-item">
+                    <label><input type="radio" name="q4" value="A"> (A) 嚴重的藥物依賴性與戒斷症狀</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q4" value="B"> (B) 日間嗜睡（Sleepiness）、疲勞與注意力不集中，可能引發開車或操作機械的意外</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q4" value="C"> (C) 骨質流失與夜間肌肉抽搐</label>
+                </li>
+                <li class="option-item">
+                    <label><input type="radio" name="q4" value="D"> (D) 導致長期深層睡眠比例永久性縮減</label>
+                </li>
+            </ul>
+            <div class="feedback correct" id="q4-correct">恭喜答對！</div>
+            <div class="feedback wrong" id="q4-wrong">答案錯誤。正確答案是 (B)。</div>
+            <div class="feedback analysis" id="q4-analysis">
+                <strong>解析導讀：</strong>這是臨床上極易被忽視的安全盲點！由於「睡眠限制」與「刺激控制」在初期會刻意剝奪部分睡眠以累積睡眠債（Sleep Debt），所以在前 1-3 週會帶來顯著的<strong>日間嗜睡與疲勞</strong>。對於高風險職業（如司機、高空作業者、精密機械操作員），醫師必須在知情同意中明確告知，並共同制定安全過渡計畫。
+            </div>
+        </div>
+
+        <div class="question-card" id="q5-card">
+            <div class="question-title">
+                <span class="q-num">5</span> 
+                <span>【Jimmy 醫師說故事：臨床場域轉化】</span>
+                <span class="q-type">開放式個案衛教反思</span>
+            </div>
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 15px; color: #475569;">
+                <strong>臨床情境：</strong>一位 45 歲的科技高階主管，長期依賴安眠藥入睡，近期產生耐藥性且白天極度昏沉。他向你抱怨：「醫師，既然 CBT-I 也是為了讓我睡著，為什麼我要花這麼多心力去搞那個什麼限制睡眠、定時起床的痛苦訓練？直接幫我加重藥量不就好了？」
+            </div>
+            <div class="form-group">
+                <label for="storyText" style="margin-bottom: 10px;">請嘗試運用文獻實證（如長期持久度、隨訪期睡眠自主拉長、藥物耐藥性），結合生動的「隱喻（如大腦重訓、睡眠儲蓄）」，寫下一段您想對這位患者說的話：</label>
+                <textarea id="storyText" rows="6" placeholder="請在此輸入您的臨床轉譯回應（建議 150-300 字）..."></textarea>
+            </div>
+            <div class="feedback correct" id="q5-feedback" style="display:block; background:#f8fafc; color:#334155; border-left:5px solid #64748b;">
+                <strong>故事轉譯引導：</strong>成功的臨床衛教常使用「大腦重訓」的隱喻。吃安眠藥就像撐拐杖，時間久了腿部肌肉（大腦自主睡眠能力）就會萎縮、產生依賴；而 CBT-I 雖然初期像在做復健（限制睡眠、定時起床）很辛苦，但它能重新鍛鍊大腦的睡眠核心肌群（累積睡眠驅力）。長遠來看，這能讓你在不吃藥的情況下，大腦自主把睡眠時間與品質贏回來。
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn-clear" onclick="clearForm()">清除所有內容</button>
+            <button type="button" class="btn-submit" onclick="submitForm()">生成個人反思摘要</button>
+        </div>
+    </form>
+
+    <div class="summary-box" id="summaryBox">
+        <h3>✨ 個人臨床反思摘要已生成</h3>
+        <p>您可以複製下方結構化內容作為您的培訓報告、Journal Club 筆記或學習歷程檔案：</p>
+        <div class="summary-content" id="summaryTxt"></div>
+        <button type="button" class="btn-submit" style="width:auto; padding: 8px 15px;" onclick="copySummary()">複製摘要內容</button>
+    </div>
+
+    <footer>
+        資料僅存於本機瀏覽器，系統不上傳至任何外部伺服器。
+    </footer>
+</div>
+
+<script>
+    // 自動初始化今日日期
+    document.getElementById('fillDate').valueAsDate = new Date();
+
+    // 監聽表單更動以計算進度
+    const form = document.getElementById('quizForm');
+    form.addEventListener('change', updateProgress);
+    document.getElementById('storyText').addEventListener('input', updateProgress);
+
+    function updateProgress() {
+        let answered = 0;
+        if (document.querySelector('input[name="q1"]:checked')) answered++;
+        if (document.querySelector('input[name="q2"]:checked')) answered++;
+        if (document.querySelector('input[name="q3"]:checked')) answered++;
+        if (document.querySelector('input[name="q4"]:checked')) answered++;
+        if (document.getElementById('storyText').value.trim().length > 10) answered++;
+
+        document.getElementById('progress-text').innerText = `${answered} / 5`;
+        document.getElementById('progress-bar').style.width = `${(answered / 5) * 100}%`;
+    }
+
+    function submitForm() {
+        let q1 = document.querySelector('input[name="q1"]:checked');
+        let q2 = document.querySelector('input[name="q2"]:checked');
+        let q3s = document.querySelectorAll('input[name="q3"]:checked');
+        let q4 = document.querySelector('input[name="q4"]:checked');
+        let story = document.getElementById('storyText').value.trim();
+
+        if (!q1 || !q2 || q3s.length === 0 || !q4 || story.length < 10) {
+            alert('請填寫完所有客觀題，並在第五題輸入足夠的反思內容後，再生成摘要！');
+            return;
+        }
+
+        // 顯示回饋與解析
+        if (q1.value === 'B') {
+            document.getElementById('q1-correct').style.display = 'block';
+            document.getElementById('q1-wrong').style.display = 'none';
+        } else {
+            document.getElementById('q1-correct').style.display = 'none';
+            document.getElementById('q1-wrong').style.display = 'block';
+        }
+        document.getElementById('q1-analysis').style.display = 'block';
+
+        if (q2.value === 'C') {
+            document.getElementById('q2-correct').style.display = 'block';
+            document.getElementById('q2-wrong').style.display = 'none';
+        } else {
+            document.getElementById('q2-correct').style.display = 'none';
+            document.getElementById('q2-wrong').style.display = 'block';
+        }
+        document.getElementById('q2-analysis').style.display = 'block';
+
+        document.getElementById('q3-feedback').style.display = 'block';
+
+        if (q4.value === 'B') {
+            document.getElementById('q4-correct').style.display = 'block';
+            document.getElementById('q4-wrong').style.display = 'none';
+        } else {
+            document.getElementById('q4-correct').style.display = 'none';
+            document.getElementById('q4-wrong').style.display = 'block';
+        }
+        document.getElementById('q4-analysis').style.display = 'block';
+
+        // 建立摘要內容
+        let name = document.getElementById('userName').value || '未填寫';
+        let date = document.getElementById('fillDate').value;
+        let course = document.getElementById('courseName').value || '未填寫';
+
+        let summaryText = `【Lancet (2022) Insomnia 文獻閱讀與臨床轉化反思摘要】\n`;
+        summaryText += `填寫人：${name}  |  日期：${date}\n`;
+        summaryText += `培訓單位/課程：${course}\n`;
+        summaryText += `--------------------------------------------------\n`;
+        summaryText += `1. 第一線治療共識：明確掌握 CBT-I 作為成人急慢性失眠首選治療的實證地位，其臨床療效不受共病有無之限制。\n\n`;
+        summaryText += `2. 療效持久性（Durability）：深刻理解 CBT-I 與藥物在長期隨訪中的本質差異。CBT-I 具備顯著持久性，隨訪期總睡眠時間（TST）常因大腦睡眠機制的重建而呈現自主拉長，而合併藥物反而可能削弱此自我調節力。\n\n`;
+        summaryText += `3. 核心要素系統觀：認同 CBT-I 是一項結合刺激控制（消退不良制約）、睡眠限制（累積睡眠驅力）與認知重塑的行為工程，單純的睡眠衛生教育在實證上不可作為單一療法。\n\n`;
+        summaryText += `4. 醫源性臨床安全防範：重視 CBT-I 執行初期（1-3週）因睡眠剝奪所帶來的日間嗜睡與疲勞風險，在臨床上面對高危職業患者時應主動落實風險告知與行為管理。\n\n`;
+        summaryText += `5. Jimmy 醫師故事醫學轉譯（對個案之溝通話術）：\n「${story}」\n\n`;
+        summaryText += `核心思維總結：健康的睡眠重建無法單靠外在藥物的強制化學開關來維持。臨床醫師與衛教人員的核心價值，在於引導患者理解「大腦睡眠重訓」的實證效益，並陪伴其度過治療前期的醫源性嗜睡瓶頸，以換取長期、自主且穩定的睡眠健康保護。`;
+
+        document.getElementById('summaryTxt').innerText = summaryText;
+        document.getElementById('summaryBox').style.display = 'block';
+        
+        document.getElementById('summaryBox').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearForm() {
+        if(confirm('確定要清除所有填寫內容嗎？')) {
+            form.reset();
+            document.getElementById('userName').value = '';
+            document.getElementById('courseName').value = '';
+            document.getElementById('storyText').value = '';
+            document.getElementById('fillDate').valueAsDate = new Date();
+            
+            const feedbacks = document.querySelectorAll('.feedback');
+            feedbacks.forEach(f => f.style.display = 'none');
+            document.getElementById('q5-feedback').style.display = 'block';
+            document.getElementById('summaryBox').style.display = 'none';
+            
+            updateProgress();
+        }
+    }
+
+    function copySummary() {
+        let txt = document.getElementById('summaryTxt').innerText;
+        navigator.clipboard.writeText(txt).then(() => {
+            alert('反思摘要內容已成功複製到剪貼簿！');
+        }).catch(err => {
+            alert('複製失敗，請手動全選複製。');
+        });
+    }
+</script>
+
+</body>
+</html>
