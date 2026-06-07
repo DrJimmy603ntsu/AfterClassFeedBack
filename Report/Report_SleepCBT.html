@@ -287,7 +287,7 @@
     <header>
         <h1>失眠認知行為治療與實證醫學之臨床反思問卷</h1>
         <div class="meta-info">
-            醫學與健康科學領域 ｜ 文獻閱讀與臨床轉化工作表
+            體育大學運動保健系 ｜ 文獻閱讀與臨床轉化工作表
         </div>
         <div class="tags">
             <span class="tag">Perlis et al. (2022)</span>
@@ -310,7 +310,7 @@
             </div>
             <div class="form-group" style="grid-column: span 2;">
                 <label for="courseName">所屬課程／指導教授／臨床單位</label>
-                <input type="text" id="courseName" placeholder="如：臨床睡眠醫學專題 / PGY訓練 / OOO 教授">
+                <input type="text" id="courseName" value="體育大學運動保健系成人病理學專論">
             </div>
         </div>
 
@@ -367,7 +367,7 @@
                     <label><input type="radio" name="q2" value="C"> (C) 唯有 CBT-I 展現長期持久療效，且急性期過後患者的總睡眠時間（TST）在追蹤期中常會自主增加。</label>
                 </li>
                 <li class="option-item">
-                    <label><input type="radio" name="q2" value="D"> (D) 「藥物 + CBT-I」的合併療法，其長期的持久效果顯著優於單純執行 CBT-I。</label>
+                    <label><input type="radio" name="q2" value="D) "> (D) 「藥物 + CBT-I」的合併療法，其長期的持久效果顯著優於單純執行 CBT-I。</label>
                 </li>
             </ul>
             <div class="feedback correct" id="q2-correct">恭喜答對！</div>
@@ -398,7 +398,7 @@
                 </li>
             </ul>
             <div class="feedback correct" id="q3-feedback">
-                <strong>解析導讀：</strong>正確答案為 <strong>(A), (B), (C), (D) 全選</strong>。標準的 CBT-I 是由這些要素交織而成的系統工程。許多臨床衛教誤以為給予睡眠衛生單張（如睡前不喝咖啡）就足夠，但文獻明確指出睡眠衛生因缺乏行為制約與驅力調整，在臨床試驗中常被當作「對照組（無效對照）」，必須結合刺激控制與睡眠限制才能發揮真正的療效。
+                <strong>解析導讀：</strong>正確答案為 <strong>(A), (B), (C), (D) 全選</strong>。標準的 CBT-I 是由這些要素交織而成的系統工程。許多臨床衛教誤以為給予睡眠衛生單張（如睡前不喝咖啡）就足夠，打著文獻明確指出睡眠衛生因缺乏行為制約與驅力調整，在臨床試驗中常被當作「對照組（無效對照）」，必須結合刺激控制與睡眠限制才能發揮真正的療效。
             </div>
         </div>
 
@@ -443,7 +443,7 @@
                 <textarea id="storyText" rows="6" placeholder="請在此輸入您的臨床轉譯回應（建議 150-300 字）..."></textarea>
             </div>
             <div class="feedback correct" id="q5-feedback" style="display:block; background:#f8fafc; color:#334155; border-left:5px solid #64748b;">
-                <strong>故事轉譯引導：</strong>成功的臨床衛教常使用「大腦重訓」的隱喻。吃安眠藥就像撐拐杖，時間久了腿部肌肉（大腦自主睡眠能力）就會萎縮、產生依賴；而 CBT-I 雖然初期像在做復健（限制睡眠、定時起床）很辛苦，但它能重新鍛鍊大腦的睡眠核心肌群（累積睡眠驅力）。長遠來看，這能讓你在不吃藥的情況下，大腦自主把睡眠時間與品質贏回來。
+                <strong>故事轉譯引導：</strong>成功的臨床衛教常使用「大腦重訓」的隱喻。吃安眠藥就像撐拐杖，時間久了腿部肌肉（大腦自主睡眠能力）就會萎縮、產生依賴；而 CBT-I 雖然初期像在做復健（限制睡眠、定時起床）很辛苦，開它能重新鍛鍊大腦的睡眠核心肌群（累積睡眠驅力）。長遠來看，這能讓你在不吃藥的情況下，大腦自主把睡眠時間與品質贏回來。
             </div>
         </div>
 
@@ -554,9 +554,9 @@
         if(confirm('確定要清除所有填寫內容嗎？')) {
             form.reset();
             document.getElementById('userName').value = '';
-            document.getElementById('courseName').value = '';
             document.getElementById('storyText').value = '';
             document.getElementById('fillDate').valueAsDate = new Date();
+            document.getElementById('courseName').value = '體育大學運動保健系成人病理學專論';
             
             const feedbacks = document.querySelectorAll('.feedback');
             feedbacks.forEach(f => f.style.display = 'none');
